@@ -1,0 +1,19 @@
+<svg width="300" height="80" viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="300" height="80" fill="white" stroke="#dc2626" stroke-width="2" rx="10"/>
+  
+  <!-- Emblem Circle -->
+  <circle cx="40" cy="40" r="25" fill="#dc2626"/>
+  <circle cx="40" cy="40" r="20" fill="white"/>
+  <circle cx="40" cy="40" r="15" fill="#dc2626"/>
+  <text x="40" y="47" text-anchor="middle" fill="white" font-size="20" font-family="Arial, sans-serif">🔮</text>
+  
+  <!-- Institute Name -->
+  <text x="80" y="25" fill="#dc2626" font-size="14" font-weight="bold" font-family="Arial, sans-serif" text-transform="uppercase">ALL INDIA INSTITUTE OF OCCULT SCIENCE</text>
+  
+  <!-- Hindi Slogan -->
+  <text x="80" y="45" fill="#dc2626" font-size="12" font-family="Arial, sans-serif">विद्याधनं सर्वधनं प्रधानम्</text>
+  
+  <!-- Registration Text -->
+  <text x="80" y="60" fill="#8b5a3c" font-size="10" font-family="Arial, sans-serif" font-style="italic">Regd. Under Govt. of NCT of Delhi</text>
+</svg>

@@ -178,12 +178,23 @@
 
                 <!-- Right Side - Search Icon & Mobile Menu Toggle -->
                 <div class="flex items-center space-x-4">
-                    <!-- Search Icon (Hidden on mobile) -->
-                    <button class="search-icon hidden md:block">
+                    <!-- Desktop Search Icon (Visible on homepage only) -->
+                    @if(request()->routeIs('blog.index'))
+                    <button class="search-icon hidden md:block" id="searchToggle">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                     </button>
+                    @endif
+                    
+                    <!-- Mobile Search Icon (Visible on mobile, homepage only) -->
+                    @if(request()->routeIs('blog.index'))
+                    <button class="mobile-search-icon md:hidden" id="mobileSearchToggle">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
+                    @endif
                     
                     <!-- Mobile Menu Toggle Button -->
                     <button class="mobile-menu-toggle lg:hidden" id="mobileMenuToggle">
@@ -289,7 +300,8 @@
                         </div>
                     </div>
                     
-                    <!-- Mobile Search -->
+                    <!-- Mobile Search - Hidden on homepage and blog view -->
+                    @if(!request()->routeIs('blog.index') && !request()->routeIs('blog.category') && !request()->routeIs('blog.post'))
                     <div class="mobile-search">
                         <button class="mobile-search-btn">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -298,10 +310,39 @@
                             Search
                         </button>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
+    
+    <!-- Search Form (Hidden by default) -->
+    @if(request()->routeIs('blog.index'))
+    <div class="search-form-container hidden" id="searchFormContainer">
+        <div class="container mx-auto px-4 py-4 bg-white border-t border-gray-200">
+            <form action="{{ route('blog.index') }}" method="GET" class="flex items-center space-x-4">
+                <div class="flex-1">
+                    <input type="text" 
+                           name="search" 
+                           placeholder="Search posts..." 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                           value="{{ request('search') }}">
+                </div>
+                <button type="submit" 
+                        class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors">
+                    Search
+                </button>
+                <button type="button" 
+                        id="closeSearchForm"
+                        class="text-gray-500 hover:text-gray-700 px-2 py-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+    @endif
 </div>
 
 <style>
@@ -520,6 +561,38 @@
 .search-icon:hover {
     background-color: #f5f5f5;
     color: #dc2626;
+}
+
+/* Mobile Search Icon */
+.mobile-search-icon {
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.mobile-search-icon:hover {
+    background-color: #f5f5f5;
+    color: #dc2626;
+}
+
+/* Search Form */
+.search-form-container {
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Mobile Menu Styles */
@@ -818,6 +891,50 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             e.stopPropagation();
             toggleMobileSubmenu('tools');
+        });
+    }
+    
+    // Search form functionality
+    const searchToggle = document.getElementById('searchToggle');
+    const mobileSearchToggle = document.getElementById('mobileSearchToggle');
+    const searchFormContainer = document.getElementById('searchFormContainer');
+    const closeSearchForm = document.getElementById('closeSearchForm');
+    
+    function toggleSearchForm() {
+        if (searchFormContainer) {
+            searchFormContainer.classList.remove('hidden');
+            // Focus on search input
+            const searchInput = searchFormContainer.querySelector('input[name="search"]');
+            if (searchInput) {
+                setTimeout(() => searchInput.focus(), 100);
+            }
+        }
+    }
+    
+    if (searchToggle && searchFormContainer) {
+        searchToggle.addEventListener('click', toggleSearchForm);
+    }
+    
+    if (mobileSearchToggle && searchFormContainer) {
+        mobileSearchToggle.addEventListener('click', toggleSearchForm);
+    }
+    
+    if (closeSearchForm && searchFormContainer) {
+        closeSearchForm.addEventListener('click', function() {
+            searchFormContainer.classList.add('hidden');
+        });
+    }
+    
+    // Close search form when clicking outside
+    if (searchFormContainer) {
+        document.addEventListener('click', function(event) {
+            const isSearchToggle = searchToggle && searchToggle.contains(event.target);
+            const isMobileSearchToggle = mobileSearchToggle && mobileSearchToggle.contains(event.target);
+            const isSearchForm = searchFormContainer.contains(event.target);
+            
+            if (!isSearchForm && !isSearchToggle && !isMobileSearchToggle) {
+                searchFormContainer.classList.add('hidden');
+            }
         });
     }
 });

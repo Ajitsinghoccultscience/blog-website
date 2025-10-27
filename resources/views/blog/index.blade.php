@@ -8,35 +8,18 @@ use Illuminate\Support\Facades\Storage;
 @endphp
 
 @section('content')
-    <!-- Hero Section -->
-<div class="hero-gradient text-white py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-5xl md:text-7xl font-bold mb-6">
-            <span class="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">Occult Science</span>
-        </h1>
-        <p class="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto mb-8">
-            विद्याधनं सर्वधनं प्रधानम्
-        </p>
-        <p class="text-lg text-blue-200 max-w-3xl mx-auto mb-10">
-            Explore the mystical and esoteric world through ancient wisdom, sacred symbols, and spiritual practices.
-            Join us in discovering the profound mysteries of occult science.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="https://www.occultscience.in/courses/" target="_blank" class="bg-orange-600 hover:bg-orange-700 text-yellow-100 px-8 py-3 rounded-lg font-semibold transition-colors shadow-lg">
-                Explore Courses
-            </a>
-            <a href="#about" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-900 px-8 py-3 rounded-lg font-semibold transition-colors">
-                Learn More
-            </a>
-        </div>
+    <!-- Banner Image -->
+    <div class="banner-container">
+        <img src="{{ asset('images/NEE (1) (3).jpg') }}" 
+             alt="Occult Science Banner" 
+             class="w-full h-auto object-cover">
     </div>
-</div>
 
-<!-- Recent Posts Section -->
-<div class="bg-white py-16">
+    <!-- Recent Posts Section -->
+<div class="bg-white py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Section Header -->
-        <div class="mb-8">
+        <div class="mb-4">
             <div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-t-lg px-6 py-4">
                 <h2 class="text-white font-bold text-xl">Recent Posts</h2>
             </div>
@@ -88,7 +71,7 @@ use Illuminate\Support\Facades\Storage;
                                                     {{ $post->published_at ? $post->published_at->format('d M, Y') : 'No date' }} by Admin
                                                 </p>
                                                 <h3 class="text-lg font-bold text-gray-900 mb-3 leading-tight hover:text-orange-600 transition-colors">
-                                <a href="{{ route('blog.show', $post->slug) }}">{{ $post->title }}</a>
+                                <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}">{{ $post->title }}</a>
                             </h3>
                                                 <p class="text-gray-600 text-sm leading-relaxed">
                                                     {{ $post->excerpt ? Str::limit($post->excerpt, 120) : Str::limit(strip_tags($post->content), 120) }}
@@ -136,7 +119,7 @@ use Illuminate\Support\Facades\Storage;
                                                     {{ $chunk->first()->published_at ? $chunk->first()->published_at->format('d M, Y') : 'No date' }} by Admin
                                                 </p>
                                                 <h3 class="text-lg font-bold text-gray-900 mb-3 leading-tight hover:text-orange-600 transition-colors">
-                                                    <a href="{{ route('blog.show', $chunk->first()->slug) }}">{{ $chunk->first()->title }}</a>
+                                                    <a href="{{ route('blog.post', [$chunk->first()->category->slug, $chunk->first()->slug]) }}">{{ $chunk->first()->title }}</a>
                                                 </h3>
                                                 <p class="text-gray-600 text-sm leading-relaxed">
                                                     {{ $chunk->first()->excerpt ? Str::limit($chunk->first()->excerpt, 120) : Str::limit(strip_tags($chunk->first()->content), 120) }}
@@ -189,7 +172,7 @@ use Illuminate\Support\Facades\Storage;
                                                     {{ $post->published_at ? $post->published_at->format('d M, Y') : 'No date' }} by Admin
                                                 </p>
                                                 <h3 class="text-lg font-bold text-gray-900 mb-3 leading-tight hover:text-orange-600 transition-colors">
-                                                    <a href="{{ route('blog.show', $post->slug) }}">{{ $post->title }}</a>
+                                                    <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}">{{ $post->title }}</a>
                                                 </h3>
                                                 <p class="text-gray-600 text-sm leading-relaxed">
                                 {{ $post->excerpt ? Str::limit($post->excerpt, 120) : Str::limit(strip_tags($post->content), 120) }}
@@ -228,11 +211,11 @@ use Illuminate\Support\Facades\Storage;
 </div>
 
 <!-- Main Content Layout - Desktop Two Column, Mobile Single Column -->
-<div class="bg-white py-8 lg:py-16">
+<div class="bg-white py-4 lg:py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Left Column - Category Sections (2/3 width on desktop) -->
-            <div class="lg:col-span-2 space-y-12">
+            <div class="lg:col-span-2 space-y-8">
                 @if($categories->count() > 0)
                     @foreach($categories->take(5) as $category)
                         @php
@@ -248,7 +231,7 @@ use Illuminate\Support\Facades\Storage;
                             <!-- Category Section -->
                             <div>
                                 <!-- Category Header - Orange Gradient -->
-                                <div class="mb-6">
+                                <div class="mb-3">
                                     <div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-t-lg px-6 py-4">
                                         <h2 class="text-white font-bold text-xl">{{ $category->name }}</h2>
                                     </div>
@@ -292,21 +275,22 @@ use Illuminate\Support\Facades\Storage;
                                                 {{ $categoryPosts[0]->published_at ? $categoryPosts[0]->published_at->format('d M, Y') : 'No date' }} by Admin
                                             </p>
                                             <h3 class="text-xl font-bold text-gray-900 mb-3 leading-tight hover:text-orange-600 transition-colors">
-                                                <a href="{{ route('blog.show', $categoryPosts[0]->slug) }}">{{ $categoryPosts[0]->title }}</a>
+                                                <a href="{{ route('blog.post', [$categoryPosts[0]->category->slug, $categoryPosts[0]->slug]) }}">{{ $categoryPosts[0]->title }}</a>
                                             </h3>
                                             <p class="text-gray-600 text-sm leading-relaxed mb-4">
                                                 {{ $categoryPosts[0]->excerpt ? Str::limit($categoryPosts[0]->excerpt, 150) : Str::limit(strip_tags($categoryPosts[0]->content), 150) }}
                                             </p>
-                                            <a href="{{ route('blog.show', $categoryPosts[0]->slug) }}" class="text-orange-600 hover:text-orange-800 font-medium text-sm">
+                                            <a href="{{ route('blog.post', [$categoryPosts[0]->category->slug, $categoryPosts[0]->slug]) }}" class="text-orange-600 hover:text-orange-800 font-medium text-sm">
                                                 Read More...
                                             </a>
                                         </div>
                                     </div>
                                 </article>
                                 
-                                <!-- Two Additional Posts - Grid Layout -->
+                                <!-- Two Additional Posts - Mixed Mobile Layout -->
                                 @if($categoryPosts->count() > 1)
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <!-- Desktop: 2 posts side by side -->
+                                    <div class="hidden md:grid grid-cols-2 gap-6">
                                         @foreach($categoryPosts->skip(1) as $post)
                                             <article class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100">
                                                 <!-- Post Image -->
@@ -329,7 +313,7 @@ use Illuminate\Support\Facades\Storage;
                                                 <!-- Post Content -->
                                                 <div class="p-4">
                                                     <h3 class="text-lg font-bold text-gray-900 mb-2 leading-tight hover:text-orange-600 transition-colors">
-                                                        <a href="{{ route('blog.show', $post->slug) }}">{{ $post->title }}</a>
+                                                        <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}">{{ $post->title }}</a>
                                                     </h3>
                                                     <p class="text-gray-600 text-sm leading-relaxed">
                                                         {{ $post->excerpt ? Str::limit($post->excerpt, 100) : Str::limit(strip_tags($post->content), 100) }}
@@ -337,6 +321,84 @@ use Illuminate\Support\Facades\Storage;
                                                 </div>
                                             </article>
                                         @endforeach
+                                    </div>
+                                    
+                                    <!-- Mobile: Mixed layout - 1 full width + 2 side by side -->
+                                    <div class="block md:hidden space-y-4">
+                                        @php
+                                            $remainingPosts = $categoryPosts->skip(1);
+                                        @endphp
+                                        
+                                        <!-- First remaining post - Full width -->
+                                        @if($remainingPosts->count() > 0)
+                                            <article class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100">
+                                                <!-- Post Image -->
+                                                <div class="relative h-48">
+                                                    @if($remainingPosts->first()->featured_image)
+                                                        <img src="{{ Storage::url($remainingPosts->first()->featured_image) }}" 
+                                                             alt="{{ $remainingPosts->first()->title }}" 
+                                                             class="w-full h-full object-cover"
+                                                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                                        <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">
+                                                            <span class="text-white text-sm">No Image</span>
+                                                        </div>
+                                                    @else
+                                                        <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
+                                                            <span class="text-white text-sm">No Image</span>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                                
+                                                <!-- Post Content -->
+                                                <div class="p-4">
+                                                    <p class="text-gray-500 text-sm mb-2">
+                                                        {{ $remainingPosts->first()->published_at ? $remainingPosts->first()->published_at->format('d M, Y') : 'No date' }} by Admin
+                                                    </p>
+                                                    <h3 class="text-lg font-bold text-gray-900 mb-3 leading-tight hover:text-orange-600 transition-colors">
+                                                        <a href="{{ route('blog.post', [$remainingPosts->first()->category->slug, $remainingPosts->first()->slug]) }}">{{ $remainingPosts->first()->title }}</a>
+                                                    </h3>
+                                                    <p class="text-gray-600 text-sm leading-relaxed">
+                                                        {{ $remainingPosts->first()->excerpt ? Str::limit($remainingPosts->first()->excerpt, 120) : Str::limit(strip_tags($remainingPosts->first()->content), 120) }}
+                                                    </p>
+                                                </div>
+                                            </article>
+                                        @endif
+                                        
+                                        <!-- Next 2 posts - Side by side -->
+                                        @if($remainingPosts->count() > 1)
+                                            <div class="grid grid-cols-2 gap-3">
+                                                @foreach($remainingPosts->skip(1)->take(2) as $post)
+                                                    <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+                                                        <!-- Post Image -->
+                                                        <div class="relative h-32">
+                                                            @if($post->featured_image)
+                                                                <img src="{{ Storage::url($post->featured_image) }}" 
+                                                                     alt="{{ $post->title }}" 
+                                                                     class="w-full h-full object-cover"
+                                                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                                                <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">
+                                                                    <span class="text-white text-xs">No Image</span>
+                                                                </div>
+                                                            @else
+                                                                <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
+                                                                    <span class="text-white text-xs">No Image</span>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                        
+                                                        <!-- Post Content -->
+                                                        <div class="p-3">
+                                                            <h3 class="text-sm font-bold text-gray-900 mb-2 leading-tight hover:text-orange-600 transition-colors">
+                                                                <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}">{{ Str::limit($post->title, 40) }}</a>
+                                                            </h3>
+                                                            <p class="text-gray-600 text-xs leading-relaxed">
+                                                                {{ $post->excerpt ? Str::limit($post->excerpt, 60) : Str::limit(strip_tags($post->content), 60) }}
+                                                            </p>
+                                                        </div>
+                                                    </article>
+                                                @endforeach
+                                            </div>
+                                        @endif
                                     </div>
                                 @endif
                             </div>
@@ -395,7 +457,7 @@ use Illuminate\Support\Facades\Storage;
                                 @foreach($recentPosts as $post)
                                     <li class="flex items-start">
                                         <div class="w-2 h-2 bg-orange-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                                        <a href="{{ route('blog.show', $post->slug) }}" class="text-gray-900 text-sm hover:text-orange-600 transition-colors leading-relaxed">
+                                        <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}" class="text-gray-900 text-sm hover:text-orange-600 transition-colors leading-relaxed">
                                             {{ Str::limit($post->title, 60) }}
                                         </a>
                                     </li>
@@ -438,6 +500,36 @@ use Illuminate\Support\Facades\Storage;
 
 @push('styles')
 <style>
+/* Banner styling */
+.banner-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.banner-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.banner-container:hover img {
+    transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+    .banner-container img {
+        /* No height restrictions - show full image */
+    }
+}
+
+@media (max-width: 480px) {
+    .banner-container img {
+        /* No height restrictions - show full image */
+    }
+}
+
 /* Mobile slider fixes */
 @media (max-width: 767px) {
     #recent-posts-slider {
@@ -456,6 +548,16 @@ use Illuminate\Support\Facades\Storage;
     /* Show mobile posts */
     .block.md\\:hidden {
         display: block !important;
+    }
+    
+    /* Force mobile layout visibility */
+    @media (max-width: 767px) {
+        .block.md\\:hidden {
+            display: block !important;
+        }
+        .hidden.md\\:grid {
+            display: none !important;
+        }
     }
 }
 </style>

@@ -32,54 +32,54 @@ use Illuminate\Support\Facades\Storage;
                 <div class="swiper-wrapper">
                     @foreach($posts as $post)
                         <div class="swiper-slide">
-                            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100">
-                                <!-- Post Image -->
-                                <div class="relative">
-                                    <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}" class="block">
-                                        <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
-                                            @if($post->featured_image)
-                                                <img src="{{ Storage::url($post->featured_image) }}" 
-                                                     alt="{{ $post->title }}" 
-                                                     class="w-full h-full object-cover hover:opacity-90 transition-opacity duration-200"
-                                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                                <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">
-                                                    <span class="text-white text-sm">No Image</span>
-                                                </div>
-                                            @else
-                                                <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
-                                                    <span class="text-white text-sm">No Image</span>
-                                                </div>
-                                            @endif
-                                        </div>
-                                        <!-- Badge -->
-                                        <div class="absolute top-3 left-3">
-                                            <span class="bg-orange-600 text-white text-xs font-bold px-3 py-1 rounded-sm shadow-md flex items-center">
-                                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                                </svg>
-                                                Occult Science
-                                            </span>
-                                        </div>
-                                    </a>
-                                </div>
-                                
-                                <!-- Post Content -->
-                                <div class="p-6">
-                                    <p class="text-gray-500 text-sm mb-2">
+                                        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+                                            <!-- Post Image -->
+                        <div class="relative">
+                            <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}" class="block">
+                            <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+                                @if($post->featured_image)
+                                                        <img src="{{ Storage::url($post->featured_image) }}" 
+                                         alt="{{ $post->title }}" 
+                                                                 class="w-full h-full object-cover hover:opacity-90 transition-opacity duration-200"
+                                                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                                        <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">
+                                                            <span class="text-white text-sm">No Image</span>
+                                                        </div>
+                                @else
+                                                        <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
+                                                            <span class="text-white text-sm">No Image</span>
+                                    </div>
+                                @endif
+                            </div>
+                                                <!-- Badge -->
+                                                <div class="absolute top-3 left-3">
+                                                    <span class="bg-orange-600 text-white text-xs font-bold px-3 py-1 rounded-sm shadow-md flex items-center">
+                                                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                                        </svg>
+                                                        Occult Science
+                                                    </span>
+                            </div>
+                                                </a>
+                                            </div>
+                                            
+                                            <!-- Post Content -->
+                                            <div class="p-6">
+                                                <p class="text-gray-500 text-sm mb-2">
                                         {{ $post->published_at ? $post->published_at->format('d M, Y') : 'No date' }}
                                     </p>
-                                    <h3 class="text-lg font-bold text-gray-900 mb-3 leading-tight hover:text-orange-600 transition-colors">
-                                        <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}">{{ $post->title }}</a>
-                                    </h3>
-                                    <p class="text-gray-600 text-sm leading-relaxed mb-3">
-                                        {{ $post->excerpt ? Str::limit($post->excerpt, 120) : Str::limit(strip_tags($post->content), 120) }}
-                                    </p>
-                                    <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}" 
-                                       class="text-orange-600 hover:text-orange-700 font-medium text-sm transition-colors">
-                                        Read More...
-                                    </a>
-                                </div>
-                            </div>
+                                                <h3 class="text-lg font-bold text-gray-900 mb-3 leading-tight hover:text-orange-600 transition-colors">
+                                                    <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}">{{ $post->title }}</a>
+                                                </h3>
+                                                <p class="text-gray-600 text-sm leading-relaxed mb-3">
+                                {{ $post->excerpt ? Str::limit($post->excerpt, 120) : Str::limit(strip_tags($post->content), 120) }}
+                            </p>
+                                                <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}" 
+                                                   class="text-orange-600 hover:text-orange-700 font-medium text-sm transition-colors">
+                                                    Read More...
+                                                </a>
+                                            </div>
+                                        </div>
                         </div>
                     @endforeach
                 </div>

@@ -228,4 +228,43 @@ class PostController extends Controller
         
         return response()->json(['slug' => $slug]);
     }
+
+    /**
+     * Upload image for TinyMCE editor
+     */
+    public function uploadImage(Request $request)
+    {
+        \Log::info('Upload attempt started', ['request' => $request->all()]);
+        
+        $request->validate([
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            
+            // Try storing in public directory directly
+            $publicPath = public_path('uploads/posts');
+            if (!file_exists($publicPath)) {
+                mkdir($publicPath, 0755, true);
+            }
+            
+            // Move file to public directory
+            $file->move($publicPath, $filename);
+            
+            \Log::info('File uploaded successfully', ['filename' => $filename, 'path' => $publicPath]);
+            
+            $url = url('uploads/posts/' . $filename);
+            
+            \Log::info('Generated URL', ['url' => $url]);
+            
+            return response()->json([
+                'location' => $url
+            ]);
+        }
+
+        \Log::error('No file uploaded');
+        return response()->json(['error' => 'No file uploaded'], 400);
+    }
 }

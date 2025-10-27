@@ -160,13 +160,11 @@
                         </label>
                         <textarea id="content" 
                                   name="content" 
-                                  rows="20" 
-                                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 @error('content') border-red-400 @enderror"
-                                  placeholder="Write your post content here... Use markdown or HTML formatting."
+                                  class="w-full @error('content') border-red-400 @enderror"
                                   required>{{ old('content', $post->content) }}</textarea>
                         <p class="mt-2 text-sm text-gray-500 flex items-center">
                             <i class="fas fa-info-circle mr-1"></i>
-                            Supports HTML and Markdown formatting
+                            Rich text editor with HTML source editing capability
                         </p>
                         @error('content')
                             <p class="mt-2 text-sm text-red-600 flex items-center">
@@ -448,5 +446,73 @@ function removeImage() {
     document.getElementById('image-preview').classList.add('hidden');
     document.querySelector('.border-dashed').classList.remove('hidden');
 }
+
+// Initialize TinyMCE
+tinymce.init({
+    selector: '#content',
+    height: 500,
+    base_url: '{{ asset("tinymce/js/tinymce") }}',
+    suffix: '.min',
+    license_key: 'gpl',
+    plugins: [
+        'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+        'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+        'insertdatetime', 'media', 'table', 'help', 'wordcount'
+    ],
+    toolbar: 'undo redo | blocks | ' +
+        'bold italic forecolor | alignleft aligncenter ' +
+        'alignright alignjustify | bullist numlist outdent indent | ' +
+        'removeformat | help | code | image | link | table',
+    menubar: 'file edit view insert format tools table help',
+    content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; }',
+    branding: false,
+    promotion: false,
+    images_upload_url: '{{ route("admin.posts.upload-image") }}',
+    automatic_uploads: true,
+    images_upload_handler: function (blobInfo, progress) {
+        return new Promise(function (resolve, reject) {
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = false;
+            xhr.open('POST', '{{ route("admin.posts.upload-image") }}');
+            
+            xhr.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
+            
+            xhr.upload.onprogress = function (e) {
+                progress(e.loaded / e.total * 100);
+            };
+            
+            xhr.onload = function() {
+                console.log('Upload response:', xhr.responseText);
+                if (xhr.status === 200) {
+                    var json = JSON.parse(xhr.responseText);
+                    if (json && json.location) {
+                        console.log('Image URL:', json.location);
+                        resolve(json.location);
+                    } else {
+                        console.error('Invalid JSON response:', json);
+                        reject('Invalid JSON: ' + xhr.responseText);
+                    }
+                } else {
+                    console.error('HTTP Error:', xhr.status, xhr.responseText);
+                    reject('HTTP Error: ' + xhr.status);
+                }
+            };
+            
+            xhr.onerror = function() {
+                console.error('Upload failed');
+                reject('Upload failed');
+            };
+            
+            var formData = new FormData();
+            formData.append('file', blobInfo.blob(), blobInfo.filename());
+            xhr.send(formData);
+        });
+    },
+    setup: function (editor) {
+        editor.on('change', function () {
+            editor.save();
+        });
+    }
+});
 </script>
 @endsection

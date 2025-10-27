@@ -24,19 +24,21 @@ use Illuminate\Support\Facades\Storage;
                         <article class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100">
                             <!-- Post Image -->
                             <div class="relative">
-                                @if($post->featured_image)
-                                    <img src="{{ Storage::url($post->featured_image) }}" 
-                                         alt="{{ $post->title }}" 
-                                         class="w-full h-56 object-cover"
-                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                    <div class="w-full h-56 bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">
-                                        <span class="text-white text-sm">No Image</span>
-                                    </div>
-                                @else
-                                    <div class="w-full h-56 bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
-                                        <span class="text-white text-sm">No Image</span>
-                                    </div>
-                                @endif
+                                <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}" class="block">
+                                    @if($post->featured_image)
+                                        <img src="{{ Storage::url($post->featured_image) }}" 
+                                             alt="{{ $post->title }}" 
+                                             class="w-full h-56 object-cover hover:opacity-90 transition-opacity duration-200"
+                                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                        <div class="w-full h-56 bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">
+                                            <span class="text-white text-sm">No Image</span>
+                                        </div>
+                                    @else
+                                        <div class="w-full h-56 bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
+                                            <span class="text-white text-sm">No Image</span>
+                                        </div>
+                                    @endif
+                                </a>
                     
                                 <!-- Category Badge -->
                                 <div class="absolute top-3 right-3">
@@ -76,23 +78,27 @@ use Illuminate\Support\Facades\Storage;
 
         <!-- Pagination -->
                 <div class="mt-8 flex justify-center">
-                    <nav class="flex items-center space-x-4">
+                    <nav class="flex items-center">
                         @if($posts->previousPageUrl())
-                            <a href="{{ $posts->previousPageUrl() }}" class="text-gray-700 hover:text-gray-900 text-sm font-medium">« Previous</a>
+                            <a href="{{ $posts->previousPageUrl() }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200">
+                                « Previous
+                            </a>
                         @endif
                         
-                        <div class="flex items-center space-x-2">
+                        <div class="flex items-center">
                             @for($i = 1; $i <= $posts->lastPage(); $i++)
                                 @if($i == $posts->currentPage())
-                                    <span class="text-gray-900 text-sm font-medium">{{ $i }}</span>
+                                    <span class="px-4 py-2 text-sm font-medium text-white bg-orange-600 border border-orange-600">{{ $i }}</span>
                                 @else
-                                    <a href="{{ $posts->url($i) }}" class="text-gray-700 hover:text-gray-900 text-sm font-medium">{{ $i }}</a>
+                                    <a href="{{ $posts->url($i) }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200">{{ $i }}</a>
                                 @endif
                             @endfor
                         </div>
                         
                         @if($posts->nextPageUrl())
-                            <a href="{{ $posts->nextPageUrl() }}" class="text-gray-700 hover:text-gray-900 text-sm font-medium">Next »</a>
+                            <a href="{{ $posts->nextPageUrl() }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200">
+                                Next »
+                            </a>
                         @endif
                     </nav>
         </div>
@@ -114,7 +120,7 @@ use Illuminate\Support\Facades\Storage;
                 <!-- Popular Posts Section -->
                 <div>
                     <h3 class="text-lg font-bold text-orange-600 mb-4 border-b-2 border-orange-600 pb-2">
-                        Popular Posts
+                        Recent Posts
                     </h3>
                     <div class="bg-white rounded-lg shadow-md p-6">
                         <div class="space-y-4">

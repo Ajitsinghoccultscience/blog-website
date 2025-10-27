@@ -68,13 +68,13 @@
                         </label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <span class="text-gray-500 text-sm">/category-slug/</span>
+                                <span class="text-gray-600 text-sm font-medium">/category-slug/</span>
                             </div>
                             <input type="text" 
                                    id="slug" 
                                    name="slug" 
                                    value="{{ old('slug', $post->slug) }}" 
-                                   class="w-full pl-24 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 @error('slug') border-red-400 @enderror"
+                                   class="w-full pl-24 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 @error('slug') border-red-400 @enderror placeholder-gray-400"
                                    placeholder="post-slug"
                                    required>
                         </div>

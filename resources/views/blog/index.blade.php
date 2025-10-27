@@ -26,182 +26,72 @@ use Illuminate\Support\Facades\Storage;
         </div>
         
         @if($posts->count() > 0)
-            <!-- Slider Container -->
-            <div class="relative">
-                <!-- Slider Wrapper -->
-                <div class="overflow-hidden">
-                    <div id="recent-posts-slider" class="flex transition-transform duration-500 ease-in-out">
-                        @foreach($posts->chunk(3) as $chunk)
-                            <div class="w-full flex-shrink-0">
-                                <!-- Desktop: Show 3 posts in grid -->
-                                <div class="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    @foreach($chunk as $post)
-                                        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100">
-                                            <!-- Post Image -->
-                        <div class="relative">
-                            <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
-                                @if($post->featured_image)
-                                                        <img src="{{ Storage::url($post->featured_image) }}" 
-                                         alt="{{ $post->title }}" 
-                                                             class="w-full h-full object-cover"
-                                                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                                        <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">
-                                                            <span class="text-white text-sm">No Image</span>
-                                                        </div>
-                                @else
-                                                        <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
-                                                            <span class="text-white text-sm">No Image</span>
-                                    </div>
-                                @endif
-                            </div>
-                                                <!-- Badge -->
-                                                <div class="absolute top-3 left-3">
-                                                    <span class="bg-orange-600 text-white text-xs font-bold px-3 py-1 rounded-sm shadow-md flex items-center">
-                                                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                                        </svg>
-                                                        Occult Science
-                                                    </span>
-                            </div>
-                        </div>
-                        
-                        <!-- Post Content -->
-                        <div class="p-6">
-                                                <p class="text-gray-500 text-sm mb-2">
-                                                    {{ $post->published_at ? $post->published_at->format('d M, Y') : 'No date' }} by Admin
-                                                </p>
-                                                <h3 class="text-lg font-bold text-gray-900 mb-3 leading-tight hover:text-orange-600 transition-colors">
-                                <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}">{{ $post->title }}</a>
-                            </h3>
-                                                <p class="text-gray-600 text-sm leading-relaxed">
-                                                    {{ $post->excerpt ? Str::limit($post->excerpt, 120) : Str::limit(strip_tags($post->content), 120) }}
-                                                </p>
-                                            </div>
+            <!-- Swiper Container -->
+            <div class="swiper recent-posts-swiper">
+                <!-- Swiper Wrapper -->
+                <div class="swiper-wrapper">
+                    @foreach($posts as $post)
+                        <div class="swiper-slide">
+                            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+                                <!-- Post Image -->
+                                <div class="relative">
+                                    <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}" class="block">
+                                        <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+                                            @if($post->featured_image)
+                                                <img src="{{ Storage::url($post->featured_image) }}" 
+                                                     alt="{{ $post->title }}" 
+                                                     class="w-full h-full object-cover hover:opacity-90 transition-opacity duration-200"
+                                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                                <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">
+                                                    <span class="text-white text-sm">No Image</span>
+                                                </div>
+                                            @else
+                                                <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
+                                                    <span class="text-white text-sm">No Image</span>
+                                                </div>
+                                            @endif
                                         </div>
-                                    @endforeach
+                                        <!-- Badge -->
+                                        <div class="absolute top-3 left-3">
+                                            <span class="bg-orange-600 text-white text-xs font-bold px-3 py-1 rounded-sm shadow-md flex items-center">
+                                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                Occult Science
+                                            </span>
+                                        </div>
+                                    </a>
                                 </div>
                                 
-                                <!-- Mobile: Show only first post of chunk -->
-                                <div class="block md:hidden">
-                                    <div class="max-w-sm mx-auto">
-                                        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100">
-                                            <!-- Post Image -->
-                                            <div class="relative">
-                                                <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
-                                                    @if($chunk->first()->featured_image)
-                                                        <img src="{{ Storage::url($chunk->first()->featured_image) }}" 
-                                                             alt="{{ $chunk->first()->title }}" 
-                                                             class="w-full h-full object-cover"
-                                                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                                        <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">
-                                                            <span class="text-white text-sm">No Image</span>
-                                                        </div>
-                                                    @else
-                                                        <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
-                                                            <span class="text-white text-sm">No Image</span>
-                                                        </div>
-                                                    @endif
-                                                </div>
-                                                <!-- Badge -->
-                                                <div class="absolute top-3 left-3">
-                                                    <span class="bg-orange-600 text-white text-xs font-bold px-3 py-1 rounded-sm shadow-md flex items-center">
-                                                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                                        </svg>
-                                                        Occult Science
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            
-                                            <!-- Post Content -->
-                                            <div class="p-6">
-                                                <p class="text-gray-500 text-sm mb-2">
-                                                    {{ $chunk->first()->published_at ? $chunk->first()->published_at->format('d M, Y') : 'No date' }} by Admin
-                                                </p>
-                                                <h3 class="text-lg font-bold text-gray-900 mb-3 leading-tight hover:text-orange-600 transition-colors">
-                                                    <a href="{{ route('blog.post', [$chunk->first()->category->slug, $chunk->first()->slug]) }}">{{ $chunk->first()->title }}</a>
-                                                </h3>
-                                                <p class="text-gray-600 text-sm leading-relaxed">
-                                                    {{ $chunk->first()->excerpt ? Str::limit($chunk->first()->excerpt, 120) : Str::limit(strip_tags($chunk->first()->content), 120) }}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
+                                <!-- Post Content -->
+                                <div class="p-6">
+                                    <p class="text-gray-500 text-sm mb-2">
+                                        {{ $post->published_at ? $post->published_at->format('d M, Y') : 'No date' }}
+                                    </p>
+                                    <h3 class="text-lg font-bold text-gray-900 mb-3 leading-tight hover:text-orange-600 transition-colors">
+                                        <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}">{{ $post->title }}</a>
+                                    </h3>
+                                    <p class="text-gray-600 text-sm leading-relaxed mb-3">
+                                        {{ $post->excerpt ? Str::limit($post->excerpt, 120) : Str::limit(strip_tags($post->content), 120) }}
+                                    </p>
+                                    <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}" 
+                                       class="text-orange-600 hover:text-orange-700 font-medium text-sm transition-colors">
+                                        Read More...
+                                    </a>
                                 </div>
                             </div>
-                        @endforeach
-                        
-                        <!-- Add individual posts for mobile sliding if we have less than 3 posts -->
-                        @if($posts->count() < 3)
-                            @foreach($posts as $post)
-                                <div class="w-full flex-shrink-0 block md:hidden">
-                                    <div class="max-w-sm mx-auto">
-                                        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100">
-                                            <!-- Post Image -->
-                                            <div class="relative">
-                                                <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
-                                                    @if($post->featured_image)
-                                                        <img src="{{ Storage::url($post->featured_image) }}" 
-                                                             alt="{{ $post->title }}" 
-                                                             class="w-full h-full object-cover"
-                                                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                                        <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">
-                                                            <span class="text-white text-sm">No Image</span>
-                                                        </div>
-                                                    @else
-                                                        <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
-                                                            <span class="text-white text-sm">No Image</span>
-                                                        </div>
-                                                    @endif
-                                                </div>
-                                                <!-- Badge -->
-                                                <div class="absolute top-3 left-3">
-                                                    <span class="bg-orange-600 text-white text-xs font-bold px-3 py-1 rounded-sm shadow-md flex items-center">
-                                                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                                        </svg>
-                                                        Occult Science
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            
-                                            <!-- Post Content -->
-                                            <div class="p-6">
-                                                <p class="text-gray-500 text-sm mb-2">
-                                                    {{ $post->published_at ? $post->published_at->format('d M, Y') : 'No date' }} by Admin
-                                                </p>
-                                                <h3 class="text-lg font-bold text-gray-900 mb-3 leading-tight hover:text-orange-600 transition-colors">
-                                                    <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}">{{ $post->title }}</a>
-                                                </h3>
-                                                <p class="text-gray-600 text-sm leading-relaxed">
-                                {{ $post->excerpt ? Str::limit($post->excerpt, 120) : Str::limit(strip_tags($post->content), 120) }}
-                            </p>
-                                            </div>
-                                        </div>
                         </div>
-                    </div>
-                @endforeach
-                        @endif
-                    </div>
+                    @endforeach
                 </div>
                 
+                <!-- Swiper Navigation -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                
+                <!-- Swiper Pagination -->
+                <div class="swiper-pagination"></div>
             </div>
             
-            <!-- Pagination Dots -->
-            <div class="flex justify-center mt-8">
-                <div id="slider-dots" class="flex space-x-2">
-                    @if($posts->count() >= 3)
-                        @for($i = 0; $i < $posts->count(); $i += 3)
-                            <button class="slider-dot w-3 h-3 rounded-full transition-colors {{ $i === 0 ? 'bg-orange-600' : 'bg-gray-400' }}" data-slide="{{ $i / 3 }}"></button>
-                        @endfor
-                    @else
-                        @for($i = 0; $i < $posts->count(); $i++)
-                            <button class="slider-dot w-3 h-3 rounded-full transition-colors {{ $i === 0 ? 'bg-orange-600' : 'bg-gray-400' }}" data-slide="{{ $i }}"></button>
-                        @endfor
-                    @endif
-                </div>
-            </div>
         @else
             <div class="text-center text-gray-500">
                 <p>No posts available at the moment.</p>
@@ -213,9 +103,9 @@ use Illuminate\Support\Facades\Storage;
 <!-- Main Content Layout - Desktop Two Column, Mobile Single Column -->
 <div class="bg-white py-4 lg:py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Left Column - Category Sections (2/3 width on desktop) -->
-            <div class="lg:col-span-2 space-y-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+            <!-- Left Column - Category Sections (2/3 width on desktop, full width on mobile) -->
+            <div class="lg:col-span-2 space-y-6 lg:space-y-8 order-1 lg:order-1">
                 @if($categories->count() > 0)
                     @foreach($categories->take(5) as $category)
                         @php
@@ -270,31 +160,30 @@ use Illuminate\Support\Facades\Storage;
                                         </div>
                                         
                                         <!-- Post Content - Right Side -->
-                                        <div class="md:w-2/3 p-6">
-                                            <p class="text-gray-500 text-sm mb-2">
-                                                {{ $categoryPosts[0]->published_at ? $categoryPosts[0]->published_at->format('d M, Y') : 'No date' }} by Admin
-                                            </p>
-                                            <h3 class="text-xl font-bold text-gray-900 mb-3 leading-tight hover:text-orange-600 transition-colors">
-                                                <a href="{{ route('blog.post', [$categoryPosts[0]->category->slug, $categoryPosts[0]->slug]) }}">{{ $categoryPosts[0]->title }}</a>
+                                        <div class="md:w-2/3 p-3 md:p-6">
+                                            <p class="text-gray-500 text-xs md:text-sm mb-1 md:mb-2">
+                                                {{ $categoryPosts[0]->published_at ? $categoryPosts[0]->published_at->format('d M, Y') : 'No date' }}                                            </p>
+                                            <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-2 md:mb-3 leading-tight hover:text-orange-600 transition-colors">
+                                                <a href="{{ route('blog.post', [$categoryPosts[0]->category->slug, $categoryPosts[0]->slug]) }}">{{ Str::limit($categoryPosts[0]->title, 40) }}</a>
                                             </h3>
-                                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
-                                                {{ $categoryPosts[0]->excerpt ? Str::limit($categoryPosts[0]->excerpt, 150) : Str::limit(strip_tags($categoryPosts[0]->content), 150) }}
+                                            <p class="text-gray-600 text-xs md:text-sm leading-relaxed mb-2 md:mb-4">
+                                                {{ $categoryPosts[0]->excerpt ? Str::limit($categoryPosts[0]->excerpt, 80) : Str::limit(strip_tags($categoryPosts[0]->content), 80) }}
                                             </p>
-                                            <a href="{{ route('blog.post', [$categoryPosts[0]->category->slug, $categoryPosts[0]->slug]) }}" class="text-orange-600 hover:text-orange-800 font-medium text-sm">
+                                            <a href="{{ route('blog.post', [$categoryPosts[0]->category->slug, $categoryPosts[0]->slug]) }}" class="text-orange-600 hover:text-orange-800 font-medium text-xs md:text-sm">
                                                 Read More...
                                             </a>
                                         </div>
                                     </div>
                                 </article>
                                 
-                                <!-- Two Additional Posts - Mixed Mobile Layout -->
+                                <!-- Two Additional Posts - Always Side by Side -->
                                 @if($categoryPosts->count() > 1)
-                                    <!-- Desktop: 2 posts side by side -->
-                                    <div class="hidden md:grid grid-cols-2 gap-6">
+                                    <!-- 2 posts side by side for all screen sizes -->
+                                    <div class="grid grid-cols-2 gap-3 md:gap-6">
                                         @foreach($categoryPosts->skip(1) as $post)
                                             <article class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100">
                                                 <!-- Post Image -->
-                                                <div class="relative h-48">
+                                                <div class="relative h-32 md:h-48">
                                                     @if($post->featured_image)
                                                         <img src="{{ Storage::url($post->featured_image) }}" 
                                                              alt="{{ $post->title }}" 
@@ -311,94 +200,20 @@ use Illuminate\Support\Facades\Storage;
                                                 </div>
                                                 
                                                 <!-- Post Content -->
-                                                <div class="p-4">
-                                                    <h3 class="text-lg font-bold text-gray-900 mb-2 leading-tight hover:text-orange-600 transition-colors">
-                                                        <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}">{{ $post->title }}</a>
+                                                <div class="p-2 md:p-4">
+                                                    <h3 class="text-sm md:text-lg font-bold text-gray-900 mb-1 md:mb-2 leading-tight hover:text-orange-600 transition-colors">
+                                                        <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}">{{ Str::limit($post->title, 30) }}</a>
                                                     </h3>
-                                                    <p class="text-gray-600 text-sm leading-relaxed">
-                                                        {{ $post->excerpt ? Str::limit($post->excerpt, 100) : Str::limit(strip_tags($post->content), 100) }}
+                                                    <p class="text-gray-600 text-xs md:text-sm leading-relaxed mb-1 md:mb-2">
+                                                        {{ $post->excerpt ? Str::limit($post->excerpt, 60) : Str::limit(strip_tags($post->content), 60) }}
                                                     </p>
+                                                    <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}" 
+                                                       class="text-orange-600 hover:text-orange-700 font-medium text-xs md:text-sm transition-colors">
+                                                        Read More...
+                                                    </a>
                                                 </div>
                                             </article>
                                         @endforeach
-                                    </div>
-                                    
-                                    <!-- Mobile: Mixed layout - 1 full width + 2 side by side -->
-                                    <div class="block md:hidden space-y-4">
-                                        @php
-                                            $remainingPosts = $categoryPosts->skip(1);
-                                        @endphp
-                                        
-                                        <!-- First remaining post - Full width -->
-                                        @if($remainingPosts->count() > 0)
-                                            <article class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100">
-                                                <!-- Post Image -->
-                                                <div class="relative h-48">
-                                                    @if($remainingPosts->first()->featured_image)
-                                                        <img src="{{ Storage::url($remainingPosts->first()->featured_image) }}" 
-                                                             alt="{{ $remainingPosts->first()->title }}" 
-                                                             class="w-full h-full object-cover"
-                                                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                                        <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">
-                                                            <span class="text-white text-sm">No Image</span>
-                                                        </div>
-                                                    @else
-                                                        <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
-                                                            <span class="text-white text-sm">No Image</span>
-                                                        </div>
-                                                    @endif
-                                                </div>
-                                                
-                                                <!-- Post Content -->
-                                                <div class="p-4">
-                                                    <p class="text-gray-500 text-sm mb-2">
-                                                        {{ $remainingPosts->first()->published_at ? $remainingPosts->first()->published_at->format('d M, Y') : 'No date' }} by Admin
-                                                    </p>
-                                                    <h3 class="text-lg font-bold text-gray-900 mb-3 leading-tight hover:text-orange-600 transition-colors">
-                                                        <a href="{{ route('blog.post', [$remainingPosts->first()->category->slug, $remainingPosts->first()->slug]) }}">{{ $remainingPosts->first()->title }}</a>
-                                                    </h3>
-                                                    <p class="text-gray-600 text-sm leading-relaxed">
-                                                        {{ $remainingPosts->first()->excerpt ? Str::limit($remainingPosts->first()->excerpt, 120) : Str::limit(strip_tags($remainingPosts->first()->content), 120) }}
-                                                    </p>
-                                                </div>
-                                            </article>
-                                        @endif
-                                        
-                                        <!-- Next 2 posts - Side by side -->
-                                        @if($remainingPosts->count() > 1)
-                                            <div class="grid grid-cols-2 gap-3">
-                                                @foreach($remainingPosts->skip(1)->take(2) as $post)
-                                                    <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100">
-                                                        <!-- Post Image -->
-                                                        <div class="relative h-32">
-                                                            @if($post->featured_image)
-                                                                <img src="{{ Storage::url($post->featured_image) }}" 
-                                                                     alt="{{ $post->title }}" 
-                                                                     class="w-full h-full object-cover"
-                                                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                                                <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">
-                                                                    <span class="text-white text-xs">No Image</span>
-                                                                </div>
-                                                            @else
-                                                                <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
-                                                                    <span class="text-white text-xs">No Image</span>
-                                                                </div>
-                                                            @endif
-                                                        </div>
-                                                        
-                                                        <!-- Post Content -->
-                                                        <div class="p-3">
-                                                            <h3 class="text-sm font-bold text-gray-900 mb-2 leading-tight hover:text-orange-600 transition-colors">
-                                                                <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}">{{ Str::limit($post->title, 40) }}</a>
-                                                            </h3>
-                                                            <p class="text-gray-600 text-xs leading-relaxed">
-                                                                {{ $post->excerpt ? Str::limit($post->excerpt, 60) : Str::limit(strip_tags($post->content), 60) }}
-                                                            </p>
-                                                        </div>
-                                                    </article>
-                                                @endforeach
-                                            </div>
-                                        @endif
                                     </div>
                                 @endif
                             </div>
@@ -407,8 +222,8 @@ use Illuminate\Support\Facades\Storage;
                 @endif
             </div>
             
-            <!-- Right Column - Sidebar (1/3 width on desktop, hidden on mobile) -->
-            <div class="hidden lg:block lg:col-span-1 space-y-8">
+            <!-- Right Column - Sidebar (1/3 width on desktop, full width on mobile) -->
+            <div class="lg:col-span-1 space-y-6 lg:space-y-8 order-2 lg:order-2">
     <!-- Categories Section -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                     <!-- Categories Header -->
@@ -499,6 +314,9 @@ use Illuminate\Support\Facades\Storage;
 @endsection
 
 @push('styles')
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
 <style>
 /* Banner styling */
 .banner-container {
@@ -520,182 +338,204 @@ use Illuminate\Support\Facades\Storage;
 
 @media (max-width: 768px) {
     .banner-container img {
-        /* No height restrictions - show full image */
+        height: auto;
     }
 }
 
 @media (max-width: 480px) {
     .banner-container img {
-        /* No height restrictions - show full image */
+        height: auto;
     }
 }
 
-/* Mobile slider fixes */
-@media (max-width: 767px) {
-    #recent-posts-slider {
-        overflow: hidden;
+/* Swiper Customization */
+.recent-posts-swiper {
+    padding: 20px 0 60px 0;
+    position: relative;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.recent-posts-swiper .swiper-slide {
+    height: auto;
+    display: flex;
+    align-items: stretch;
+}
+
+.recent-posts-swiper .swiper-slide > div {
+    width: 100%;
+    flex: 1;
+}
+
+/* Navigation Buttons */
+.recent-posts-swiper .swiper-button-next,
+.recent-posts-swiper .swiper-button-prev {
+    color: #ea580c;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    margin-top: -22px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.recent-posts-swiper .swiper-button-next:hover,
+.recent-posts-swiper .swiper-button-prev:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
+}
+
+.recent-posts-swiper .swiper-button-next:after,
+.recent-posts-swiper .swiper-button-prev:after {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Pagination Dots */
+.recent-posts-swiper .swiper-pagination-bullet {
+    background: #d1d5db;
+    opacity: 1;
+    width: 12px;
+    height: 12px;
+    transition: all 0.3s ease;
+}
+
+.recent-posts-swiper .swiper-pagination-bullet-active {
+    background: #ea580c;
+    transform: scale(1.2);
+}
+
+.recent-posts-swiper .swiper-pagination {
+    bottom: 20px;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .recent-posts-swiper {
+        padding: 10px 20px 50px 20px;
+        max-width: 100%;
     }
     
-    #recent-posts-slider > div {
-        min-width: 100%;
+    /* Hide navigation buttons on mobile */
+    .recent-posts-swiper .swiper-button-next,
+    .recent-posts-swiper .swiper-button-prev {
+        display: none;
     }
-    
-    /* Hide desktop grid on mobile */
-    .hidden.md\\:grid {
-        display: none !important;
-    }
-    
-    /* Show mobile posts */
-    .block.md\\:hidden {
-        display: block !important;
-    }
-    
-    /* Force mobile layout visibility */
-    @media (max-width: 767px) {
-        .block.md\\:hidden {
-            display: block !important;
-        }
-        .hidden.md\\:grid {
-            display: none !important;
-        }
+}
+
+/* Desktop and tablet spacing */
+@media (min-width: 769px) {
+    .recent-posts-swiper {
+        padding: 20px 40px 60px 40px;
     }
 }
 </style>
 @endpush
 
 @push('scripts')
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const slider = document.getElementById('recent-posts-slider');
-    const dots = document.querySelectorAll('.slider-dot');
+    console.log('Initializing Recent Posts Swiper...');
     
-    if (!slider) {
-        console.log('Slider not found');
-        return;
-    }
-    
-    let currentSlide = 0;
-    let totalSlides = 0;
-    
-    // Check if mobile
-    function isMobile() {
-        return window.innerWidth < 768;
-    }
-    
-    // Update total slides based on device
-    function updateTotalSlides() {
-        if (isMobile()) {
-            // Mobile: count individual posts
-            totalSlides = document.querySelectorAll('.block.md\\:hidden').length;
-        } else {
-            // Desktop: count chunks
-            totalSlides = slider.children.length;
-        }
-    }
-    
-    // Initialize
-    updateTotalSlides();
-    
-    console.log('Total slides:', totalSlides);
-    console.log('Total posts:', {{ $posts->count() }});
-    console.log('Is mobile:', isMobile());
-    
-    // Update slider position
-    function updateSlider() {
-        const translateX = -currentSlide * 100;
-        slider.style.transform = `translateX(${translateX}%)`;
+    // Initialize Swiper
+    const swiper = new Swiper('.recent-posts-swiper', {
+        // Optional parameters
+        loop: false,
+        autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+        },
         
-        console.log('Current slide:', currentSlide, 'TranslateX:', translateX);
+        // Navigation arrows
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
         
-        // Update dots
-        dots.forEach((dot, index) => {
-            if (index === currentSlide) {
-                dot.classList.remove('bg-gray-400');
-                dot.classList.add('bg-orange-600');
-            } else {
-                dot.classList.remove('bg-orange-600');
-                dot.classList.add('bg-gray-400');
-            }
+        // Pagination
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            dynamicBullets: false,
+        },
+        
+        // Responsive breakpoints
+        breakpoints: {
+            // Mobile
+            320: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+                centeredSlides: true,
+                autoplay: {
+                    delay: 3000,
+                }
+            },
+            // Tablet
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+                centeredSlides: false,
+                autoplay: {
+                    delay: 4000,
+                }
+            },
+            // Desktop
+            1024: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+                centeredSlides: false,
+                autoplay: {
+                    delay: 5000,
+                }
+            },
+        },
+        
+        // Touch/Swipe settings
+        touchRatio: 1,
+        touchAngle: 45,
+        grabCursor: true,
+        
+        // Speed
+        speed: 600,
+        
+        // Events
+        on: {
+            init: function () {
+                console.log('Recent Posts Swiper initialized with', this.slides.length, 'slides');
+                console.log('Current slides per view:', this.params.slidesPerView);
+            },
+            slideChange: function () {
+                console.log('Slide changed to:', this.activeIndex);
+            },
+            autoplayStart: function () {
+                console.log('Autoplay started');
+            },
+            autoplayStop: function () {
+                console.log('Autoplay stopped');
+            },
+        },
+    });
+    
+    // Pause autoplay on hover (desktop only)
+    const swiperContainer = document.querySelector('.recent-posts-swiper');
+    if (swiperContainer) {
+        swiperContainer.addEventListener('mouseenter', () => {
+            swiper.autoplay.stop();
+            console.log('Autoplay paused on hover');
+        });
+        
+        swiperContainer.addEventListener('mouseleave', () => {
+            swiper.autoplay.start();
+            console.log('Autoplay resumed');
         });
     }
     
-    // Next slide
-    function nextSlide() {
-        if (totalSlides > 1) {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateSlider();
-            console.log('Auto-advancing to slide:', currentSlide);
-        }
-    }
-    
-    // Previous slide
-    function prevSlide() {
-        if (totalSlides > 1) {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateSlider();
-        }
-    }
-    
-    // Dot navigation
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            const slideIndex = parseInt(dot.getAttribute('data-slide'));
-            currentSlide = slideIndex;
-            updateSlider();
-            console.log('Clicked dot:', index, 'Slide index:', slideIndex);
-        });
-    });
-    
-    // Initialize slider
-    updateSlider();
-    
-    // Auto-play slider - 3 seconds (only if more than 1 slide)
-    if (totalSlides > 1) {
-        console.log('Starting auto-play with', totalSlides, 'slides');
-        let autoPlay = setInterval(nextSlide, 3000);
-        
-        // Pause auto-play on hover (desktop only)
-        slider.addEventListener('mouseenter', () => {
-            clearInterval(autoPlay);
-            console.log('Auto-play paused on hover');
-        });
-        
-        slider.addEventListener('mouseleave', () => {
-            autoPlay = setInterval(nextSlide, 3000);
-            console.log('Auto-play resumed');
-        });
-    } else {
-        console.log('Only 1 slide, no auto-play needed');
-    }
-    
-    // Touch/swipe support for mobile
-    let startX = 0;
-    let endX = 0;
-    
-    slider.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-    });
-    
-    slider.addEventListener('touchend', (e) => {
-        endX = e.changedTouches[0].clientX;
-        const diff = startX - endX;
-        
-        if (Math.abs(diff) > 50) { // Minimum swipe distance
-            if (diff > 0) {
-                nextSlide(); // Swipe left - next slide
-            } else {
-                prevSlide(); // Swipe right - previous slide
-            }
-        }
-    });
-    
-    // Handle window resize
-    window.addEventListener('resize', () => {
-        updateTotalSlides();
-        currentSlide = 0;
-        updateSlider();
-        console.log('Window resized - Total slides:', totalSlides, 'Is mobile:', isMobile());
-    });
+    console.log('Recent Posts Swiper setup complete!');
 });
 </script>
 @endpush
+

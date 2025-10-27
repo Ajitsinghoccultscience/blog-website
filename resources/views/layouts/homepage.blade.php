@@ -32,6 +32,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Custom Styles -->
+    @stack('styles')
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -132,12 +133,17 @@
                         @foreach($latestPosts as $latestPost)
                             <div class="flex space-x-3">
                                 <div class="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden">
-                                    @if($latestPost->featured_image && Storage::exists($latestPost->featured_image))
+                                    @if($latestPost->featured_image)
                                         <img src="{{ Storage::url($latestPost->featured_image) }}" 
                                              alt="{{ $latestPost->title }}" 
-                                             class="w-full h-full object-cover">
+                                             class="w-full h-full object-cover"
+                                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                        <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">
+                                            <span class="text-white text-xs">No Image</span>
+                                        </div>
                                     @else
-                                        <div class="w-full h-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
+                                        <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
+                                            <span class="text-white text-xs">No Image</span>
                                         </div>
                                     @endif
                                 </div>
@@ -186,5 +192,8 @@
             </div>
         </div>
     </footer>
+
+    <!-- Scripts -->
+    @stack('scripts')
 </body>
 </html>

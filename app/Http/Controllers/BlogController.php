@@ -17,12 +17,13 @@ class BlogController extends Controller
         $posts = Post::with('category')
             ->where('is_published', true)
             ->orderBy('published_at', 'desc')
-            ->paginate(10);
+            ->limit(6)
+            ->get();
 
         $categories = Category::where('is_active', true)->get();
 
         // Process content for all posts to fix image URLs
-        $posts->getCollection()->transform(function ($post) {
+        $posts->transform(function ($post) {
             $post->content = $this->processContentImages($post->content);
             return $post;
         });
@@ -81,6 +82,9 @@ class BlogController extends Controller
                     ->orderBy('published_at', 'desc')
                     ->paginate(10);
 
+                // Append the category slug to pagination links
+                $posts->appends(['category' => $category->slug]);
+
                 $categories = Category::where('is_active', true)->get();
 
                 // Process content for all posts to fix image URLs
@@ -137,7 +141,11 @@ class BlogController extends Controller
             ->where('is_published', true)
             ->where('category_id', $category->id)
             ->orderBy('published_at', 'desc')
-            ->paginate(10);
+            ->paginate(10
+        );
+
+        // Append the category slug to pagination links
+        $posts->appends(['category' => $category->slug]);
 
         $categories = Category::where('is_active', true)->get();
 

@@ -110,9 +110,8 @@
         </div>
         @endif
 
-        <!-- Danger Zone -->
+        <!-- Actions -->
         <div class="mt-8 pt-6 border-t border-gray-200">
-            <h3 class="text-lg font-semibold text-red-600 mb-4">Danger Zone</h3>
             <div class="bg-red-50 border border-red-200 rounded-lg p-4">
                 <div class="flex items-center justify-between">
                     <div>

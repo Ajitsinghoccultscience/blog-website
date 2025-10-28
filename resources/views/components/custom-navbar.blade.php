@@ -19,7 +19,7 @@
                             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                         </svg>
                     </a>
-                    <a href="#" class="social-icon">
+                    <a href="https://x.com/gurudevsk" target="_blank" class="social-icon">
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                         </svg>
@@ -83,41 +83,41 @@
                         <!-- Dropdown Menu -->
                         <div class="dropdown-menu absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                             <div class="py-2">
-                                <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
+                                <a href="https://www.occultscience.in/astrology-course/" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
                                     <div class="font-medium">Astrology</div>
                                 </a>
-                                <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
+                                <a href="https://www.occultscience.in/vastu-course/" target="_blank" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
                                     <div class="font-medium">Vastu Shastra</div>
                                 </a>
-                                <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
+                                <a href="https://www.occultscience.in/numerology-course/" target="_blank" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
                                     <div class="font-medium">Numerology</div>
                                 </a>
-                                <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
+                                <a href="https://www.occultscience.in/palmistry-course/" target="_blank" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
                                     <div class="font-medium">Palmistry</div>
                                 </a>
-                                <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
+                                <a href="https://www.occultscience.in/graphology-course/" target="_blank" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
                                     <div class="font-medium">Graphology</div>
                                 </a>
-                                <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
+                                <a href="https://www.occultscience.in/card-reading-course/" target="_blank" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
                                     <div class="font-medium">Tarot Card</div>
                                 </a>
-                                <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
+                                <a href="https://www.occultscience.in/reiki-course/" target="_blank" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
                                     <div class="font-medium">Reiki Healing</div>
                                 </a>
-                                <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
-                                    <div class="font-medium">Pune Institute</div>
+                                <a href="https://www.occultscience.in/astrology-course-in-pune/" target="_blank" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
+                                    <div class="font-medium">Astrology Course Pune</div>
                                 </a>
-                                <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
-                                    <div class="font-medium">Delhi Institute</div>
+                                <a href="https://www.occultscience.in/astrology-course-in-delhi/" target="_blank" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
+                                    <div class="font-medium">Astrology Course Delhi</div>
                                 </a>
-                                <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
-                                    <div class="font-medium">Vedic Astrology</div>
+                                <a href="https://www.occultscience.in/learn-vedic-astrology/" target="_blank" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
+                                    <div class="font-medium">Learn Vedic Astrology</div>
                                 </a>
-                                <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
-                                    <div class="font-medium">Kolkata Institute</div>
+                                <a href="https://www.occultscience.in/astrology-course-in-kolkata/" target="_blank" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
+                                    <div class="font-medium">Astrology Course Kolkata</div>
                                 </a>
-                                <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
-                                    <div class="font-medium">Vastu Kolkata</div>
+                                <a href="https://www.occultscience.in/vastu-course-in-kolkata/" target="_blank" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
+                                    <div class="font-medium">Vastu Course Kolkata</div>
                                 </a>
                             </div>
                         </div>
@@ -162,14 +162,14 @@
                         <!-- Dropdown Menu -->
                         <div class="dropdown-menu absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                             <div class="py-2">
-                                <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
-                                    <div class="font-medium">Palm Reading Tool</div>
+                                <a href="https://www.occultscience.in/tools/numerology-calculator/" target="_blank" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
+                                    <div class="font-medium">Numerology Calculator</div>
                                 </a>
-                                <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
-                                    <div class="font-medium">Birth Chart Calculator</div>
+                                <a href="https://www.occultscience.in/tools/lo-shu-grid-calculator/" target="_blank" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
+                                    <div class="font-medium">Lo Shu Grid Calculator</div>
                                 </a>
-                                <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
-                                    <div class="font-medium">Vastu Analyzer</div>
+                                <a href="https://www.occultscience.in/tools/mobile-number-numerology-calculator/" target="_blank" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
+                                    <div class="font-medium">Mobile Number Calculator</div>
                                 </a>
                             </div>
                         </div>
@@ -218,41 +218,53 @@
                             </svg>
                         </a>
                         <div id="courses-submenu" class="mobile-submenu hidden">
-                            <a href="#" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
+                            <a href="https://www.occultscience.in/astrology-course/" target="_blank" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
                                 Astrology
                             </a>
-                            <a href="#" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
+                            <a href="https://www.occultscience.in/vastu-course/" target="_blank" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
                                 Vastu Shastra
                             </a>
-                            <a href="#" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
+                            <a href="https://www.occultscience.in/numerology-course/" target="_blank" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
                                 Numerology
                             </a>
-                            <a href="#" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
+                            <a href="https://www.occultscience.in/palmistry-course/" target="_blank" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
                                 Palmistry
                             </a>
-                            <a href="#" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
+                            <a href="https://www.occultscience.in/graphology-course/" target="_blank" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
                                 Graphology
                             </a>
-                            <a href="#" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
+                            <a href="https://www.occultscience.in/card-reading-course/" target="_blank" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
                                 Tarot Card
                             </a>
-                            <a href="#" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
+                            <a href="https://www.occultscience.in/reiki-course/" target="_blank" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
                                 Reiki Healing
                             </a>
-                            <a href="#" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
+                            <a href="https://www.occultscience.in/pune-institute/" target="_blank" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
                                 Pune Institute
                             </a>
-                            <a href="#" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
+                            <a href="https://www.occultscience.in/delhi-institute/" target="_blank" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
                                 Delhi Institute
                             </a>
-                            <a href="#" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
+                            <a href="https://www.occultscience.in/vedic-astrology-course/" target="_blank" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
                                 Vedic Astrology
                             </a>
-                            <a href="#" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
+                            <a href="https://www.occultscience.in/kolkata-institute/" target="_blank" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
                                 Kolkata Institute
                             </a>
-                            <a href="#" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
-                                Vastu Kolkata
+                            <a href="https://www.occultscience.in/astrology-course-in-pune/" target="_blank" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
+                                Astrology Course Pune
+                            </a>
+                            <a href="https://www.occultscience.in/astrology-course-in-delhi/" target="_blank" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
+                                Astrology Course Delhi
+                            </a>
+                            <a href="https://www.occultscience.in/learn-vedic-astrology/" target="_blank" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
+                                Learn Vedic Astrology
+                            </a>
+                            <a href="https://www.occultscience.in/astrology-course-in-kolkata/" target="_blank" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
+                                Astrology Course Kolkata
+                            </a>
+                            <a href="https://www.occultscience.in/vastu-course-in-kolkata/" target="_blank" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
+                                Vastu Course Kolkata
                             </a>
                         </div>
                     </div>
@@ -284,14 +296,14 @@
                             </svg>
                         </a>
                         <div id="tools-submenu" class="mobile-submenu hidden">
-                            <a href="#" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
-                                Palm Reading Tool
+                            <a href="https://www.occultscience.in/tools/numerology-calculator/" target="_blank" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
+                                Numerology Calculator
                             </a>
-                            <a href="#" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
-                                Birth Chart Calculator
+                            <a href="https://www.occultscience.in/tools/lo-shu-grid-calculator/" target="_blank" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
+                                Lo Shu Grid Calculator
                             </a>
-                            <a href="#" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
-                                Vastu Analyzer
+                            <a href="https://www.occultscience.in/tools/mobile-number-numerology-calculator/" target="_blank" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
+                                Mobile Number Calculator
                             </a>
                         </div>
                     </div>
@@ -461,7 +473,6 @@
     text-decoration: none;
     font-weight: 600;
     font-size: 14px;
-    text-transform: uppercase;
     letter-spacing: 0.5px;
     padding: 8px 0;
     position: relative;
@@ -628,7 +639,6 @@
     text-decoration: none;
     font-weight: 600;
     font-size: 16px;
-    text-transform: uppercase;
     letter-spacing: 0.5px;
     padding: 12px 20px;
     border-bottom: 1px solid #f0f0f0;

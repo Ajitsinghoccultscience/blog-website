@@ -178,23 +178,19 @@
 
                 <!-- Right Side - Search Icon & Mobile Menu Toggle -->
                 <div class="flex items-center space-x-4">
-                    <!-- Desktop Search Icon (Visible on homepage only) -->
-                    @if(request()->routeIs('blog.index'))
+                    <!-- Desktop Search Icon -->
                     <button class="search-icon hidden md:block" id="searchToggle">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                     </button>
-                    @endif
                     
-                    <!-- Mobile Search Icon (Visible on mobile, homepage only) -->
-                    @if(request()->routeIs('blog.index'))
+                    <!-- Mobile Search Icon -->
                     <button class="mobile-search-icon md:hidden" id="mobileSearchToggle">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                     </button>
-                    @endif
                     
                     <!-- Mobile Menu Toggle Button -->
                     <button class="mobile-menu-toggle lg:hidden" id="mobileMenuToggle">
@@ -317,16 +313,15 @@
     </div>
     
     <!-- Search Form (Hidden by default) -->
-    @if(request()->routeIs('blog.index'))
     <div class="search-form-container hidden" id="searchFormContainer">
         <div class="container mx-auto px-4 py-4 bg-white border-t border-gray-200">
-            <form action="{{ route('blog.index') }}" method="GET" class="flex items-center space-x-4">
+            <form action="{{ route('blog.search') }}" method="GET" class="flex items-center space-x-4">
                 <div class="flex-1">
                     <input type="text" 
-                           name="search" 
-                           placeholder="Search posts..." 
+                           name="q" 
+                           placeholder="Search articles, topics, categories..." 
                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
-                           value="{{ request('search') }}">
+                           value="{{ request('q') }}">
                 </div>
                 <button type="submit" 
                         class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors">
@@ -342,7 +337,6 @@
             </form>
         </div>
     </div>
-    @endif
 </div>
 
 <style>

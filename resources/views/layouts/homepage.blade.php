@@ -23,6 +23,11 @@
     <meta property="twitter:description" content="@yield('description', 'Exploring the mystical and esoteric world through ancient wisdom and modern insights.')">
     <meta property="twitter:image" content="@yield('og_image', asset('images/occult-blog-og.jpg'))">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('images/WEBSITE_HEADER_LOGO.png') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('images/WEBSITE_HEADER_LOGO.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/WEBSITE_HEADER_LOGO.png') }}">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -81,7 +86,11 @@
                 <!-- Column 1: Institute Info -->
                 <div>
                     <div class="flex items-start mb-6 md:flex-row flex-col md:items-start items-center text-center md:text-left">
-                        <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mr-4 flex-shrink-0 md:mr-4 mr-0 mb-4 md:mb-0">
+                        <div class="w-16 h-16 rounded-full overflow-hidden mr-4 flex-shrink-0 md:mr-4 mr-0 mb-4 md:mb-0">
+                            <img src="{{ asset('images/WEBSITE_HEADER_LOGO.png') }}" 
+                                 alt="Logo" 
+                                 class="w-full h-full object-cover"
+                                 onerror="this.style.display='none';">
                         </div>
                         <div>
                             <h3 class="text-lg font-bold text-white uppercase leading-tight">ALL INDIA INSTITUTE OF OCCULT SCIENCE</h3>

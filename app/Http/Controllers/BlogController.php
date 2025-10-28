@@ -32,6 +32,40 @@ class BlogController extends Controller
     }
 
     /**
+     * Search blog posts by query.
+     */
+    public function search(Request $request)
+    {
+        $query = $request->get('q');
+        
+        if (empty($query)) {
+            return redirect()->route('blog.index');
+        }
+
+        $posts = Post::with('category')
+            ->where('is_published', true)
+            ->where(function ($q) use ($query) {
+                $q->where('title', 'LIKE', "%{$query}%")
+                  ->orWhere('excerpt', 'LIKE', "%{$query}%")
+                  ->orWhereHas('category', function ($categoryQuery) use ($query) {
+                      $categoryQuery->where('name', 'LIKE', "%{$query}%");
+                  });
+            })
+            ->orderBy('published_at', 'desc')
+            ->paginate(10);
+
+        $categories = Category::where('is_active', true)->get();
+
+        // Process content for all posts to fix image URLs
+        $posts->getCollection()->transform(function ($post) {
+            $post->content = $this->processContentImages($post->content);
+            return $post;
+        });
+
+        return view('blog.search', compact('posts', 'categories', 'query'));
+    }
+
+    /**
      * Display the specified blog post or category.
      */
     public function show($slug, $post_slug = null)

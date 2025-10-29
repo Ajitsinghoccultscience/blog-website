@@ -482,7 +482,7 @@ tinymce.init({
         'alignright alignjustify | bullist numlist outdent indent | ' +
         'removeformat | help | code | image | link | table',
     menubar: 'file edit view insert format tools table help',
-    content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; }',
+    content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; } a { color: #ef4444; text-decoration: underline; }',
     branding: false,
     promotion: false,
     images_upload_url: '{{ route("admin.posts.upload-image") }}',

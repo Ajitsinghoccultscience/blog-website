@@ -34,7 +34,7 @@
                            name="slug" 
                            value="{{ old('slug', $category->slug) }}" 
                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent @error('slug') border-red-500 @enderror placeholder-gray-400"
-                           placeholder="category-slug"
+                            placeholder="category-slug"
                            required>
                     <p class="mt-1 text-sm text-gray-500">URL-friendly version of the name</p>
                     @error('slug')

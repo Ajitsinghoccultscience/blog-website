@@ -11,42 +11,21 @@
     </a>
 </div>
 
-<!-- Filters -->
+<!-- Search -->
 <div class="bg-white rounded-lg shadow p-4 mb-6">
-    <form method="GET" class="flex flex-wrap gap-4 items-end">
-        <div class="flex-1 min-w-64">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Search</label>
+    <form method="GET" class="flex gap-4 items-end">
+        <div class="flex-1">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Search Posts by Title</label>
             <input type="text" name="search" value="{{ request('search') }}" 
-                   placeholder="Search posts..." 
+                   placeholder="Enter post title..." 
                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
         </div>
         
-        <div class="min-w-48">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-            <select name="status" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
-                <option value="">All Posts</option>
-                <option value="published" {{ request('status') === 'published' ? 'selected' : '' }}>Published</option>
-                <option value="draft" {{ request('status') === 'draft' ? 'selected' : '' }}>Draft</option>
-            </select>
-        </div>
-        
-        <div class="min-w-48">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
-            <select name="category" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
-                <option value="">All Categories</option>
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
-                        {{ $category->name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-        
         <button type="submit" class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors">
-            <i class="fas fa-search mr-2"></i>Filter
+            <i class="fas fa-search mr-2"></i>Search
         </button>
         
-        @if(request()->hasAny(['search', 'status', 'category']))
+        @if(request()->has('search'))
             <a href="{{ route('admin.posts.index') }}" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 transition-colors">
                 <i class="fas fa-times mr-2"></i>Clear
             </a>

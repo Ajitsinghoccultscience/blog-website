@@ -17,36 +17,17 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Post::with('category');
+        $query = Post::on('mysql')->with('category');
 
-        // Filter by status
-        if ($request->has('status')) {
-            if ($request->status === 'published') {
-                $query->where('is_published', true);
-            } elseif ($request->status === 'draft') {
-                $query->where('is_published', false);
-            }
-        }
-
-        // Filter by category
-        if ($request->has('category')) {
-            $query->where('category_id', $request->category);
-        }
-
-        // Search
-        if ($request->has('search')) {
+        // Search by title only
+        if ($request->has('search') && !empty($request->search)) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
-                $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('excerpt', 'like', "%{$search}%")
-                  ->orWhere('content', 'like', "%{$search}%");
-            });
+            $query->where('title', 'like', "%{$search}%");
         }
 
         $posts = $query->orderBy('created_at', 'desc')->paginate(15);
-        $categories = Category::where('is_active', true)->get();
 
-        return view('admin.posts.index', compact('posts', 'categories'));
+        return view('admin.posts.index', compact('posts'));
     }
 
     /**
@@ -54,7 +35,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = Category::where('is_active', true)->get();
+        $categories = Category::on('mysql')->where('is_active', true)->get();
         return view('admin.posts.create', compact('categories'));
     }
 
@@ -122,7 +103,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        $categories = Category::where('is_active', true)->get();
+        $categories = Category::on('mysql')->where('is_active', true)->get();
         return view('admin.posts.edit', compact('post', 'categories'));
     }
 

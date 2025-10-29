@@ -91,14 +91,7 @@ class PostController extends Controller
             ->with('success', 'Post created successfully.');
     }
 
-    /**
-     * Display the specified post.
-     */
-    public function show(Post $post)
-    {
-        $post->load('category');
-        return view('admin.posts.show', compact('post'));
-    }
+    
 
     /**
      * Show the form for editing the specified post.

@@ -25,7 +25,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::post('categories/generate-slug', [CategoryController::class, 'generateSlug'])->name('categories.generate-slug');
     
     // Post management routes
-    Route::resource('posts', PostController::class);
+    Route::resource('posts', PostController::class)->except(['show']);
     Route::post('posts/generate-slug', [PostController::class, 'generateSlug'])->name('posts.generate-slug');
     Route::post('posts/{post}/toggle-status', [PostController::class, 'toggleStatus'])->name('posts.toggle-status');
     Route::post('posts/upload-image', [PostController::class, 'uploadImage'])->name('posts.upload-image');

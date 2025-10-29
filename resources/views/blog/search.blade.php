@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Storage;
                         <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100">
                             <!-- Post Image -->
                             <div class="relative">
-                                <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}" class="block">
+                                <a href="{{ route('blog.post', $post->slug) }}" class="block">
                                     <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
                                         @if($post->featured_image)
                                             <img src="{{ Storage::url($post->featured_image) }}" 
@@ -69,7 +69,7 @@ use Illuminate\Support\Facades\Storage;
                                 </p>
                                 
                                 <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
-                                    <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}" 
+                                    <a href="{{ route('blog.post', $post->slug) }}" 
                                        class="hover:text-red-600 transition-colors">
                                         {{ $post->title }}
                                     </a>
@@ -79,7 +79,7 @@ use Illuminate\Support\Facades\Storage;
                                     {{ $post->excerpt ?: Str::limit(strip_tags($post->content), 120) }}
                                 </p>
                                 
-                                <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}" 
+                                <a href="{{ route('blog.post', $post->slug) }}" 
                                    class="inline-flex items-center text-red-600 hover:text-red-700 font-medium">
                                     Read More
                                     <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

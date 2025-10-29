@@ -35,7 +35,7 @@ use Illuminate\Support\Facades\Storage;
                                         <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100">
                                             <!-- Post Image -->
                         <div class="relative">
-                            <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}" class="block">
+                            <a href="{{ route('blog.post', $post->slug) }}" class="block">
                             <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
                                 @if($post->featured_image)
                                                         <img src="{{ Storage::url($post->featured_image) }}" 
@@ -69,12 +69,12 @@ use Illuminate\Support\Facades\Storage;
                                         {{ $post->published_at ? $post->published_at->format('d M, Y') : 'No date' }}
                                     </p>
                                                 <h3 class="text-lg font-bold text-gray-900 mb-3 leading-tight hover:text-orange-600 transition-colors">
-                                                    <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}">{{ $post->title }}</a>
+                                                    <a href="{{ route('blog.post', $post->slug) }}">{{ $post->title }}</a>
                                                 </h3>
                                                 <p class="text-gray-600 text-sm leading-relaxed mb-3">
                                 {{ $post->excerpt ? Str::limit($post->excerpt, 120) : Str::limit(strip_tags($post->content), 120) }}
                             </p>
-                                                <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}" 
+                                                <a href="{{ route('blog.post', $post->slug) }}" 
                                                    class="text-orange-600 hover:text-orange-700 font-medium text-sm transition-colors">
                                                     Read More...
                                                 </a>
@@ -168,12 +168,12 @@ use Illuminate\Support\Facades\Storage;
                                             <p class="text-gray-500 text-xs md:text-sm mb-1 md:mb-2">
                                                 {{ $categoryPosts[0]->published_at ? $categoryPosts[0]->published_at->format('d M, Y') : 'No date' }}                                            </p>
                                             <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-2 md:mb-3 leading-tight hover:text-orange-600 transition-colors">
-                                                <a href="{{ route('blog.post', [$categoryPosts[0]->category->slug, $categoryPosts[0]->slug]) }}">{{ Str::limit($categoryPosts[0]->title, 40) }}</a>
+                                                <a href="{{ route('blog.post', $categoryPosts[0]->slug) }}">{{ Str::limit($categoryPosts[0]->title, 40) }}</a>
                                             </h3>
                                             <p class="text-gray-600 text-xs md:text-sm leading-relaxed mb-2 md:mb-4">
                                                 {{ $categoryPosts[0]->excerpt ? Str::limit($categoryPosts[0]->excerpt, 80) : Str::limit(strip_tags($categoryPosts[0]->content), 80) }}
                                             </p>
-                                            <a href="{{ route('blog.post', [$categoryPosts[0]->category->slug, $categoryPosts[0]->slug]) }}" class="text-orange-600 hover:text-orange-800 font-medium text-xs md:text-sm">
+                                            <a href="{{ route('blog.post', $categoryPosts[0]->slug) }}" class="text-orange-600 hover:text-orange-800 font-medium text-xs md:text-sm">
                                                 Read More...
                                             </a>
                                         </div>
@@ -206,12 +206,12 @@ use Illuminate\Support\Facades\Storage;
                                                 <!-- Post Content -->
                                                 <div class="p-2 md:p-4">
                                                     <h3 class="text-sm md:text-lg font-bold text-gray-900 mb-1 md:mb-2 leading-tight hover:text-orange-600 transition-colors">
-                                                        <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}">{{ Str::limit($post->title, 30) }}</a>
+                                                        <a href="{{ route('blog.post', $post->slug) }}">{{ Str::limit($post->title, 30) }}</a>
                                                     </h3>
                                                     <p class="text-gray-600 text-xs md:text-sm leading-relaxed mb-1 md:mb-2">
                                                         {{ $post->excerpt ? Str::limit($post->excerpt, 60) : Str::limit(strip_tags($post->content), 60) }}
                                                     </p>
-                                                    <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}" 
+                                                    <a href="{{ route('blog.post', $post->slug) }}" 
                                                        class="text-orange-600 hover:text-orange-700 font-medium text-xs md:text-sm transition-colors">
                                                         Read More...
                                                     </a>
@@ -276,7 +276,7 @@ use Illuminate\Support\Facades\Storage;
                                 @foreach($recentPosts as $post)
                                     <li class="flex items-start">
                                         <div class="w-2 h-2 bg-orange-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                                        <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}" class="text-gray-900 text-sm hover:text-orange-600 transition-colors leading-relaxed">
+                                        <a href="{{ route('blog.post', $post->slug) }}" class="text-gray-900 text-sm hover:text-orange-600 transition-colors leading-relaxed">
                                             {{ Str::limit($post->title, 60) }}
                                         </a>
                                     </li>

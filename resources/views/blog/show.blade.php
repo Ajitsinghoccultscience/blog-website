@@ -68,6 +68,23 @@ use Illuminate\Support\Facades\Storage;
                             color: #6b7280;
                             margin-top: 0.5rem;
                         }
+                        .prose a, article a {
+                            color: #ef4444;
+                            
+                        }
+                        .prose a:hover, article a:hover {
+                            color: #dc2626;
+                            
+                        }
+                        .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+                            margin-top: 2em;
+                            margin-bottom: 1em;
+                            line-height: 1.3;
+                        }
+                        .prose p {
+                            margin-bottom: 1.2em;
+                            line-height: 1.7;
+                        }
                     </style>
                     {!! $processedContent !!}
                 </div>
@@ -136,7 +153,7 @@ use Illuminate\Support\Facades\Storage;
                                     </div>
                                     <div class="flex-1">
                                         <h4 class="text-sm font-medium text-gray-900 mb-1 hover:text-orange-600 transition-colors">
-                                            <a href="{{ route('blog.post', [$latestPost->category->slug, $latestPost->slug]) }}">{{ Str::limit($latestPost->title, 50) }}</a>
+                                            <a href="{{ route('blog.post', $latestPost->slug) }}">{{ Str::limit($latestPost->title, 50) }}</a>
                                         </h4>
                                         <p class="text-xs text-gray-500">{{ $latestPost->published_at ? $latestPost->published_at->format('F j, Y') : 'No Date' }}</p>
                                     </div>
@@ -203,7 +220,7 @@ use Illuminate\Support\Facades\Storage;
                             @endif
                             
                             <h3 class="font-bold text-gray-900 mb-2">
-                                <a href="{{ route('blog.post', [$relatedPost->category->slug, $relatedPost->slug]) }}" class="hover:text-orange-600 transition-colors">
+                                <a href="{{ route('blog.post', $relatedPost->slug) }}" class="hover:text-orange-600 transition-colors">
                                     {{ $relatedPost->title }}
                                 </a>
                             </h3>

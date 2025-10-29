@@ -66,100 +66,33 @@ class BlogController extends Controller
     }
 
     /**
-     * Display the specified blog post or category.
+     * Display the specified blog post.
      */
-    public function show($slug, $post_slug = null)
+    public function show($slug)
     {
-        if ($post_slug !== null) {
-            // It's a nested route: /category-slug/post-slug
-            // First, find the category
-            $category = Category::where('slug', $slug)
-                ->where('is_active', true)
-                ->firstOrFail();
+        // Find post by slug (categories use /category/{slug})
+        $post = Post::with('category')
+            ->where('slug', $slug)
+            ->where('is_published', true)
+            ->firstOrFail();
 
-            // Then find the post within that category
-            $post = Post::with('category')
-                ->where('slug', $post_slug)
-                ->where('category_id', $category->id)
-                ->where('is_published', true)
-                ->firstOrFail();
+        $relatedPosts = Post::with('category')
+            ->where('is_published', true)
+            ->where('id', '!=', $post->id)
+            ->where('category_id', $post->category_id)
+            ->limit(3)
+            ->get();
 
-            $relatedPosts = Post::with('category')
-                ->where('is_published', true)
-                ->where('id', '!=', $post->id)
-                ->where('category_id', $post->category_id)
-                ->limit(3)
-                ->get();
+        $categories = Category::where('is_active', true)->get();
 
-            $categories = Category::where('is_active', true)->get();
+        // Set meta data
+        $metaTitle = $post->meta_title ?: $post->title;
+        $metaDescription = $post->meta_description ?: $post->excerpt ?: Str::limit(strip_tags($post->content), 160);
 
-            // Set meta data
-            $metaTitle = $post->meta_title ?: $post->title;
-            $metaDescription = $post->meta_description ?: $post->excerpt ?: Str::limit(strip_tags($post->content), 160);
+        // Process content to fix image URLs
+        $processedContent = $this->processContentImages($post->content);
 
-            // Process content to fix image URLs
-            $processedContent = $this->processContentImages($post->content);
-
-            return view('blog.show', compact('post', 'relatedPosts', 'categories', 'metaTitle', 'metaDescription', 'processedContent'));
-        } else {
-            // It's a single slug route: /slug
-            // First, try to find a category with this slug
-            $category = Category::where('slug', $slug)
-                ->where('is_active', true)
-                ->first();
-
-            if ($category) {
-                // It's a category, show the category page
-                $posts = Post::with('category')
-                    ->where('is_published', true)
-                    ->where('category_id', $category->id)
-                    ->orderBy('published_at', 'desc')
-                    ->paginate(10);
-
-                // Append the category slug to pagination links
-                $posts->appends(['category' => $category->slug]);
-
-                $categories = Category::where('is_active', true)->get();
-
-                // Process content for all posts to fix image URLs
-                $posts->getCollection()->transform(function ($post) {
-                    $post->content = $this->processContentImages($post->content);
-                    return $post;
-                });
-
-                return view('blog.category', compact('posts', 'category', 'categories'));
-            }
-
-            // If not a category, try to find a post with this slug
-            $post = Post::with('category')
-                ->where('slug', $slug)
-                ->where('is_published', true)
-                ->first();
-
-            if ($post) {
-                // It's a post, show the post
-                $relatedPosts = Post::with('category')
-                    ->where('is_published', true)
-                    ->where('id', '!=', $post->id)
-                    ->where('category_id', $post->category_id)
-                    ->limit(3)
-                    ->get();
-
-                $categories = Category::where('is_active', true)->get();
-
-                // Set meta data
-                $metaTitle = $post->meta_title ?: $post->title;
-                $metaDescription = $post->meta_description ?: $post->excerpt ?: Str::limit(strip_tags($post->content), 160);
-
-                // Process content to fix image URLs
-                $processedContent = $this->processContentImages($post->content);
-
-                return view('blog.show', compact('post', 'relatedPosts', 'categories', 'metaTitle', 'metaDescription', 'processedContent'));
-            }
-
-            // If neither category nor post found, return 404
-            abort(404);
-        }
+        return view('blog.show', compact('post', 'relatedPosts', 'categories', 'metaTitle', 'metaDescription', 'processedContent'));
     }
 
     /**

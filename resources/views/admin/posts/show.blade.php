@@ -142,7 +142,7 @@
                             </button>
                         </form>
                         
-                        <a href="{{ route('blog.post', [$post->category->slug, $post->slug]) }}" 
+                        <a href="{{ route('blog.post', $post->slug) }}" 
                            target="_blank"
                            class="block w-full text-left px-3 py-2 text-sm text-blue-700 hover:bg-blue-100 rounded transition-colors">
                             <i class="fas fa-external-link-alt mr-2"></i>

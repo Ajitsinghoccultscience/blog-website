@@ -463,7 +463,7 @@ tinymce.init({
         'alignright alignjustify | bullist numlist outdent indent | ' +
         'removeformat | help | code | image | link | table',
     menubar: 'file edit view insert format tools table help',
-    content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; margin: 0; padding: 0; }',
+    content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; margin: 0; padding: 0; } h1, h2, h3, h4, h5, h6 { margin-bottom: 1rem; margin-top: 1rem; } p { margin-bottom: 1rem; margin-top: 1rem; } a { color: #ef4444; text-decoration: underline; }',
     branding: false,
     promotion: false,
     images_upload_url: '{{ route("admin.posts.upload-image") }}',

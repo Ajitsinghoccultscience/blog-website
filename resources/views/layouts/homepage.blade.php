@@ -158,7 +158,7 @@
                                 </div>
                                 <div class="flex-1">
                                     <h5 class="text-sm text-white font-medium mb-1">{{ Str::limit($latestPost->title, 40) }}</h5>
-                                    <a href="{{ route('blog.post', [$latestPost->category->slug, $latestPost->slug]) }}" class="text-red-500 text-sm hover:text-red-400 transition-colors">
+                                    <a href="{{ route('blog.post', $latestPost->slug) }}" class="text-red-500 text-sm hover:text-red-400 transition-colors">
                                         Read More »
                                     </a>
                                 </div>

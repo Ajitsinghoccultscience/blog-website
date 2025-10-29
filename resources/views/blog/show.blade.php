@@ -85,6 +85,36 @@ use Illuminate\Support\Facades\Storage;
                             margin-bottom: 1.2em;
                             line-height: 1.7;
                         }
+                        .prose ul, .prose ol {
+                            margin: 1rem 0;
+                            padding-left: 2rem;
+                            list-style-position: outside;
+                        }
+                        .prose ul {
+                            list-style-type: disc;
+                        }
+                        .prose ol {
+                            list-style-type: decimal;
+                        }
+                        .prose li {
+                            margin: 0.5rem 0;
+                            display: list-item;
+                        }
+                        article ul, article ol {
+                            margin: 1rem 0;
+                            padding-left: 2rem;
+                            list-style-position: outside;
+                        }
+                        article ul {
+                            list-style-type: disc;
+                        }
+                        article ol {
+                            list-style-type: decimal;
+                        }
+                        article li {
+                            margin: 0.5rem 0;
+                            display: list-item;
+                        }
                     </style>
                     {!! $processedContent !!}
                 </div>

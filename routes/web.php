@@ -36,4 +36,4 @@ Route::get('/', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/about', [BlogController::class, 'about'])->name('blog.about');
 Route::get('/search', [BlogController::class, 'search'])->name('blog.search');
 Route::get('/category/{slug}', [BlogController::class, 'category'])->name('blog.category');
-Route::get('/{slug}', [BlogController::class, 'show'])->name('blog.post');
+Route::get('/{slug}', [BlogController::class, 'show'])->name('blog.post')->where('slug', '.*');

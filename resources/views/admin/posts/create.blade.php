@@ -378,7 +378,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!slugInput.value) {
             const title = this.value;
             const slug = title.toLowerCase()
-                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/[^a-z0-9\s\/-]/g, '')
                 .replace(/\s+/g, '-')
                 .replace(/-+/g, '-')
                 .trim('-');
@@ -463,7 +463,7 @@ tinymce.init({
         'alignright alignjustify | bullist numlist outdent indent | ' +
         'removeformat | help | code | image | link | table',
     menubar: 'file edit view insert format tools table help',
-    content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; margin: 0; padding: 0; } h1, h2, h3, h4, h5, h6 { margin-bottom: 1rem; margin-top: 1rem; } p { margin-bottom: 1rem; margin-top: 1rem; } a { color: #ef4444; text-decoration: underline; }',
+    content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; margin: 0; padding: 0; } h1, h2, h3, h4, h5, h6 { margin-top: 2em; margin-bottom: 1em; line-height: 1.3; } p { margin-bottom: 1.2em; line-height: 1.7; } a { color: #ef4444; text-decoration: underline; } ul, ol { margin: 1rem 0; padding-left: 2rem; list-style-position: outside; } ul { list-style-type: disc; } ol { list-style-type: decimal; } li { margin: 0.5rem 0; display: list-item; }',
     branding: false,
     promotion: false,
     images_upload_url: '{{ route("admin.posts.upload-image") }}',

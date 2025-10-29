@@ -47,13 +47,8 @@ use Illuminate\Support\Facades\Storage;
                 <!-- Title -->
                 <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">{{ $post->title }}</h1>
 
-            <!-- Excerpt -->
-            @if($post->excerpt)
-                    <div class="bg-gray-50 border-l-4 border-orange-500 p-4 mb-8">
-                    <p class="text-lg text-gray-700 italic">{{ $post->excerpt }}</p>
-                </div>
-            @endif
-
+           
+          
             <!-- Content -->
             <div class="prose prose-lg max-w-none text-gray-800">
                     <style>

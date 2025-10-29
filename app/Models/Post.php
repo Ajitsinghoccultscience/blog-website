@@ -11,6 +11,7 @@ class Post extends Model
         'content',
         'slug',
         'excerpt',
+        'tags',
         'meta_title',
         'meta_description',
         'featured_image',

@@ -152,6 +152,29 @@
                         @enderror
                     </div>
 
+                    <!-- Tags -->
+                    <div>
+                        <label for="tags" class="block text-sm font-semibold text-gray-700 mb-3">
+                            Tags
+                        </label>
+                        <input type="text" 
+                               id="tags" 
+                               name="tags" 
+                               value="{{ old('tags') }}"
+                               class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 @error('tags') border-red-400 @enderror"
+                               placeholder="Enter tags separated by commas (e.g., astrology, zodiac, mysticism)">
+                        <p class="mt-2 text-sm text-gray-500 flex items-center">
+                            <i class="fas fa-info-circle mr-1"></i>
+                            Separate multiple tags with commas
+                        </p>
+                        @error('tags')
+                            <p class="mt-2 text-sm text-red-600 flex items-center">
+                                <i class="fas fa-exclamation-circle mr-1"></i>
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+
                     <!-- Content -->
                     <div>
                         <label for="content" class="block text-sm font-semibold text-gray-700 mb-3">

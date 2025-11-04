@@ -40,7 +40,7 @@ use Illuminate\Support\Facades\Storage;
                                 @if($post->featured_image)
                                                         <img src="{{ Storage::url($post->featured_image) }}" 
                                          alt="{{ $post->title }}" 
-                                                                 class="w-full h-full object-cover hover:opacity-90 transition-opacity duration-200"
+                                                                 class="w-full h-full object-contain hover:opacity-90 transition-opacity duration-200"
                                                              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                                         <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">
                                                             <span class="text-white text-sm">No Image</span>
@@ -136,7 +136,7 @@ use Illuminate\Support\Facades\Storage;
                                                 @if($categoryPosts[0]->featured_image)
                                                     <img src="{{ Storage::url($categoryPosts[0]->featured_image) }}" 
                                                          alt="{{ $categoryPosts[0]->title }}" 
-                                                         class="w-full h-full object-cover"
+                                                         class="w-full h-full object-contain"
                                                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                                     <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">
                                                         <span class="text-white text-sm">No Image</span>
@@ -191,7 +191,7 @@ use Illuminate\Support\Facades\Storage;
                                                     @if($post->featured_image)
                                                         <img src="{{ Storage::url($post->featured_image) }}" 
                                                              alt="{{ $post->title }}" 
-                                                             class="w-full h-full object-cover"
+                                                             class="w-full h-full object-contain"
                                                              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                                         <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">
                                                             <span class="text-white text-sm">No Image</span>

@@ -15,14 +15,14 @@ use Illuminate\Support\Facades\Storage;
         <div class="lg:col-span-3">
             <!-- Metadata Header -->
             <div class="flex items-center text-sm text-gray-600 mb-4">
-                <span class="mr-2">•</span>
+                <span class="mr-2">◆</span>
                 <span class="mr-4">{{ $post->published_at ? $post->published_at->format('F j, Y') : 'No Date' }}</span>
                 <span class="mr-2">◷</span>
                 <span class="mr-4">{{ $post->published_at ? $post->published_at->format('g:i A') : 'No Time' }}</span>
-                <span class="mr-2">◆</span>
-            @if($post->category)
+                @if($post->category)
+                    <span class="mr-2">◆</span>
                     <span class="text-gray-700">{{ $post->category->name }}</span>
-            @endif
+                @endif
             </div>
 
             <!-- Featured Image -->
@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Storage;
                 @if($post->featured_image)
                     <img src="{{ Storage::url($post->featured_image) }}" 
                          alt="{{ $post->title }}" 
-                         class="w-full h-96 object-cover rounded-lg"
+                         class="w-full h-auto object-contain rounded-lg mx-auto"
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="w-full h-96 bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center rounded-lg" style="display: none;">
                         <span class="text-white text-lg">No Featured Image</span>
@@ -42,10 +42,11 @@ use Illuminate\Support\Facades\Storage;
                 @endif
             </div>
 
+            <!-- Title -->
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{{ $post->title }}</h1>
+
             <!-- Article Content -->
             <article class="bg-white">
-                <!-- Title -->
-                <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">{{ $post->title }}</h1>
 
            
           
@@ -231,7 +232,7 @@ use Illuminate\Support\Facades\Storage;
                         @if($relatedPost->featured_image)
                             <img src="{{ Storage::url($relatedPost->featured_image) }}" 
                                  alt="{{ $relatedPost->title }}" 
-                                 class="w-full h-32 object-cover"
+                                 class="w-full h-32 object-contain"
                                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="w-full h-32 bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">
                                 <span class="text-white text-sm">No Image</span>

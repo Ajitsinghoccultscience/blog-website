@@ -38,6 +38,7 @@
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-16">#</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Post</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tags</th>
@@ -48,23 +49,13 @@
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-                @forelse($posts as $post)
+                @forelse($posts as $index => $post)
                 <tr class="hover:bg-gray-50">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {{ ($posts->currentPage() - 1) * $posts->perPage() + $loop->iteration }}
+                    </td>
                     <td class="px-6 py-4">
-                        <div class="flex items-center">
-                            @if($post->featured_image)
-                                <img src="{{ Storage::url($post->featured_image) }}" 
-                                     alt="{{ $post->title }}" 
-                                     class="w-12 h-12 rounded-lg object-cover mr-4">
-                            @else
-                                <div class="w-12 h-12 bg-gray-200 rounded-lg mr-4 flex items-center justify-center">
-                                    <i class="fas fa-image text-gray-400"></i>
-                                </div>
-                            @endif
-                            <div>
-                                <div class="text-sm font-medium text-gray-900">{{ $post->title }}</div>
-                            </div>
-                        </div>
+                        <div class="text-sm font-medium text-gray-900">{{ $post->title }}</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         @if($post->category)
@@ -142,7 +133,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="7" class="px-6 py-12 text-center text-gray-500">
+                    <td colspan="8" class="px-6 py-12 text-center text-gray-500">
                         <i class="fas fa-file-alt text-4xl mb-4"></i>
                         <p class="text-lg">No posts found</p>
                         <p class="text-sm">Get started by creating your first blog post.</p>
@@ -154,8 +145,10 @@
     </div>
     
     @if($posts->hasPages())
-        <div class="px-6 py-3 border-t border-gray-200">
-            {{ $posts->links() }}
+        <div class="px-6 py-4 border-t border-gray-200 bg-gray-50">
+            <div class="d-flex justify-content-center">
+                {{ $posts->appends(request()->query())->links('pagination::bootstrap-5') }}
+            </div>
         </div>
     @endif
 </div>

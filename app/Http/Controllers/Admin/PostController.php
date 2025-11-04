@@ -25,7 +25,7 @@ class PostController extends Controller
             $query->where('title', 'like', "%{$search}%");
         }
 
-        $posts = $query->orderBy('created_at', 'desc')->paginate(15);
+        $posts = $query->orderBy('created_at', 'desc')->paginate(5);
 
         return view('admin.posts.index', compact('posts'));
     }

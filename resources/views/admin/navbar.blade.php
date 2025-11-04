@@ -1,5 +1,5 @@
 <!-- Simple Admin Navbar -->
-<div class="w-64 bg-white shadow-lg sticky top-0 h-screen overflow-y-auto">
+<div class="w-64 bg-white shadow-lg flex-shrink-0 sticky top-0 h-screen overflow-y-auto">
     <div class="p-6">
         <div class="flex items-center">
             <div class="w-10 h-10 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-lg flex items-center justify-center mr-3 shadow-lg">

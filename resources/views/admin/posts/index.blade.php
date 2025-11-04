@@ -34,12 +34,12 @@
 </div>
 
 <div class="bg-white rounded-lg shadow overflow-hidden">
-    <div class="overflow-x-auto">
-        <table class="min-w-full divide-y divide-gray-200">
+    <div class="overflow-x-auto" style="max-width: 100%;">
+        <table class="min-w-full divide-y divide-gray-200" style="min-width: 1200px;">
             <thead class="bg-gray-50">
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-16">#</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Post</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider min-w-[300px]">Post</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tags</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
@@ -54,7 +54,7 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {{ ($posts->currentPage() - 1) * $posts->perPage() + $loop->iteration }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 whitespace-nowrap">
                         <div class="text-sm font-medium text-gray-900">{{ $post->title }}</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">

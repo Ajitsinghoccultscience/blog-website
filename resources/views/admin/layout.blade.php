@@ -23,12 +23,12 @@
     </script>
 </head>
 <body class="bg-gray-50">
-    <div class="min-h-screen flex">
+    <div class="min-h-screen flex overflow-hidden">
         <!-- Admin Navbar -->
         @include('admin.navbar')
 
         <!-- Main Content -->
-        <div class="flex-1 flex flex-col">
+        <div class="flex-1 flex flex-col overflow-hidden">
         <!-- Header -->
         <header class="bg-white shadow-sm border-b">
             <div class="px-6 py-4 flex justify-between items-center">

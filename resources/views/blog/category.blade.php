@@ -41,11 +41,11 @@ use Illuminate\Support\Facades\Storage;
                                 </a>
                     
                                 <!-- Category Badge -->
-                                <div class="absolute top-3 right-3">
+                                <!-- <div class="absolute top-3 right-3">
                                     <span class="bg-orange-600 text-white text-xs font-bold px-3 py-1 rounded-sm shadow-md">
                                         {{ strtoupper($category->name) }}
                         </span>
-                                </div>
+                                </div> -->
                             </div>
                             
                             <!-- Post Content -->

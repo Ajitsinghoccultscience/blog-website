@@ -298,12 +298,12 @@
                                            id="meta_title" 
                                            name="meta_title" 
                                            value="{{ old('meta_title') }}" 
-                                           maxlength="60"
+                                           maxlength="255"
                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary @error('meta_title') border-red-400 @enderror"
-                                           placeholder="SEO title (max 60 chars)">
+                                           placeholder="SEO title (max 255 chars)">
                                     <div class="mt-1 flex justify-between items-center">
                                         <p class="text-xs text-gray-500">Leave empty to use post title</p>
-                                        <span class="text-xs text-gray-400" id="meta-title-count">0/60</span>
+                                        <span class="text-xs text-gray-400" id="meta-title-count">0/255</span>
                                     </div>
                                     @error('meta_title')
                                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -317,12 +317,12 @@
                                     <textarea id="meta_description" 
                                               name="meta_description" 
                                               rows="3" 
-                                              maxlength="160"
+                                              maxlength="500"
                                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary @error('meta_description') border-red-400 @enderror"
-                                              placeholder="SEO description (max 160 chars)">{{ old('meta_description') }}</textarea>
+                                              placeholder="SEO description (max 500 chars)">{{ old('meta_description') }}</textarea>
                                     <div class="mt-1 flex justify-between items-center">
                                         <p class="text-xs text-gray-500">Leave empty to use excerpt</p>
-                                        <span class="text-xs text-gray-400" id="meta-desc-count">0/160</span>
+                                        <span class="text-xs text-gray-400" id="meta-desc-count">0/500</span>
                                     </div>
                                     @error('meta_description')
                                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -411,8 +411,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     excerptTextarea.addEventListener('input', () => updateCounter(excerptTextarea, 'excerpt-count', 500));
-    metaTitleInput.addEventListener('input', () => updateCounter(metaTitleInput, 'meta-title-count', 60));
-    metaDescTextarea.addEventListener('input', () => updateCounter(metaDescTextarea, 'meta-desc-count', 160));
+    metaTitleInput.addEventListener('input', () => updateCounter(metaTitleInput, 'meta-title-count', 255));
+    metaDescTextarea.addEventListener('input', () => updateCounter(metaDescTextarea, 'meta-desc-count', 500));
     
     // Save draft functionality
     saveDraftBtn.addEventListener('click', function() {
@@ -423,8 +423,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize counters
     updateCounter(excerptTextarea, 'excerpt-count', 500);
-    updateCounter(metaTitleInput, 'meta-title-count', 60);
-    updateCounter(metaDescTextarea, 'meta-desc-count', 160);
+    updateCounter(metaTitleInput, 'meta-title-count', 255);
+    updateCounter(metaDescTextarea, 'meta-desc-count', 500);
 });
 
 // Image preview functionality

@@ -147,7 +147,7 @@
     @if($posts->hasPages())
         <div class="px-6 py-4 border-t border-gray-200 bg-gray-50">
             <div class="d-flex justify-content-center">
-                {{ $posts->appends(request()->query())->links('pagination::bootstrap-15') }}
+                {{ $posts->appends(request()->query())->links('pagination::bootstrap-5') }}
             </div>
         </div>
     @endif

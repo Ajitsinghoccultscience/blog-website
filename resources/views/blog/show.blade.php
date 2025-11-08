@@ -73,20 +73,20 @@ use Illuminate\Support\Facades\Storage;
                             font-size: 2.5rem;
                             /* font-weight: 800; */
                             color: #1a1a1a;
-                            margin-bottom: 1rem;
+                            margin-bottom: 0.75rem;
                         }
                         .prose h2, article h2 {
                             font-size: 2rem;
                             /* font-weight: 700; */
                             color: #222;
-                            margin-top: 2rem;
-                            margin-bottom: 1rem;
+                            margin-top: 1.5rem;
+                            margin-bottom: 0.75rem;
                         }
                         .prose h3, article h3 {
                             font-size: 1.5rem;
                             /* font-weight: 600; */
                             color: #333;
-                            margin-top: 1.5rem;
+                            margin-top: 1.25rem;
                             margin-bottom: 0.75rem;
                         }
                         .prose h4, article h4 {
@@ -127,33 +127,11 @@ use Illuminate\Support\Facades\Storage;
                         
                         /* 📱 Mobile (below 768px) */
                         @media (max-width: 768px) {
-                            .prose h1, article h1 {
-                                font-size: 2rem;
-                                margin-top: 1.5rem;
-                                margin-bottom: 0.75rem;
-                            }
                             .prose h2, article h2 {
-                                font-size: 1.75rem;
-                                margin-top: 1.25rem;
-                                margin-bottom: 0.75rem;
+                                margin-top: 1rem;
                             }
                             .prose h3, article h3 {
-                                font-size: 1.25rem;
-                                margin-top: 1rem;
-                                margin-bottom: 0.5rem;
-                            }
-                            .prose h4, article h4 {
-                                font-size: 1.125rem;
                                 margin-top: 0.75rem;
-                                margin-bottom: 0.4rem;
-                            }
-                            .prose p, article p {
-                                font-size: 0.95rem;
-                                line-height: 1.7;
-                                margin-bottom: 1rem;
-                            }
-                            .prose ul, .prose ol, article ul, article ol {
-                                margin-left: 1rem;
                             }
                         }
                     </style>

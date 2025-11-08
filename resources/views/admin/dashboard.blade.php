@@ -121,7 +121,7 @@
             <div class="flex items-center">
                 @if($post->featured_image)
                     <img src="{{ Storage::url($post->featured_image) }}" 
-                         alt="{{ $post->title }}" 
+                         alt="{{ $post->featured_image_alt ?? $post->title }}" 
                          class="w-10 h-10 rounded-lg object-cover mr-3">
                 @else
                     <div class="w-10 h-10 bg-gray-200 rounded-lg mr-3 flex items-center justify-center">

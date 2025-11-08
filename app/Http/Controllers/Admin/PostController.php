@@ -54,6 +54,7 @@ class PostController extends Controller
             'meta_description' => 'nullable|string|max:500',
             'category_id' => 'required|exists:categories,id',
             'featured_image' => 'nullable|image|mimes:jpeg,png,gif,webp|max:2048',
+            'featured_image_alt' => 'nullable|string|max:255',
             'is_published' => 'boolean',
             'published_at' => 'nullable|date',
         ]);
@@ -73,6 +74,7 @@ class PostController extends Controller
             'meta_title' => $request->meta_title,
             'meta_description' => $request->meta_description,
             'category_id' => $request->category_id,
+            'featured_image_alt' => $request->featured_image_alt,
             'is_published' => $request->has('is_published'),
             'published_at' => $request->is_published ? ($request->published_at ?: now()) : null,
         ];
@@ -98,6 +100,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        // Reload post from mysql connection to ensure all fields are loaded
+        $post = Post::on('mysql')->with('category')->findOrFail($post->id);
         $categories = Category::on('mysql')->where('is_active', true)->get();
         return view('admin.posts.edit', compact('post', 'categories'));
     }
@@ -117,6 +121,7 @@ class PostController extends Controller
             'meta_description' => 'nullable|string|max:500',
             'category_id' => 'required|exists:categories,id',
             'featured_image' => 'nullable|image|mimes:jpeg,png,gif,webp|max:2048',
+            'featured_image_alt' => 'nullable|string|max:255',
             'is_published' => 'boolean',
             'published_at' => 'nullable|date',
         ]);
@@ -136,6 +141,7 @@ class PostController extends Controller
             'meta_title' => $request->meta_title,
             'meta_description' => $request->meta_description,
             'category_id' => $request->category_id,
+            'featured_image_alt' => $request->featured_image_alt,
             'is_published' => $request->has('is_published'),
             'published_at' => $request->is_published ? ($request->published_at ?: now()) : null,
         ];

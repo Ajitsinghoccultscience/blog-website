@@ -85,22 +85,15 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Column 1: Institute Info -->
                 <div>
-                    <div class="flex items-start mb-6 md:flex-row flex-col md:items-start items-center text-center md:text-left">
-                        <div class="w-16 h-16 rounded-full overflow-hidden mr-4 flex-shrink-0 md:mr-4 mr-0 mb-4 md:mb-0">
-                            <img src="{{ asset('images/WEBSITE_HEADER_LOGO.png') }}" 
-                                 alt="Logo" 
-                                 class="w-full h-full object-cover"
-                                 onerror="this.style.display='none';">
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-white uppercase leading-tight">ALL INDIA INSTITUTE OF OCCULT SCIENCE</h3>
-                            <p class="text-sm text-white mt-1">विद्याधनं सर्वधनं प्रधानम्</p>
-                            <p class="text-xs text-gray-300 mt-1">Regd. Under Govt. of NCT of Delhi</p>
-                        </div>
+                    <div class="mb-8 flex justify-center md:justify-start md:-ml-4">
+                        <img src="{{ asset('images/WEBSITE-HEADER_1-2-e1663577068999.png') }}" 
+                             alt="ALL INDIA INSTITUTE OF OCCULT SCIENCE" 
+                             class="max-w-full h-auto object-contain"
+                             onerror="this.style.display='none';">
                     </div>
                     
                     <!-- Social Media Icons -->
-                    <div class="flex space-x-3 md:justify-start justify-center">
+                    <div class="flex space-x-3 justify-center mt-4">
                         <a href="https://www.facebook.com/allindiainstituteofoccultscience/" target="_blank" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-600 transition-colors">
                             <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -144,7 +137,7 @@
                                 <div class="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden">
                                     @if($latestPost->featured_image)
                                         <img src="{{ Storage::url($latestPost->featured_image) }}" 
-                                             alt="{{ $latestPost->title }}" 
+                                             alt="{{ $latestPost->featured_image_alt ?? $latestPost->title }}" 
                                              class="w-full h-full object-cover"
                                              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                         <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">

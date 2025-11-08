@@ -39,7 +39,7 @@ use Illuminate\Support\Facades\Storage;
                             <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
                                 @if($post->featured_image)
                                                         <img src="{{ Storage::url($post->featured_image) }}" 
-                                         alt="{{ $post->title }}" 
+                                         alt="{{ $post->featured_image_alt ?? $post->title }}" 
                                                                  class="w-full h-full object-contain hover:opacity-90 transition-opacity duration-200"
                                                              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                                         <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">
@@ -139,7 +139,7 @@ use Illuminate\Support\Facades\Storage;
                                             <div class="relative h-48 md:h-full">
                                                 @if($categoryPosts[0]->featured_image)
                                                     <img src="{{ Storage::url($categoryPosts[0]->featured_image) }}" 
-                                                         alt="{{ $categoryPosts[0]->title }}" 
+                                                         alt="{{ $categoryPosts[0]->featured_image_alt ?? $categoryPosts[0]->title }}" 
                                                          class="w-full h-full object-contain"
                                                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                                     <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">
@@ -194,7 +194,7 @@ use Illuminate\Support\Facades\Storage;
                                                 <div class="relative h-32 md:h-48">
                                                     @if($post->featured_image)
                                                         <img src="{{ Storage::url($post->featured_image) }}" 
-                                                             alt="{{ $post->title }}" 
+                                                             alt="{{ $post->featured_image_alt ?? $post->title }}" 
                                                              class="w-full h-full object-contain"
                                                              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                                         <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">

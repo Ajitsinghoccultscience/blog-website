@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Storage;
                                 <a href="{{ route('blog.post', $post->slug) }}" class="block">
                                     @if($post->featured_image)
                                         <img src="{{ Storage::url($post->featured_image) }}" 
-                                             alt="{{ $post->title }}" 
+                                             alt="{{ $post->featured_image_alt ?? $post->title }}" 
                                              class="w-full h-56 object-cover hover:opacity-90 transition-opacity duration-200"
                                              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                         <div class="w-full h-56 bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">
@@ -137,7 +137,7 @@ use Illuminate\Support\Facades\Storage;
                                     <div class="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden">
                                         @if($popularPost->featured_image)
                                             <img src="{{ Storage::url($popularPost->featured_image) }}" 
-                                                 alt="{{ $popularPost->title }}" 
+                                                 alt="{{ $popularPost->featured_image_alt ?? $popularPost->title }}" 
                                                  class="w-full h-full object-cover"
                                                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                             <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">

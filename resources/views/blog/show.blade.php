@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Storage;
             <div class="relative mb-6">
                 @if($post->featured_image)
                     <img src="{{ Storage::url($post->featured_image) }}" 
-                         alt="{{ $post->title }}" 
+                         alt="{{ $post->featured_image_alt ?? $post->title }}" 
                          class="w-full h-auto object-contain rounded-lg mx-auto"
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="w-full h-96 bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center rounded-lg" style="display: none;">
@@ -69,52 +69,51 @@ use Illuminate\Support\Facades\Storage;
                             color: #6b7280;
                             margin-top: 0.5rem;
                         }
+                        .prose h1, article h1 {
+                            font-size: 2.5rem;
+                            font-weight: 800;
+                            color: #1a1a1a;
+                            margin-bottom: 1rem;
+                        }
+                        .prose h2, article h2 {
+                            font-size: 2rem;
+                            font-weight: 700;
+                            color: #222;
+                            margin-top: 2rem;
+                            margin-bottom: 1rem;
+                        }
+                        .prose h3, article h3 {
+                            font-size: 1.5rem;
+                            font-weight: 600;
+                            color: #333;
+                            margin-top: 1.5rem;
+                            margin-bottom: 0.75rem;
+                        }
+                        .prose h4, article h4 {
+                            font-size: 1.25rem;
+                            font-weight: 500;
+                            color: #444;
+                            margin-top: 1rem;
+                            margin-bottom: 0.5rem;
+                        }
+                        .prose p, article p {
+                            font-size: 1rem;
+                            line-height: 1.75;
+                            color: #555;
+                            margin-bottom: 1.2em;
+                        }
                         .prose a, article a {
-                            color: #ef4444;
-                            
+                            color: #0073e6;
+                            text-decoration: none;
+                            font-weight: 500;
                         }
                         .prose a:hover, article a:hover {
-                            color: #dc2626;
-                            
+                            color: #005bb5;
+                            text-decoration: underline;
                         }
-                        .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
-                            margin-top: 2em;
-                            margin-bottom: 1em;
-                            line-height: 1.3;
-                        }
-                        .prose p {
-                            margin-bottom: 1.2em;
+                        .prose ul, .prose ol, article ul, article ol {
+                            margin-left: 1.5rem;
                             line-height: 1.7;
-                        }
-                        .prose ul, .prose ol {
-                            margin: 1rem 0;
-                            padding-left: 2rem;
-                            list-style-position: outside;
-                        }
-                        .prose ul {
-                            list-style-type: disc;
-                        }
-                        .prose ol {
-                            list-style-type: decimal;
-                        }
-                        .prose li {
-                            margin: 0.5rem 0;
-                            display: list-item;
-                        }
-                        article ul, article ol {
-                            margin: 1rem 0;
-                            padding-left: 2rem;
-                            list-style-position: outside;
-                        }
-                        article ul {
-                            list-style-type: disc;
-                        }
-                        article ol {
-                            list-style-type: decimal;
-                        }
-                        article li {
-                            margin: 0.5rem 0;
-                            display: list-item;
                         }
                     </style>
                     {!! $processedContent !!}
@@ -170,7 +169,7 @@ use Illuminate\Support\Facades\Storage;
                                     <div class="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden">
                                         @if($latestPost->featured_image)
                                             <img src="{{ Storage::url($latestPost->featured_image) }}" 
-                                                 alt="{{ $latestPost->title }}" 
+                                                 alt="{{ $latestPost->featured_image_alt ?? $latestPost->title }}" 
                                                  class="w-full h-full object-cover"
                                                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                             <div class="w-full h-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center" style="display: none;">
@@ -231,7 +230,7 @@ use Illuminate\Support\Facades\Storage;
                     <article class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
                         @if($relatedPost->featured_image)
                             <img src="{{ Storage::url($relatedPost->featured_image) }}" 
-                                 alt="{{ $relatedPost->title }}" 
+                                 alt="{{ $relatedPost->featured_image_alt ?? $relatedPost->title }}" 
                                  class="w-full h-32 object-contain"
                                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="w-full h-32 bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">

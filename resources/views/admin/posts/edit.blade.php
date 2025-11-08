@@ -220,7 +220,7 @@
                                     <div class="mb-4">
                                         <div class="relative">
                                             <img src="{{ Storage::url($post->featured_image) }}" 
-                                                 alt="{{ $post->title }}" 
+                                                 alt="{{ $post->featured_image_alt ?? $post->title }}" 
                                                  class="w-full h-48 object-cover rounded-lg border-2 border-gray-200">
                                             <div class="absolute top-2 right-2">
                                                 <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">
@@ -262,6 +262,31 @@
                                         {{ $message }}
                                     </p>
                                 @enderror
+                                
+                                <!-- Alt Text Input -->
+                                <div class="mt-4">
+                                    <label for="featured_image_alt" class="block text-sm font-semibold text-gray-700 mb-2">
+                                        <i class="fas fa-image mr-1"></i>
+                                        Image Alt Text
+                                    </label>
+                                    <input type="text" 
+                                           id="featured_image_alt" 
+                                           name="featured_image_alt" 
+                                           value="{{ old('featured_image_alt', $post->featured_image_alt) }}" 
+                                           class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 @error('featured_image_alt') border-red-400 @enderror"
+                                           placeholder="Enter descriptive alt text for the image..."
+                                           maxlength="255">
+                                    <p class="mt-1 text-xs text-gray-500">
+                                        <i class="fas fa-info-circle mr-1"></i>
+                                        Help screen readers understand your image. Keep it concise and descriptive.
+                                    </p>
+                                    @error('featured_image_alt')
+                                        <p class="mt-2 text-sm text-red-600 flex items-center">
+                                            <i class="fas fa-exclamation-circle mr-1"></i>
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
 
@@ -482,7 +507,7 @@ tinymce.init({
         'alignright alignjustify | bullist numlist outdent indent | ' +
         'removeformat | help | code | image | link | table',
     menubar: 'file edit view insert format tools table help',
-    content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; margin: 0; padding: 0; } h1, h2, h3, h4, h5, h6 { margin-top: 2em; margin-bottom: 1em; line-height: 1.3; } p { margin-bottom: 1.2em; line-height: 1.7; } a { color: #ef4444; text-decoration: underline; } ul, ol { margin: 1rem 0; padding-left: 2rem; list-style-position: outside; } ul { list-style-type: disc; } ol { list-style-type: decimal; } li { margin: 0.5rem 0; display: list-item; } table { border-collapse: collapse; width: 100%; } table, th, td { border: 1px solid #000; } th, td { padding: 8px; text-align: left; }',
+    content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; margin: 0; padding: 0; } h1 { font-size: 2.5rem; font-weight: 800; color: #1a1a1a; margin-bottom: 1rem; } h2 { font-size: 2rem; font-weight: 700; color: #222; margin-top: 2rem; margin-bottom: 1rem; } h3 { font-size: 1.5rem; font-weight: 600; color: #333; margin-top: 1.5rem; margin-bottom: 0.75rem; } h4 { font-size: 1.25rem; font-weight: 500; color: #444; margin-top: 1rem; margin-bottom: 0.5rem; } p { font-size: 1rem; line-height: 1.75; color: #555; margin-bottom: 1.2em; } a { color: #0073e6; text-decoration: none; font-weight: 500; } a:hover { color: #005bb5; text-decoration: underline; } ul, ol { margin-left: 1.5rem; line-height: 1.7; } table { border-collapse: collapse; width: 100%; } table, th, td { border: 1px solid #000; } th, td { padding: 8px; text-align: left; }',
     branding: false,
     promotion: false,
     images_upload_url: '{{ route("admin.posts.upload-image") }}',

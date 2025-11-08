@@ -129,10 +129,13 @@ use Illuminate\Support\Facades\Storage;
                         @media (max-width: 768px) {
                             .prose h2, article h2 {
                                 margin-top: 1rem;
+                                line-height: 1.65;
                             }
                             .prose h3, article h3 {
                                 margin-top: 0.75rem;
+                                line-height: 1.65;
                             }
+                            
                         }
                     </style>
                     {!! $processedContent !!}

@@ -100,7 +100,8 @@ use Illuminate\Support\Facades\Storage;
                             font-size: 1rem;
                             line-height: 1.75;
                             color: #555;
-                            margin-bottom: 1.2em;
+                            margin-top: 0;
+                            margin-bottom: 0.85rem;
                         }
                         .prose a, article a {                            color: #ea580c;
                             text-decoration: none;
@@ -111,9 +112,11 @@ use Illuminate\Support\Facades\Storage;
                             text-decoration: underline;
                         }
                         .prose ul, article ul {
-                            margin-left: 1.5rem;
+                            margin-left: 1.2rem;
                             line-height: 1.7;
                             list-style-type: disc;
+                            margin-top: 0.25rem;
+                            margin-bottom: 1rem;
                         }
                         .prose ol, article ol {
                             margin-left: 1.5rem;
@@ -127,17 +130,45 @@ use Illuminate\Support\Facades\Storage;
                         
                         /* 📱 Mobile (below 768px) */
                         @media (max-width: 768px) {
-                            .prose h2, article h2 {
+                            .prose h1, article h1 {
+                                font-size: 2rem;
                                 margin-top: 1rem;
-                                line-height: 1.65;
-                                font-size: 1.75rem;
+                                margin-bottom: 0.5rem;
+                                line-height: 1.25;
+                            }
+                            .prose h2, article h2 {
+                                font-size: 1.5rem;
+                                margin-top: 0.9rem;
+                                margin-bottom: 0.4rem;
+                                line-height: 1.13;
                             }
                             .prose h3, article h3 {
                                 margin-top: 0.75rem;
-                                line-height: 1.65;
-                                font-size: 1.5rem;
+                                margin-bottom: 0.4rem;
+                                line-height: 1.35;
+                                font-size: 1.25rem;
                             }
-
+                            .prose h4, article h4 {
+                                font-size: 1.125rem;
+                                margin-top: 0.6rem;
+                                margin-bottom: 0.3rem;
+                                line-height: 1.4;
+                            }
+                            .prose p, article p {
+                                font-size: 0.95rem;
+                                margin-bottom: 0.75rem;
+                                line-height: 1.68;
+                            }
+                            .prose ul, article ul {
+                                margin-left: 1rem;
+                                margin-bottom: 0.75rem;
+                                line-height: 1.65;
+                            }
+                            .prose ol, article ol {
+                                margin-left: 1rem;
+                                margin-bottom: 0.75rem;
+                                line-height: 1.65;
+                            }
                         }
                     </style>
                     {!! $processedContent !!}

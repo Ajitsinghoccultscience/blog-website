@@ -102,13 +102,12 @@ use Illuminate\Support\Facades\Storage;
                             color: #555;
                             margin-bottom: 1.2em;
                         }
-                        .prose a, article a {
-                            color: #0073e6;
+                        .prose a, article a {                            color: #ea580c;
                             text-decoration: none;
                             /* font-weight: 500; */
                         }
                         .prose a:hover, article a:hover {
-                            color: #005bb5;
+                            color: #c2410c;
                             text-decoration: underline;
                         }
                         .prose ul, article ul {

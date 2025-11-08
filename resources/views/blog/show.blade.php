@@ -71,27 +71,27 @@ use Illuminate\Support\Facades\Storage;
                         }
                         .prose h1, article h1 {
                             font-size: 2.5rem;
-                            font-weight: 800;
+                            /* font-weight: 800; */
                             color: #1a1a1a;
                             margin-bottom: 1rem;
                         }
                         .prose h2, article h2 {
                             font-size: 2rem;
-                            font-weight: 700;
+                            /* font-weight: 700; */
                             color: #222;
                             margin-top: 2rem;
                             margin-bottom: 1rem;
                         }
                         .prose h3, article h3 {
                             font-size: 1.5rem;
-                            font-weight: 600;
+                            /* font-weight: 600; */
                             color: #333;
                             margin-top: 1.5rem;
                             margin-bottom: 0.75rem;
                         }
                         .prose h4, article h4 {
                             font-size: 1.25rem;
-                            font-weight: 500;
+                            /* font-weight: 500; */
                             color: #444;
                             margin-top: 1rem;
                             margin-bottom: 0.5rem;
@@ -105,15 +105,25 @@ use Illuminate\Support\Facades\Storage;
                         .prose a, article a {
                             color: #0073e6;
                             text-decoration: none;
-                            font-weight: 500;
+                            /* font-weight: 500; */
                         }
                         .prose a:hover, article a:hover {
                             color: #005bb5;
                             text-decoration: underline;
                         }
-                        .prose ul, .prose ol, article ul, article ol {
+                        .prose ul, article ul {
                             margin-left: 1.5rem;
                             line-height: 1.7;
+                            list-style-type: disc;
+                        }
+                        .prose ol, article ol {
+                            margin-left: 1.5rem;
+                            line-height: 1.7;
+                            list-style-type: decimal;
+                        }
+                        .prose li, article li {
+                            display: list-item;
+                            margin: 0.5rem 0;
                         }
                     </style>
                     {!! $processedContent !!}

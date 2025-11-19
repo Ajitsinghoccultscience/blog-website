@@ -36,6 +36,9 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Additional Head Content -->
+    @stack('head')
+    
     <!-- Custom Styles -->
     @stack('styles')
     <style>

@@ -3,6 +3,12 @@
 @section('title', 'Occult Science Blog - All India Institute of Occult Science')
 @section('description', 'Learn about India\'s best occult science courses at our institute. Master astrology, numerology, tarot, and more. Read blogs for deeper occult knowledge.')
 
+@push('head')
+<link rel="canonical" href="{{ url(route('blog.index')) }}/">
+<meta name="author" content="All India Institute of Occult Science">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+@endpush
+
 @php
 use Illuminate\Support\Facades\Storage;
 @endphp

@@ -10,7 +10,7 @@
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:url" content="{{ rtrim(url()->current(), '/') }}/">
     <meta property="og:title" content="@yield('title', 'ALL INDIA INSTITUTE OF OCCULT SCIENCE')">
     <meta property="og:description" content="@yield('description', 'Exploring the mystical and esoteric world through ancient wisdom and modern insights.')">
     <meta property="og:image" content="@yield('og_image', asset('images/occult-blog-og.jpg'))">
@@ -18,7 +18,7 @@
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="{{ url()->current() }}">
+    <meta property="twitter:url" content="{{ rtrim(url()->current(), '/') }}/">
     <meta property="twitter:title" content="@yield('title', 'ALL INDIA INSTITUTE OF OCCULT SCIENCE')">
     <meta property="twitter:description" content="@yield('description', 'Exploring the mystical and esoteric world through ancient wisdom and modern insights.')">
     <meta property="twitter:image" content="@yield('og_image', asset('images/occult-blog-og.jpg'))">

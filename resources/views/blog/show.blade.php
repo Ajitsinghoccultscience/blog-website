@@ -5,7 +5,7 @@
 @section('og_image', $post->featured_image ? Storage::url($post->featured_image) : asset('images/occult-blog-og.jpg'))
 
 @push('head')
-<link rel="canonical" href="{{ url(route('blog.post', $post->slug)) }}">
+<link rel="canonical" href="{{ url(route('blog.post', $post->slug)) }}/">
 <meta name="author" content="All India Institute of Occult Science">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 @endpush

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
     <div class="banner-container">
         <img src="{{ asset('images/NEE (1) (3).jpg') }}" 
              alt="Occult Science Banner" 
-             class="w-full h-auto object-cover">
+             class="w-full h-auto object-cover max-h-[400px] md:max-h-[500px]">
     </div>
 
     <!-- Recent Posts Section -->
@@ -331,11 +331,17 @@ use Illuminate\Support\Facades\Storage;
     width: 100%;
     overflow: hidden;
     position: relative;
+    max-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .banner-container img {
     width: 100%;
     height: auto;
+    max-height: 500px;
+    object-fit: cover;
     display: block;
     transition: transform 0.3s ease;
 }
@@ -345,14 +351,22 @@ use Illuminate\Support\Facades\Storage;
 }
 
 @media (max-width: 768px) {
+    .banner-container {
+        max-height: 300px;
+    }
+    
     .banner-container img {
-        height: auto;
+        max-height: 300px;
     }
 }
 
 @media (max-width: 480px) {
+    .banner-container {
+        max-height: 250px;
+    }
+    
     .banner-container img {
-        height: auto;
+        max-height: 250px;
     }
 }
 

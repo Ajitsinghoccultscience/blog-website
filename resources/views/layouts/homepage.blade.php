@@ -71,6 +71,28 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
+        
+        /* Scroll to Top Button */
+        #scrollToTop {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        #scrollToTop:hover {
+            transform: translateY(-3px) scale(1.05);
+        }
+        
+        #scrollToTop:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+        
+        @media (max-width: 768px) {
+            #scrollToTop {
+                bottom: 4rem;
+                right: 1rem;
+                width: 3rem;
+                height: 3rem;
+            }
+        }
     </style>
 </head>
 <body class="font-sans antialiased bg-gray-50">
@@ -198,7 +220,42 @@
         </div>
     </footer>
 
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" 
+            class="fixed bottom-6 right-6 w-12 h-12 bg-gradient-to-b from-red-500 to-orange-500 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center z-50 opacity-0 pointer-events-none"
+            aria-label="Scroll to top">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+        </svg>
+    </button>
+
     <!-- Scripts -->
     @stack('scripts')
+    
+    <!-- Scroll to Top Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const scrollToTopButton = document.getElementById('scrollToTop');
+            
+            // Show/hide button based on scroll position
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollToTopButton.classList.remove('opacity-0', 'pointer-events-none');
+                    scrollToTopButton.classList.add('opacity-100', 'pointer-events-auto');
+                } else {
+                    scrollToTopButton.classList.add('opacity-0', 'pointer-events-none');
+                    scrollToTopButton.classList.remove('opacity-100', 'pointer-events-auto');
+                }
+            });
+            
+            // Smooth scroll to top on click
+            scrollToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 @extends('layouts.homepage')
 
-@section('title', $metaTitle . ' - ALL INDIA INSTITUTE OF OCCULT SCIENCE')
+@section('title', $metaTitle)
 @section('description', $metaDescription)
 @section('og_image', $post->featured_image ? Storage::url($post->featured_image) : asset('images/occult-blog-og.jpg'))
 

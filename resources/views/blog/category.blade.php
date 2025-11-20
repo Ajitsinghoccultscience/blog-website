@@ -1,6 +1,6 @@
 @extends('layouts.homepage')
 
-@section('title', $category->name . ' - ALL INDIA INSTITUTE OF OCCULT SCIENCE')
+@section('title', $category->name)
 @section('description', $category->description ?: 'Explore posts in the ' . $category->name . ' category.')
 
 @php

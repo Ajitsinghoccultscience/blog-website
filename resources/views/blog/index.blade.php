@@ -1,7 +1,7 @@
 @extends('layouts.homepage')
 
-@section('title', 'ALL INDIA INSTITUTE OF OCCULT SCIENCE - Home')
-@section('description', 'Discover ancient wisdom, mystical practices, and esoteric knowledge through our comprehensive occult science education.')
+@section('title', 'Occult Science Blog - All India Institute of Occult Science')
+@section('description', 'Learn about India\'s best occult science courses at our institute. Master astrology, numerology, tarot, and more. Read blogs for deeper occult knowledge.')
 
 @php
 use Illuminate\Support\Facades\Storage;

@@ -1,6 +1,6 @@
 @extends('layouts.homepage')
 
-@section('title', 'Search Results - ALL INDIA INSTITUTE OF OCCULT SCIENCE')
+@section('title', 'Search Results')
 @section('description', 'Search results for: ' . $query)
 
 @php

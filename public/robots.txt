@@ -1,2 +1,4 @@
 User-agent: *
-Disallow: /
+Allow: /
+Crawl-delay:3
+sitemap: https://blog.occultscience.in/sitemap.xml

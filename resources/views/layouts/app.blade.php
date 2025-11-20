@@ -46,18 +46,18 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <a href="{{ route('blog.index') }}" class="text-white text-xl font-bold">
+                    <a href="{{ route('blog.index') }}/" class="text-white text-xl font-bold">
                         Occult Blog
                     </a>
                 </div>
                 
                 <div class="flex items-center space-x-4">
-                    <a href="{{ route('blog.index') }}" class="text-white hover:text-purple-200 px-3 py-2 rounded-md text-sm font-medium">
+                    <a href="{{ route('blog.index') }}/" class="text-white hover:text-purple-200 px-3 py-2 rounded-md text-sm font-medium">
                         Home
                     </a>
                     @if(isset($categories))
                         @foreach($categories->take(4) as $category)
-                            <a href="{{ route('blog.category', $category->slug) }}" 
+                            <a href="{{ route('blog.category', $category->slug) }}/" 
                                class="text-white hover:text-purple-200 px-3 py-2 rounded-md text-sm font-medium">
                                 {{ $category->name }}
                             </a>

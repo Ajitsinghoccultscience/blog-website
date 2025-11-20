@@ -87,7 +87,7 @@
             </div>
         </a>
 
-        <a href="{{ route('blog.index') }}" 
+        <a href="{{ route('blog.index') }}/" 
            class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
             <div class="p-2 rounded-full bg-green-100 mr-3">
                 <i class="fas fa-eye text-green-600"></i>

@@ -244,7 +244,7 @@ use Illuminate\Support\Facades\Storage;
                                     </div>
                                     <div class="flex-1">
                                         <h4 class="text-sm font-medium text-gray-900 mb-1 hover:text-orange-600 transition-colors">
-                                            <a href="{{ route('blog.post', $latestPost->slug) }}">{{ Str::limit($latestPost->title, 50) }}</a>
+                                            <a href="{{ route('blog.post', $latestPost->slug) }}/">{{ Str::limit($latestPost->title, 50) }}</a>
                                         </h4>
                                         <p class="text-xs text-gray-500">{{ $latestPost->published_at ? $latestPost->published_at->format('F j, Y') : 'No Date' }}</p>
                                     </div>
@@ -265,7 +265,7 @@ use Illuminate\Support\Facades\Storage;
                         @if(isset($categories) && $categories->count() > 0)
                             @foreach($categories as $category)
                                 <div class="px-4 py-3 border-b border-gray-200 last:border-b-0 hover:bg-gray-50 transition-colors">
-                                    <a href="{{ route('blog.category', $category->slug) }}" 
+                                    <a href="{{ route('blog.category', $category->slug) }}/" 
                                        class="block text-gray-900 font-bold text-sm uppercase hover:text-orange-600 transition-colors">
                                         {{ $category->name }}
                                     </a>
@@ -311,7 +311,7 @@ use Illuminate\Support\Facades\Storage;
                             @endif
                             
                             <h3 class="font-bold text-gray-900 mb-2">
-                                <a href="{{ route('blog.post', $relatedPost->slug) }}" class="hover:text-orange-600 transition-colors">
+                                <a href="{{ route('blog.post', $relatedPost->slug) }}/" class="hover:text-orange-600 transition-colors">
                                     {{ $relatedPost->title }}
                                 </a>
                             </h3>
@@ -326,13 +326,13 @@ use Illuminate\Support\Facades\Storage;
 
     <!-- Navigation -->
     <div class="mt-12 flex justify-between">
-        <a href="{{ route('blog.index') }}" 
+        <a href="{{ route('blog.index') }}/" 
            class="inline-flex items-center px-4 py-2 bg-orange-600 text-yellow-100 rounded-lg hover:bg-orange-700 transition-colors shadow-lg">
             ← Back to Blog
         </a>
         
         @if($post->category)
-            <a href="{{ route('blog.category', $post->category->slug) }}" 
+            <a href="{{ route('blog.category', $post->category->slug) }}/" 
                class="inline-flex items-center px-4 py-2 border border-orange-600 text-orange-600 rounded-lg hover:bg-orange-50 transition-colors">
                 More in {{ $post->category->name }} →
             </a>

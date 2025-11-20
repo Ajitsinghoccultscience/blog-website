@@ -116,7 +116,7 @@
 
             <!-- Back to Site -->
             <div class="mt-6 text-center">
-                <a href="{{ route('blog.index') }}" 
+                <a href="{{ route('blog.index') }}/" 
                    class="text-sm text-gray-600 hover:text-gray-800 transition-colors">
                     <i class="fas fa-arrow-left mr-1"></i>
                     Back to Website

@@ -73,7 +73,7 @@
 
     <!-- Call to Action -->
     <div class="mt-12 text-center">
-        <a href="{{ route('blog.index') }}" 
+        <a href="{{ route('blog.index') }}/" 
            class="inline-flex items-center px-8 py-3 bg-orange-600 text-yellow-100 font-semibold rounded-lg hover:bg-orange-700 transition-colors shadow-lg">
             Explore Our Blog
         </a>

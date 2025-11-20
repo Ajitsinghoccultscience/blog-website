@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Storage;
                         <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100">
                             <!-- Post Image -->
                             <div class="relative">
-                                <a href="{{ route('blog.post', $post->slug) }}" class="block">
+                                <a href="{{ route('blog.post', $post->slug) }}/" class="block">
                                     <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
                                         @if($post->featured_image)
                                             <img src="{{ Storage::url($post->featured_image) }}" 
@@ -69,7 +69,7 @@ use Illuminate\Support\Facades\Storage;
                                 </p>
                                 
                                 <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
-                                    <a href="{{ route('blog.post', $post->slug) }}" 
+                                    <a href="{{ route('blog.post', $post->slug) }}/" 
                                        class="hover:text-red-600 transition-colors">
                                         {{ $post->title }}
                                     </a>
@@ -113,7 +113,7 @@ use Illuminate\Support\Facades\Storage;
                                 <h4 class="text-sm font-medium text-gray-900 mb-4">Browse by Category</h4>
                                 <div class="flex flex-wrap justify-center gap-2">
                                     @foreach($categories->take(6) as $category)
-                                        <a href="{{ route('blog.category', $category->slug) }}" 
+                                        <a href="{{ route('blog.category', $category->slug) }}/" 
                                            class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-700 hover:bg-red-100 hover:text-red-700 transition-colors">
                                             {{ $category->name }}
                                         </a>

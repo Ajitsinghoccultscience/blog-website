@@ -68,10 +68,10 @@
 
                 <!-- Desktop Navigation Links -->
                 <div class="hidden lg:flex items-center space-x-8">
-                    <a href="{{ route('blog.index') }}" class="nav-link {{ request()->routeIs('blog.index') ? 'active' : '' }}">
+                    <a href="{{ route('blog.index') }}/" class="nav-link {{ request()->routeIs('blog.index') ? 'active' : '' }}">
                         HOME
                     </a>
-                    <a href="{{ route('blog.about') }}" class="nav-link {{ request()->routeIs('blog.about') ? 'active' : '' }}">
+                    <a href="{{ route('blog.about') }}/" class="nav-link {{ request()->routeIs('blog.about') ? 'active' : '' }}">
                         ABOUT
                     </a>
                     <div class="nav-link dropdown relative group">
@@ -133,7 +133,7 @@
                             <div class="py-2">
                                 @if(isset($navbarCategories) && $navbarCategories->count() > 0)
                                     @foreach($navbarCategories->take(8) as $category)
-                                        <a href="{{ route('blog.category', $category->slug) }}" 
+                                        <a href="{{ route('blog.category', $category->slug) }}/" 
                                            class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
                                             <div class="font-medium">{{ $category->name }}</div>
                                         </a>
@@ -204,10 +204,10 @@
             <!-- Mobile Navigation Menu -->
             <div class="mobile-menu lg:hidden" id="mobileMenu">
                 <div class="mobile-menu-content">
-                    <a href="{{ route('blog.index') }}" class="mobile-nav-link {{ request()->routeIs('blog.index') ? 'active' : '' }}">
+                    <a href="{{ route('blog.index') }}/" class="mobile-nav-link {{ request()->routeIs('blog.index') ? 'active' : '' }}">
                         HOME
                     </a>
-                    <a href="{{ route('blog.about') }}" class="mobile-nav-link {{ request()->routeIs('blog.about') ? 'active' : '' }}">
+                    <a href="{{ route('blog.about') }}/" class="mobile-nav-link {{ request()->routeIs('blog.about') ? 'active' : '' }}">
                         ABOUT
                     </a>
                     <div class="mobile-dropdown">
@@ -278,7 +278,7 @@
                         <div id="categories-submenu" class="mobile-submenu hidden">
                             @if(isset($navbarCategories) && $navbarCategories->count() > 0)
                                 @foreach($navbarCategories as $category)
-                                    <a href="{{ route('blog.category', $category->slug) }}" 
+                                    <a href="{{ route('blog.category', $category->slug) }}/" 
                                        class="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-red-600 transition-colors">
                                         {{ $category->name }}
                                     </a>

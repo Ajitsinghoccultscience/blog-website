@@ -101,7 +101,7 @@
             <div class="bg-gray-50 p-4 rounded-lg">
                 <p class="text-gray-600">
                     This category has {{ $category->posts_count }} {{ Str::plural('post', $category->posts_count) }}.
-                    <a href="{{ route('blog.category', $category->slug) }}" 
+                    <a href="{{ route('blog.category', $category->slug) }}/" 
                        class="text-primary hover:text-blue-700 ml-1">
                         View posts →
                     </a>

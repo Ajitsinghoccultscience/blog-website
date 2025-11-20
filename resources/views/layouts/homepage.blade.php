@@ -176,7 +176,7 @@
                                 </div>
                                 <div class="flex-1">
                                     <h5 class="text-sm text-white font-medium mb-1">{{ Str::limit($latestPost->title, 40) }}</h5>
-                                    <a href="{{ route('blog.post', $latestPost->slug) }}" class="text-red-500 text-sm hover:text-red-400 transition-colors">
+                                    <a href="{{ route('blog.post', $latestPost->slug) }}/" class="text-red-500 text-sm hover:text-red-400 transition-colors">
                                         Read More »
                                     </a>
                                 </div>
@@ -195,7 +195,7 @@
                         @if(isset($navbarCategories) && $navbarCategories->count() > 0)
                             @foreach($navbarCategories as $category)
                                 <div class="border-b border-gray-600 pb-2 last:border-b-0">
-                                    <a href="{{ route('blog.category', $category->slug) }}" 
+                                    <a href="{{ route('blog.category', $category->slug) }}/" 
                                        class="text-white text-sm hover:text-red-500 transition-colors">
                                         {{ $category->name }}
                                     </a>

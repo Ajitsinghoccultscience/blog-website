@@ -103,7 +103,7 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <div class="flex space-x-2">
-                            <a href="{{ route('blog.post', $post->slug) }}" 
+                            <a href="{{ route('blog.post', $post->slug) }}/" 
                                target="_blank"
                                class="text-gray-600 hover:text-gray-800" title="View on Website">
                                 <i class="fas fa-eye"></i>

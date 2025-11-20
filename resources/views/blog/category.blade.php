@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Storage;
                         <article class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100">
                             <!-- Post Image -->
                             <div class="relative">
-                                <a href="{{ route('blog.post', $post->slug) }}" class="block">
+                                <a href="{{ route('blog.post', $post->slug) }}/" class="block">
                                     @if($post->featured_image)
                                         <img src="{{ Storage::url($post->featured_image) }}" 
                                              alt="{{ $post->featured_image_alt ?? $post->title }}" 
@@ -51,7 +51,7 @@ use Illuminate\Support\Facades\Storage;
                             <!-- Post Content -->
                             <div class="p-6">
                                 <h3 class="text-xl font-bold text-gray-900 mb-3 leading-tight">
-                                    <a href="{{ route('blog.post', $post->slug) }}" class="hover:text-orange-600 transition-colors">
+                                    <a href="{{ route('blog.post', $post->slug) }}/" class="hover:text-orange-600 transition-colors">
                                         {{ strtolower($post->title) }}
                             </a>
                         </h3>
@@ -63,7 +63,7 @@ use Illuminate\Support\Facades\Storage;
                         @endif
                         
                                 <div class="flex items-center justify-between">
-                            <a href="{{ route('blog.post', $post->slug) }}" 
+                            <a href="{{ route('blog.post', $post->slug) }}/" 
                                        class="text-orange-600 hover:text-orange-800 font-medium text-sm">
                                         READ MORE
                             </a>
@@ -106,7 +106,7 @@ use Illuminate\Support\Facades\Storage;
         <div class="text-center py-12">
             <h3 class="text-2xl font-bold text-gray-900 mb-4">No Posts in This Category</h3>
             <p class="text-gray-600 mb-6">Check back soon for posts in {{ $category->name }}.</p>
-            <a href="{{ route('blog.index') }}" 
+            <a href="{{ route('blog.index') }}/" 
                        class="inline-flex items-center px-4 py-2 bg-orange-600 text-yellow-100 rounded-lg hover:bg-orange-700 transition-colors shadow-lg">
                 ← Back to All Posts
             </a>
@@ -151,7 +151,7 @@ use Illuminate\Support\Facades\Storage;
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <h4 class="text-sm font-bold text-gray-900 mb-1 leading-tight hover:text-orange-600 transition-colors">
-                                            <a href="{{ route('blog.post', $popularPost->slug) }}">{{ $popularPost->title }}</a>
+                                            <a href="{{ route('blog.post', $popularPost->slug) }}/">{{ $popularPost->title }}</a>
                                         </h4>
                                         <p class="text-xs text-gray-500">{{ $popularPost->published_at ? $popularPost->published_at->format('F d, Y') : 'No Date' }}</p>
                                     </div>
@@ -170,7 +170,7 @@ use Illuminate\Support\Facades\Storage;
                         @if(isset($categories) && $categories->count() > 0)
                             @foreach($categories as $cat)
                                 <div class="border-b border-gray-200 pb-2 last:border-b-0">
-                                    <a href="{{ route('blog.category', $cat->slug) }}" 
+                                    <a href="{{ route('blog.category', $cat->slug) }}/" 
                                        class="text-gray-700 text-sm hover:text-orange-600 transition-colors font-medium">
                                         {{ strtoupper($cat->name) }}
                                     </a>

@@ -24,7 +24,7 @@
             <i class="fas fa-tags mr-3"></i>
             Categories
         </a>
-        <a href="{{ route('blog.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100">
+        <a href="{{ route('blog.index') }}/" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100">
             <i class="fas fa-home mr-3"></i>
             View Site
         </a>

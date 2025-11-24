@@ -113,9 +113,9 @@ use Illuminate\Support\Facades\Storage;
 <!-- Main Content Layout - Desktop Two Column, Mobile Single Column -->
 <div class="bg-white py-4 lg:py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-            <!-- Left Column - Category Sections (2/3 width on desktop, full width on mobile) -->
-            <div class="lg:col-span-2 space-y-6 lg:space-y-8 order-1 lg:order-1">
+        <div class="grid grid-cols-1 gap-6 lg:gap-8">
+            <!-- Main Content - Full Width -->
+            <div class="space-y-6 lg:space-y-8">
                 @if($categories->count() > 0)
                     @foreach($categories->take(5) as $category)
                         @php
@@ -234,93 +234,6 @@ use Illuminate\Support\Facades\Storage;
                         @endif
                     @endforeach
                 @endif
-            </div>
-            
-            <!-- Right Column - Sidebar (1/3 width on desktop, full width on mobile) -->
-            <div class="lg:col-span-1 space-y-6 lg:space-y-8 order-2 lg:order-2">
-    <!-- Categories Section -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <!-- Categories Header -->
-                    <div class="bg-orange-600 text-white px-4 py-3">
-                        <h3 class="font-bold text-lg">Categories</h3>
-                    </div>
-                    
-                    <!-- Categories List -->
-                    <div class="p-0">
-                        @if($categories->count() > 0)
-                            @foreach($categories as $category)
-                                <div class="px-4 py-3 border-b border-gray-200 last:border-b-0 hover:bg-gray-50 transition-colors">
-                                    <a href="{{ route('blog.category', $category->slug) }}/" 
-                                       class="block text-gray-900 font-medium text-sm hover:text-orange-600 transition-colors">
-                                        {{ $category->name }}
-                                    </a>
-                                </div>
-                            @endforeach
-                        @else
-                            <div class="px-4 py-3">
-                                <p class="text-gray-500 text-sm">No categories available</p>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-                
-                <!-- Recent Posts Section -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <!-- Recent Posts Header -->
-                    <div class="bg-orange-600 text-white px-4 py-3">
-                        <h3 class="font-bold text-lg">Recent Posts</h3>
-                    </div>
-                    
-                    <!-- Recent Posts List -->
-                    <div class="p-4">
-                        @php
-                            $recentPosts = \App\Models\Post::with('category')
-                                ->where('is_published', true)
-                                ->orderBy('published_at', 'desc')
-                                ->limit(5)
-                                ->get();
-                        @endphp
-                        
-                        @if($recentPosts->count() > 0)
-                            <ul class="space-y-3">
-                                @foreach($recentPosts as $post)
-                                    <li class="flex items-start">
-                                        <div class="w-2 h-2 bg-orange-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                                        <a href="{{ route('blog.post', $post->slug) }}/" class="text-gray-900 text-sm hover:text-orange-600 transition-colors leading-relaxed">
-                                            {{ Str::limit($post->title, 60) }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        @else
-                            <p class="text-gray-500 text-sm">No posts available</p>
-                        @endif
-                    </div>
-                </div>
-                
-                <!-- Newsletter Section -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <!-- Newsletter Header -->
-                    <div class="bg-gradient-to-r from-orange-500 to-orange-600 px-4 py-3">
-                        <h3 class="text-white font-bold text-lg">Subscribe to Our Newsletter</h3>
-                    </div>
-                    
-                    <!-- Newsletter Form -->
-                    <div class="p-4">
-                        <form class="space-y-4">
-                            <div>
-                                <label class="block text-gray-700 text-sm font-medium mb-2">Email us *</label>
-                                <input type="email" 
-                                       placeholder="Enter Email Address" 
-                                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent">
-                            </div>
-                            <button type="submit" 
-                                    class="w-full bg-orange-600 hover:bg-orange-700 text-yellow-100 font-medium py-2 px-4 rounded-md transition-colors duration-200 shadow-lg">
-                                Subscribe
-                            </button>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

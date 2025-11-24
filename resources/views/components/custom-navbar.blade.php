@@ -1,5 +1,5 @@
 <!-- Custom Navbar Component -->
-<div class="custom-navbar">
+<div class="custom-navbar fixed top-0 left-0 right-0 z-50">
     <!-- Top Bar (Dark Grey) -->
     <div class="top-bar">
         <div class="container mx-auto px-4">

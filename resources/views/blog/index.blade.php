@@ -14,11 +14,138 @@ use Illuminate\Support\Facades\Storage;
 @endphp
 
 @section('content')
-    <!-- Banner Image -->
-    <div class="banner-container">
-        <img src="{{ asset('images/NEE (1) (3).jpg') }}" 
-             alt="Occult Science Banner" 
-             class="w-full h-auto object-cover max-h-[400px] md:max-h-[500px]">
+    <!-- Spacer for fixed navbar -->
+    <div class="h-[130px] md:h-[130px]"></div>
+    
+    <!-- Hero Landing Section -->
+    <div class="relative min-h-[500px] md:min-h-[600px] flex items-center hero-bg-image" style="background-image: url('{{ asset('images/WhatsApp Image 2025-11-24 at 15.21.19.jpeg') }}'); background-repeat: no-repeat; background-size: cover; background-position: center; background-attachment: fixed;">
+        <!-- Dark Overlay for Text Readability -->
+        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 w-full relative z-10 py-2">
+            <!-- Left Section - Content -->
+            <div class="lg:col-span-2 relative text-white py-2 px-6 md:px-8 lg:px-10 flex flex-col justify-center min-h-[400px] md:min-h-[500px]">
+                
+                <!-- Content -->
+                <div class="relative z-10">
+                    <!-- Headline -->
+                    <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 leading-tight">
+                        <span class="text-orange-500">Learn, Research & Explore</span><br>
+                        <span class="text-white">The Depths Of Occult Knowledge</span>
+                    </h1>
+                    
+                    <!-- Description -->
+                    <p class="text-sm md:text-base text-white mb-4 leading-relaxed max-w-2xl">
+                        All India Institute of Occult Science is the premier institute for occult studies, offering flexible online platforms for various occult subjects like astrology, vastu, numerology, palmistry, card reading, and reiki, with small batch sizes (10-15 students).
+                    </p>
+                    
+                    <!-- Bullet Points -->
+                    <ul class="space-y-2 mb-4">
+                        <li class="flex items-start">
+                            <svg class="w-4 h-4 text-white mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="text-sm md:text-base text-white">Build Your Career With Our 100% Online Program</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-4 h-4 text-white mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="text-sm md:text-base text-white">Advance Your Future With A Trusted 23+ Years Legacy</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-4 h-4 text-white mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="text-sm md:text-base text-white">Government-Approved Online Program With Live Interactive Classes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-4 h-4 text-white mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="text-sm md:text-base text-white">Expert And Experienced Educators Across All Subjects</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Right Section - Inquiry Form -->
+            <div class="lg:col-span-1 flex items-center justify-center p-2 md:p-4 relative">
+                <!-- Form Card -->
+                <div class="w-full max-w-sm bg-white rounded-xl shadow-2xl p-3 md:p-4 relative z-10">
+                    <!-- Form Title -->
+                    <h2 class="text-lg md:text-xl font-bold text-gray-900 mb-3 text-center">
+                        Fill Out This Forms To Get Course Details
+                    </h2>
+                    
+                    <!-- Form -->
+                    <form action="https://www.occultscience.in/enquiry-form-home/" method="POST" class="space-y-4" target="_blank">
+                        <!-- Name Field -->
+                        <div>
+                            <label for="name" class="block text-xs font-semibold text-gray-700 mb-1.5">Your Name</label>
+                            <input type="text" 
+                                   id="name" 
+                                   name="name" 
+                                   placeholder="Enter Your Name" 
+                                   required
+                                   class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all">
+                        </div>
+                        
+                        <!-- Contact Field -->
+                        <div>
+                            <label for="contact" class="block text-xs font-semibold text-gray-700 mb-1.5">Contact</label>
+                            <div class="flex">
+                                <span class="inline-flex items-center px-3 py-2 text-sm border-2 border-r-0 border-gray-300 rounded-l-lg bg-gray-50 text-gray-700 font-medium">
+                                    +91
+                                </span>
+                                <input type="tel" 
+                                       id="contact" 
+                                       name="contact" 
+                                       placeholder="Enter Your Phone Number" 
+                                       required
+                                       pattern="[0-9]{10}"
+                                       maxlength="10"
+                                       class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all">
+                            </div>
+                        </div>
+                        
+                        <!-- Email Field -->
+                        <div>
+                            <label for="email" class="block text-xs font-semibold text-gray-700 mb-1.5">Your Email</label>
+                            <input type="email" 
+                                   id="email" 
+                                   name="email" 
+                                   placeholder="Enter Your Email Id" 
+                                   required
+                                   class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all">
+                        </div>
+                        
+                        <!-- Course Selection -->
+                        <div>
+                            <label for="course" class="block text-xs font-semibold text-gray-700 mb-1.5">Choose Your Course</label>
+                            <select id="course" 
+                                    name="course" 
+                                    required
+                                    class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all bg-white">
+                                <option value="">Select Course</option>
+                                <option value="astrology">Astrology Course</option>
+                                <option value="vastu">Vastu Course</option>
+                                <option value="numerology">Numerology Course</option>
+                                <option value="palmistry">Palmistry Course</option>
+                                <option value="graphology">Graphology Course</option>
+                                <option value="card-reading">Card Reading Course</option>
+                                <option value="reiki">Reiki Course</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Submit Button -->
+                        <button type="submit" 
+                                class="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm md:text-base py-3 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                            Book Live Demo Session
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Recent Posts Section -->
@@ -352,47 +479,17 @@ use Illuminate\Support\Facades\Storage;
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
 <style>
-/* Banner styling */
-.banner-container {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    max-height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* Hero Background Image */
+.hero-bg-image {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
-.banner-container img {
-    width: 100%;
-    height: auto;
-    max-height: 500px;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
-}
-
-.banner-container:hover img {
-    transform: scale(1.02);
-}
-
-@media (max-width: 768px) {
-    .banner-container {
-        max-height: 300px;
-    }
-    
-    .banner-container img {
-        max-height: 300px;
-    }
-}
-
-@media (max-width: 480px) {
-    .banner-container {
-        max-height: 250px;
-    }
-    
-    .banner-container img {
-        max-height: 250px;
+@media (max-width: 1024px) {
+    .hero-bg-image {
+        background-attachment: scroll;
     }
 }
 

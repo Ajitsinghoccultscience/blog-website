@@ -113,9 +113,9 @@ use Illuminate\Support\Facades\Storage;
 <!-- Main Content Layout - Desktop Two Column, Mobile Single Column -->
 <div class="bg-white py-4 lg:py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 gap-6 lg:gap-8">
-            <!-- Main Content - Full Width -->
-            <div class="space-y-6 lg:space-y-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+            <!-- Left Column - Category Sections (2/3 width on desktop, full width on mobile) -->
+            <div class="lg:col-span-2 space-y-6 lg:space-y-8 order-1 lg:order-1">
                 @if($categories->count() > 0)
                     @foreach($categories->take(5) as $category)
                         @php
@@ -234,6 +234,111 @@ use Illuminate\Support\Facades\Storage;
                         @endif
                     @endforeach
                 @endif
+            </div>
+            
+            <!-- Right Column - Sidebar (1/3 width on desktop, full width on mobile) -->
+            <div class="lg:col-span-1 space-y-6 lg:space-y-8 order-2 lg:order-2">
+                <!-- What's Hot Section -->
+                <div class="bg-gray-900 rounded-lg shadow-lg overflow-hidden">
+                    <!-- What's Hot Header -->
+                    <div class="bg-gradient-to-r from-orange-500 to-orange-600 px-4 py-3">
+                        <h3 class="text-white font-bold text-lg">What's Hot</h3>
+                    </div>
+                    
+                    <!-- What's Hot Posts List -->
+                    <div class="p-4">
+                        @php
+                            // Specify the slugs of posts you want to show in "What's Hot"
+                            $hotPostSlugs = [
+                                'billionaire-signs-palmistry',
+                                'triangle-in-palmistry',
+                                'divorce-line-in-female-hand-second-marriage-line-in-female-hand',
+                                'unlocking-the-secrets-of-nakshatra-and-their-lords',
+                            ];
+                            
+                            $hotPosts = \App\Models\Post::with('category')
+                                ->where('is_published', true)
+                                ->whereIn('slug', $hotPostSlugs)
+                                ->get()
+                                ->sortBy(function($post) use ($hotPostSlugs) {
+                                    return array_search($post->slug, $hotPostSlugs);
+                                })
+                                ->values()
+                                ->take(4);
+                        @endphp
+                        
+                        @if($hotPosts->count() > 0)
+                            <div class="space-y-4">
+                                @foreach($hotPosts as $hotPost)
+                                    <a href="{{ route('blog.post', $hotPost->slug) }}/" class="block group">
+                                        <div class="flex space-x-3 hover:bg-gray-800 rounded-lg p-2 -m-2 transition-colors">
+                                            <!-- Thumbnail -->
+                                            <div class="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 border-gray-700 group-hover:border-orange-500 transition-colors">
+                                                @if($hotPost->featured_image)
+                                                    <img src="{{ Storage::url($hotPost->featured_image) }}" 
+                                                         alt="{{ $hotPost->featured_image_alt ?? $hotPost->title }}" 
+                                                         class="w-full h-full object-cover"
+                                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                                    <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center" style="display: none;">
+                                                        <span class="text-white text-xs">No Image</span>
+                                                    </div>
+                                                @else
+                                                    <div class="w-full h-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
+                                                        <span class="text-white text-xs">No Image</span>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            
+                                            <!-- Post Info -->
+                                            <div class="flex-1 min-w-0">
+                                                <h4 class="text-white text-sm font-medium mb-1 line-clamp-2 group-hover:text-orange-400 transition-colors">
+                                                    {{ $hotPost->title }}
+                                                </h4>
+                                                <p class="text-gray-400 text-xs">
+                                                    {{ $hotPost->published_at ? $hotPost->published_at->format('F d, Y') : 'No date' }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            </div>
+                        @else
+                            <p class="text-gray-400 text-sm">No posts available</p>
+                        @endif
+                    </div>
+                </div>
+                
+                <!-- Newsletter Section -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <!-- Newsletter Header -->
+                    <div class="bg-gradient-to-r from-orange-500 to-orange-600 px-4 py-3">
+                        <h3 class="text-white font-bold text-lg">Subscribe to Our Newsletter</h3>
+                    </div>
+                    
+                    <!-- Newsletter Form -->
+                    <div class="p-4">
+                        <form class="space-y-4">
+                            <div>
+                                <label class="block text-gray-700 text-sm font-medium mb-2">Email us *</label>
+                                <input type="email" 
+                                       placeholder="Enter Email Address" 
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                            </div>
+                            <button type="submit" 
+                                    class="w-full bg-orange-600 hover:bg-orange-700 text-yellow-100 font-medium py-2 px-4 rounded-md transition-colors duration-200 shadow-lg">
+                                Subscribe
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Image Section -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <img src="{{ asset('images/tttt.png') }}" 
+                         alt="Sidebar Image" 
+                         class="w-full h-auto object-contain"
+                         onerror="this.style.display='none';">
+                </div>
             </div>
         </div>
     </div>

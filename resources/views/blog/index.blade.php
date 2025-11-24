@@ -334,10 +334,12 @@ use Illuminate\Support\Facades\Storage;
                 
                 <!-- Image Section -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <img src="{{ asset('images/tttt.png') }}" 
-                         alt="Sidebar Image" 
-                         class="w-full h-auto object-contain"
-                         onerror="this.style.display='none';">
+                    <a href="https://www.occultscience.in/enquiry-form-home/" target="_blank" rel="noopener noreferrer" class="block">
+                        <img src="{{ asset('images/tttt.png') }}" 
+                             alt="Sidebar Image" 
+                             class="w-full h-auto object-contain hover:opacity-90 transition-opacity"
+                             onerror="this.style.display='none';">
+                    </a>
                 </div>
             </div>
         </div>

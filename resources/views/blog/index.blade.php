@@ -7,6 +7,8 @@
 <link rel="canonical" href="{{ url(route('blog.index')) }}/">
 <meta name="author" content="All India Institute of Occult Science">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<!-- Preload Banner Image -->
+<link rel="preload" as="image" href="{{ asset('images/WhatsApp Image 2025-11-24 at 15.21.19.jpeg') }}">
 @endpush
 
 @php
@@ -14,11 +16,8 @@ use Illuminate\Support\Facades\Storage;
 @endphp
 
 @section('content')
-    <!-- Spacer for fixed navbar -->
-    <div class="h-[130px] md:h-[130px]"></div>
-    
     <!-- Hero Landing Section -->
-    <div class="relative min-h-[500px] md:min-h-[600px] flex items-center hero-bg-image" style="background-image: url('{{ asset('images/WhatsApp Image 2025-11-24 at 15.21.19.jpeg') }}'); background-repeat: no-repeat; background-size: cover; background-position: center; background-attachment: fixed;">
+    <div class="relative min-h-[500px] md:min-h-[600px] flex items-center hero-bg-image mt-[80px]" style="background-image: url('{{ asset('images/WhatsApp Image 2025-11-24 at 15.21.19.jpeg') }}'); background-repeat: no-repeat; background-size: cover; background-position: center; background-attachment: fixed;">
         <!-- Dark Overlay for Text Readability -->
         <div class="absolute inset-0 bg-black bg-opacity-60"></div>
         <div class="grid grid-cols-1 lg:grid-cols-3 w-full relative z-10 py-2">
@@ -366,7 +365,7 @@ use Illuminate\Support\Facades\Storage;
             <!-- Right Column - Sidebar (1/3 width on desktop, full width on mobile) -->
             <div class="lg:col-span-1 space-y-6 lg:space-y-8 order-2 lg:order-2">
                 <!-- What's Hot Section -->
-                <div class="bg-gray-900 rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                     <!-- What's Hot Header -->
                     <div class="bg-gradient-to-r from-orange-500 to-orange-600 px-4 py-3">
                         <h3 class="text-white font-bold text-lg">What's Hot</h3>
@@ -398,9 +397,9 @@ use Illuminate\Support\Facades\Storage;
                             <div class="space-y-4">
                                 @foreach($hotPosts as $hotPost)
                                     <a href="{{ route('blog.post', $hotPost->slug) }}/" class="block group">
-                                        <div class="flex space-x-3 hover:bg-gray-800 rounded-lg p-2 -m-2 transition-colors">
+                                        <div class="flex space-x-3 hover:bg-gray-50 rounded-lg p-2 -m-2 transition-colors">
                                             <!-- Thumbnail -->
-                                            <div class="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 border-gray-700 group-hover:border-orange-500 transition-colors">
+                                            <div class="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 border-gray-300 group-hover:border-orange-500 transition-colors">
                                                 @if($hotPost->featured_image)
                                                     <img src="{{ Storage::url($hotPost->featured_image) }}" 
                                                          alt="{{ $hotPost->featured_image_alt ?? $hotPost->title }}" 
@@ -418,10 +417,10 @@ use Illuminate\Support\Facades\Storage;
                                             
                                             <!-- Post Info -->
                                             <div class="flex-1 min-w-0">
-                                                <h4 class="text-white text-sm font-medium mb-1 line-clamp-2 group-hover:text-orange-400 transition-colors">
+                                                <h4 class="text-gray-900 text-sm font-medium mb-1 line-clamp-2 group-hover:text-orange-600 transition-colors">
                                                     {{ $hotPost->title }}
                                                 </h4>
-                                                <p class="text-gray-400 text-xs">
+                                                <p class="text-gray-600 text-xs">
                                                     {{ $hotPost->published_at ? $hotPost->published_at->format('F d, Y') : 'No date' }}
                                                 </p>
                                             </div>
@@ -430,7 +429,7 @@ use Illuminate\Support\Facades\Storage;
                                 @endforeach
                             </div>
                         @else
-                            <p class="text-gray-400 text-sm">No posts available</p>
+                            <p class="text-gray-600 text-sm">No posts available</p>
                         @endif
                     </div>
                 </div>

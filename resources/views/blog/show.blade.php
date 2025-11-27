@@ -8,6 +8,9 @@
 <link rel="canonical" href="{{ url(route('blog.post', $post->slug)) }}/">
 <meta name="author" content="All India Institute of Occult Science">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+@if($post->custom_script)
+{!! $post->custom_script !!}
+@endif
 @endpush
 
 @php

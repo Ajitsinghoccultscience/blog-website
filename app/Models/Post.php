@@ -14,6 +14,7 @@ class Post extends Model
         'tags',
         'meta_title',
         'meta_description',
+        'custom_script',
         'featured_image',
         'featured_image_alt',
         'is_published',

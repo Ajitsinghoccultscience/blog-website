@@ -370,6 +370,27 @@
                                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                     @enderror
                                 </div>
+
+                                <div>
+                                    <label for="custom_script" class="block text-sm font-medium text-gray-700 mb-2">
+                                        <i class="fas fa-code mr-1"></i>
+                                        Custom Script (Head Tag)
+                                    </label>
+                                    <textarea id="custom_script" 
+                                              name="custom_script" 
+                                              rows="6" 
+                                              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary font-mono text-sm @error('custom_script') border-red-400 @enderror"
+                                              placeholder="Enter custom script to add in &lt;head&gt; tag (e.g., JSON-LD schema, tracking codes, etc.)">{{ old('custom_script', $post->custom_script) }}</textarea>
+                                    <div class="mt-1">
+                                        <p class="text-xs text-gray-500">
+                                            <i class="fas fa-info-circle mr-1"></i>
+                                            This script will be added to the &lt;head&gt; section of the blog post page
+                                        </p>
+                                    </div>
+                                    @error('custom_script')
+                                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                     </div>

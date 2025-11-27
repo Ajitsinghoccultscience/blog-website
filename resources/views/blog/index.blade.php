@@ -164,18 +164,19 @@ use Illuminate\Support\Facades\Storage;
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
             <!-- Left Column - Category Sections (2/3 width on desktop, full width on mobile) -->
             <div class="lg:col-span-2 space-y-6 lg:space-y-8 order-1 lg:order-1">
-                @if($categories->count() > 0)
-                    @foreach($categories->take(5) as $category)
-                        @php
-                            $categoryPosts = \App\Models\Post::with('category')
-                                ->where('is_published', true)
-                                ->where('category_id', $category->id)
-                                ->orderBy('published_at', 'desc')
-                                ->limit(3)
-                                ->get();
-                        @endphp
-                        
-                        @if($categoryPosts->count() > 0)
+                @foreach($categories->filter(function($category) {
+                    return strtolower($category->name) !== 'festivals';
+                }) as $category)
+                    @php
+                        $categoryPosts = \App\Models\Post::with('category')
+                            ->where('is_published', true)
+                            ->where('category_id', $category->id)
+                            ->orderBy('published_at', 'desc')
+                            ->limit(3)
+                            ->get();
+                    @endphp
+                    
+                    @if($categoryPosts->count() > 0)
                             <!-- Category Section -->
                             <div>
                                 <!-- Category Header - Orange Gradient -->
@@ -278,10 +279,19 @@ use Illuminate\Support\Facades\Storage;
                                         @endforeach
                                     </div>
                                 @endif
+                                
+                                <!-- Category CTA Section -->
+                                <div class="mt-6">
+                                    @include('components.commonAdv', [
+                                        'subject' => strtolower($category->name),
+                                        'heading' => 'Ready to start your journey in ' . strtolower($category->name) . '?',
+                                        'subheading' => 'Get your personalized counseling session free.',
+                                        'buttonText' => 'Book Free Live Demo Class'
+                                    ])
+                                </div>
                             </div>
-                        @endif
-                    @endforeach
-                @endif
+                    @endif
+                @endforeach
             </div>
             
             <!-- Right Column - Sidebar (1/3 width on desktop, full width on mobile) -->

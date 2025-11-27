@@ -86,7 +86,8 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         $category->loadCount('posts');
-        return view('admin.categories.show', compact('category'));
+        $posts = $category->posts()->orderBy('published_at', 'desc')->paginate(10);
+        return view('admin.categories.show', compact('category', 'posts'));
     }
 
     /**

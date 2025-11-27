@@ -8,18 +8,18 @@ use Illuminate\Support\Facades\Storage;
 @endphp
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-[80px] lg:mt-[130px] mb-8 pt-4">
     <!-- Page Title -->
-    <div class="text-center mb-8 py-12">
-        <h1 class="text-2xl font-bold text-gray-900">Category: {{ $category->name }}</h1>
+    <div class="text-center mb-6 md:mb-8 py-6 md:py-12">
+        <h1 class="text-xl md:text-2xl font-bold text-gray-900">Category: {{ $category->name }}</h1>
     </div>
 
     <!-- Two Column Layout -->
-    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 md:gap-8">
         <!-- Main Content Column (3/4 width) -->
-        <div class="lg:col-span-3">
+        <div class="lg:col-span-3 order-1">
     @if($posts->count() > 0)
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
             @foreach($posts as $post)
                         <article class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100">
                             <!-- Post Image -->
@@ -49,22 +49,22 @@ use Illuminate\Support\Facades\Storage;
                             </div>
                             
                             <!-- Post Content -->
-                            <div class="p-6">
-                                <h3 class="text-xl font-bold text-gray-900 mb-3 leading-tight">
+                            <div class="p-4 md:p-6">
+                                <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-2 md:mb-3 leading-tight">
                                     <a href="{{ route('blog.post', $post->slug) }}/" class="hover:text-orange-600 transition-colors">
                                         {{ strtolower($post->title) }}
                             </a>
                         </h3>
                         
                         @if($post->excerpt)
-                                    <p class="text-gray-600 text-sm mb-4 leading-relaxed">{{ Str::limit($post->excerpt, 120) }}</p>
+                                    <p class="text-gray-600 text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">{{ Str::limit($post->excerpt, 120) }}</p>
                                 @elseif($post->content)
-                                    <p class="text-gray-600 text-sm mb-4 leading-relaxed">{{ Str::limit(strip_tags($post->content), 120) }}</p>
+                                    <p class="text-gray-600 text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">{{ Str::limit(strip_tags($post->content), 120) }}</p>
                         @endif
                         
-                                <div class="flex items-center justify-between">
+                                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
                             <a href="{{ route('blog.post', $post->slug) }}/" 
-                                       class="text-orange-600 hover:text-orange-800 font-medium text-sm">
+                                       class="text-orange-600 hover:text-orange-800 font-medium text-xs md:text-sm">
                                         READ MORE
                             </a>
                                     <div class="text-xs text-gray-500">
@@ -77,26 +77,52 @@ use Illuminate\Support\Facades\Storage;
         </div>
 
         <!-- Pagination -->
-                <div class="mt-8 flex justify-center">
-                    <nav class="flex items-center">
+                <div class="mt-6 md:mt-8 flex justify-center overflow-x-auto">
+                    <nav class="flex items-center gap-1 md:gap-0">
                         @if($posts->previousPageUrl())
-                            <a href="{{ $posts->previousPageUrl() }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200">
-                                « Previous
+                            <a href="{{ $posts->previousPageUrl() }}" class="px-3 md:px-4 py-2 text-xs md:text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 whitespace-nowrap">
+                                « Prev
                             </a>
                         @endif
                         
-                        <div class="flex items-center">
-                            @for($i = 1; $i <= $posts->lastPage(); $i++)
-                                @if($i == $posts->currentPage())
-                                    <span class="px-4 py-2 text-sm font-medium text-white bg-orange-600 border border-orange-600">{{ $i }}</span>
-                                @else
-                                    <a href="{{ $posts->url($i) }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200">{{ $i }}</a>
+                        <div class="flex items-center overflow-x-auto">
+                            @php
+                                $currentPage = $posts->currentPage();
+                                $lastPage = $posts->lastPage();
+                                $showPages = 5; // Show max 5 page numbers on mobile
+                            @endphp
+                            
+                            @if($lastPage <= $showPages)
+                                @for($i = 1; $i <= $lastPage; $i++)
+                                    @if($i == $currentPage)
+                                        <span class="px-3 md:px-4 py-2 text-xs md:text-sm font-medium text-white bg-orange-600 border border-orange-600 whitespace-nowrap">{{ $i }}</span>
+                                    @else
+                                        <a href="{{ $posts->url($i) }}" class="px-3 md:px-4 py-2 text-xs md:text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200 whitespace-nowrap">{{ $i }}</a>
+                                    @endif
+                                @endfor
+                            @else
+                                @if($currentPage > 3)
+                                    <a href="{{ $posts->url(1) }}" class="px-3 md:px-4 py-2 text-xs md:text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200 whitespace-nowrap">1</a>
+                                    <span class="px-2 text-gray-500">...</span>
                                 @endif
-                            @endfor
+                                
+                                @for($i = max(1, $currentPage - 1); $i <= min($lastPage, $currentPage + 1); $i++)
+                                    @if($i == $currentPage)
+                                        <span class="px-3 md:px-4 py-2 text-xs md:text-sm font-medium text-white bg-orange-600 border border-orange-600 whitespace-nowrap">{{ $i }}</span>
+                                    @else
+                                        <a href="{{ $posts->url($i) }}" class="px-3 md:px-4 py-2 text-xs md:text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200 whitespace-nowrap">{{ $i }}</a>
+                                    @endif
+                                @endfor
+                                
+                                @if($currentPage < $lastPage - 2)
+                                    <span class="px-2 text-gray-500">...</span>
+                                    <a href="{{ $posts->url($lastPage) }}" class="px-3 md:px-4 py-2 text-xs md:text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200 whitespace-nowrap">{{ $lastPage }}</a>
+                                @endif
+                            @endif
                         </div>
                         
                         @if($posts->nextPageUrl())
-                            <a href="{{ $posts->nextPageUrl() }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200">
+                            <a href="{{ $posts->nextPageUrl() }}" class="px-3 md:px-4 py-2 text-xs md:text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 whitespace-nowrap">
                                 Next »
                             </a>
                         @endif
@@ -115,15 +141,15 @@ use Illuminate\Support\Facades\Storage;
         </div>
 
         <!-- Sidebar Column (1/4 width) -->
-        <div class="lg:col-span-1">
-            <div class="space-y-8">
+        <div class="lg:col-span-1 order-2">
+            <div class="space-y-6 md:space-y-8">
                 <!-- Popular Posts Section -->
                 <div>
                     <h3 class="text-lg font-bold text-orange-600 mb-4 border-b-2 border-orange-600 pb-2">
                         Recent Posts
                     </h3>
-                    <div class="bg-white rounded-lg shadow-md p-6">
-                        <div class="space-y-4">
+                    <div class="bg-white rounded-lg shadow-md p-4 md:p-6">
+                        <div class="space-y-3 md:space-y-4">
                             @php
                                 $popularPosts = \App\Models\Post::with('category')
                                     ->where('is_published', true)
@@ -162,7 +188,7 @@ use Illuminate\Support\Facades\Storage;
                 </div>
 
                 <!-- Category Section -->
-                <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="bg-white rounded-lg shadow-md p-4 md:p-6">
                     <h3 class="text-lg font-bold text-orange-600 mb-4 border-b-2 border-orange-600 pb-2">
                         Category
                     </h3>

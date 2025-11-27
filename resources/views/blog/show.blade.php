@@ -15,22 +15,10 @@ use Illuminate\Support\Facades\Storage;
 @endphp
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-[130px] mb-8 pt-4">
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
         <!-- Main Content Area -->
         <div class="lg:col-span-3">
-            <!-- Metadata Header -->
-            <div class="flex items-center text-sm text-gray-600 mb-4">
-                <span class="mr-2">◆</span>
-                <span class="mr-4">{{ $post->published_at ? $post->published_at->format('F j, Y') : 'No Date' }}</span>
-                <span class="mr-2">◷</span>
-                <span class="mr-4">{{ $post->published_at ? $post->published_at->format('g:i A') : 'No Time' }}</span>
-                @if($post->category)
-                    <span class="mr-2">◆</span>
-                    <span class="text-gray-700">{{ $post->category->name }}</span>
-                @endif
-            </div>
-
             <!-- Featured Image -->
             <div class="relative mb-6">
                 @if($post->featured_image)
@@ -45,6 +33,18 @@ use Illuminate\Support\Facades\Storage;
                     <div class="w-full h-96 bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center rounded-lg">
                         <span class="text-white text-lg">No Featured Image</span>
                     </div>
+                @endif
+            </div>
+
+            <!-- Metadata Header -->
+            <div class="flex items-center text-sm text-gray-600 mb-4">
+                <span class="mr-2">◆</span>
+                <span class="mr-4">{{ $post->published_at ? $post->published_at->format('F j, Y') : 'No Date' }}</span>
+                <span class="mr-2">◷</span>
+                <span class="mr-4">{{ $post->published_at ? $post->published_at->format('g:i A') : 'No Time' }}</span>
+                @if($post->category)
+                    <span class="mr-2">◆</span>
+                    <span class="text-gray-700">{{ $post->category->name }}</span>
                 @endif
             </div>
 

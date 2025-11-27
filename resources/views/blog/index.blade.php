@@ -20,9 +20,9 @@ use Illuminate\Support\Facades\Storage;
     <div class="relative min-h-[500px] md:min-h-[600px] flex items-center hero-bg-image mt-[80px]" style="background-image: url('{{ asset('images/WhatsApp Image 2025-11-24 at 15.21.19.jpeg') }}'); background-repeat: no-repeat; background-size: cover; background-position: center; background-attachment: fixed;">
         <!-- Dark Overlay for Text Readability -->
         <div class="absolute inset-0 bg-black bg-opacity-60"></div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 w-full relative z-10 py-2">
-            <!-- Left Section - Content -->
-            <div class="lg:col-span-2 relative text-white py-2 px-6 md:px-8 lg:px-10 flex flex-col justify-center min-h-[400px] md:min-h-[500px]">
+        <div class="w-full relative z-10 py-2">
+            <!-- Content Section -->
+            <div class="relative text-white py-2 px-6 md:px-8 lg:px-10 flex flex-col justify-center min-h-[400px] md:min-h-[500px] max-w-4xl mx-auto">
                 
                 <!-- Content -->
                 <div class="relative z-10">
@@ -64,84 +64,6 @@ use Illuminate\Support\Facades\Storage;
                             <span class="text-sm md:text-base text-white">Expert And Experienced Educators Across All Subjects</span>
                         </li>
                     </ul>
-                </div>
-            </div>
-            
-            <!-- Right Section - Inquiry Form -->
-            <div class="lg:col-span-1 flex items-center justify-center p-2 md:p-4 relative">
-                <!-- Form Card -->
-                <div class="w-full max-w-sm bg-white rounded-xl shadow-2xl p-3 md:p-4 relative z-10">
-                    <!-- Form Title -->
-                    <h2 class="text-lg md:text-xl font-bold text-gray-900 mb-3 text-center">
-                        Fill Out This Forms To Get Course Details
-                    </h2>
-                    
-                    <!-- Form -->
-                    <form action="https://www.occultscience.in/enquiry-form-home/" method="POST" class="space-y-4" target="_blank">
-                        <!-- Name Field -->
-                        <div>
-                            <label for="name" class="block text-xs font-semibold text-gray-700 mb-1.5">Your Name</label>
-                            <input type="text" 
-                                   id="name" 
-                                   name="name" 
-                                   placeholder="Enter Your Name" 
-                                   required
-                                   class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all">
-                        </div>
-                        
-                        <!-- Contact Field -->
-                        <div>
-                            <label for="contact" class="block text-xs font-semibold text-gray-700 mb-1.5">Contact</label>
-                            <div class="flex">
-                                <span class="inline-flex items-center px-3 py-2 text-sm border-2 border-r-0 border-gray-300 rounded-l-lg bg-gray-50 text-gray-700 font-medium">
-                                    +91
-                                </span>
-                                <input type="tel" 
-                                       id="contact" 
-                                       name="contact" 
-                                       placeholder="Enter Your Phone Number" 
-                                       required
-                                       pattern="[0-9]{10}"
-                                       maxlength="10"
-                                       class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all">
-                            </div>
-                        </div>
-                        
-                        <!-- Email Field -->
-                        <div>
-                            <label for="email" class="block text-xs font-semibold text-gray-700 mb-1.5">Your Email</label>
-                            <input type="email" 
-                                   id="email" 
-                                   name="email" 
-                                   placeholder="Enter Your Email Id" 
-                                   required
-                                   class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all">
-                        </div>
-                        
-                        <!-- Course Selection -->
-                        <div>
-                            <label for="course" class="block text-xs font-semibold text-gray-700 mb-1.5">Choose Your Course</label>
-                            <select id="course" 
-                                    name="course" 
-                                    required
-                                    class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all bg-white">
-                                <option value="">Select Course</option>
-                                <option value="astrology">Astrology Course</option>
-                                <option value="vastu">Vastu Course</option>
-                                <option value="numerology">Numerology Course</option>
-                                <option value="palmistry">Palmistry Course</option>
-                                <option value="graphology">Graphology Course</option>
-                                <option value="card-reading">Card Reading Course</option>
-                                <option value="reiki">Reiki Course</option>
-                            </select>
-                        </div>
-                        
-                        <!-- Submit Button -->
-                        <button type="submit" 
-                                class="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm md:text-base py-3 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-                            Book Live Demo Session
-                        </button>
-                    </form>
                 </div>
             </div>
         </div>

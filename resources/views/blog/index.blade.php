@@ -1,6 +1,6 @@
 @extends('layouts.homepage')
 
-@section('title', 'Occult Science Blog - All India Institute of Occult Science')
+@section('title', 'Occult Science Means – Explore Trusted Occult Science Learning Blogs')
 @section('description', 'Learn about India\'s best occult science courses at our institute. Master astrology, numerology, tarot, and more. Read blogs for deeper occult knowledge.')
 
 @push('head')

@@ -61,11 +61,11 @@ use Illuminate\Support\Facades\Storage;
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                         </svg>
                         <svg class="w-3 h-3 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </div>
                 </div>
-                <div class="p-4" id="toc-content">
+                <div class="p-4 hidden" id="toc-content">
                     <ul class="space-y-1.5">
                         @foreach($tableOfContents as $item)
                             <li class="text-sm">

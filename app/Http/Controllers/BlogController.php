@@ -95,8 +95,14 @@ class BlogController extends Controller
 
         // Process content to fix image URLs
         $processedContent = $this->processContentImages($post->content);
+        
+        // Generate table of contents from headings
+        $tableOfContents = $this->generateTableOfContents($processedContent);
+        
+        // Add IDs to headings for anchor links
+        $processedContent = $this->addHeadingIds($processedContent);
 
-        return view('blog.show', compact('post', 'relatedPosts', 'categories', 'metaTitle', 'metaDescription', 'processedContent'));
+        return view('blog.show', compact('post', 'relatedPosts', 'categories', 'metaTitle', 'metaDescription', 'processedContent', 'tableOfContents'));
     }
 
     /**
@@ -177,5 +183,121 @@ class BlogController extends Controller
         );
 
         return $content;
+    }
+
+    /**
+     * Generate table of contents from headings in content
+     */
+    private function generateTableOfContents($content)
+    {
+        $toc = [];
+        
+        // Use regex as fallback if DOMDocument fails
+        if (preg_match_all('/<h([2-4])[^>]*>(.*?)<\/h[2-4]>/is', $content, $matches, PREG_SET_ORDER)) {
+            $sectionNumber = 0;
+            $subsectionNumber = 0;
+            $subsubsectionNumber = 0;
+            
+            foreach ($matches as $match) {
+                $level = (int) $match[1];
+                $text = strip_tags($match[2]);
+                $text = trim($text);
+                
+                if (empty($text)) {
+                    continue;
+                }
+                
+                // Generate ID from text
+                $id = $this->generateHeadingId($text);
+                
+                // Reset counters based on level
+                if ($level == 2) {
+                    $sectionNumber++;
+                    $subsectionNumber = 0;
+                    $subsubsectionNumber = 0;
+                } elseif ($level == 3) {
+                    $subsectionNumber++;
+                    $subsubsectionNumber = 0;
+                } elseif ($level == 4) {
+                    $subsubsectionNumber++;
+                }
+                
+                // Generate numbering
+                $number = '';
+                if ($level == 2) {
+                    $number = $sectionNumber . '.';
+                } elseif ($level == 3) {
+                    $number = $sectionNumber . '.' . $subsectionNumber . '.';
+                } elseif ($level == 4) {
+                    $number = $sectionNumber . '.' . $subsectionNumber . '.' . $subsubsectionNumber . '.';
+                }
+                
+                $toc[] = [
+                    'level' => $level,
+                    'text' => $text,
+                    'id' => $id,
+                    'number' => $number
+                ];
+            }
+        }
+        
+        return $toc;
+    }
+
+    /**
+     * Add IDs to headings in content for anchor links
+     */
+    private function addHeadingIds($content)
+    {
+        // Use regex to add IDs to headings
+        $content = preg_replace_callback(
+            '/<h([2-4])([^>]*)>(.*?)<\/h[2-4]>/is',
+            function ($matches) {
+                $level = $matches[1];
+                $attributes = $matches[2];
+                $text = strip_tags($matches[3]);
+                $text = trim($text);
+                
+                if (empty($text)) {
+                    return $matches[0];
+                }
+                
+                // Check if ID already exists
+                if (preg_match('/id=["\']([^"\']+)["\']/', $attributes, $idMatch)) {
+                    return $matches[0]; // ID already exists
+                }
+                
+                // Generate ID from text
+                $id = $this->generateHeadingId($text);
+                
+                // Add ID attribute
+                if (empty($attributes) || $attributes === ' ') {
+                    $attributes = ' id="' . $id . '"';
+                } else {
+                    $attributes = rtrim($attributes) . ' id="' . $id . '"';
+                }
+                
+                return '<h' . $level . $attributes . '>' . $matches[3] . '</h' . $level . '>';
+            },
+            $content
+        );
+        
+        return $content;
+    }
+
+    /**
+     * Generate a URL-friendly ID from heading text
+     */
+    private function generateHeadingId($text)
+    {
+        // Convert to lowercase, replace spaces with hyphens, remove special chars
+        $id = Str::slug($text);
+        
+        // Ensure it starts with a letter
+        if (!preg_match('/^[a-z]/', $id)) {
+            $id = 'heading-' . $id;
+        }
+        
+        return $id;
     }
 }

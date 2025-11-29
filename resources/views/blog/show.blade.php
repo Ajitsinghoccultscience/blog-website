@@ -51,6 +51,37 @@ use Illuminate\Support\Facades\Storage;
                 @endif
             </div>
 
+            <!-- Table of Contents -->
+            @if(!empty($tableOfContents) && count($tableOfContents) > 0)
+            <div class="bg-gray-100 rounded-lg border border-gray-200 mb-6 overflow-hidden" id="table-of-contents-container">
+                <div class="bg-white px-4 py-3 border-b border-gray-200 flex items-center justify-between cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleTOC()">
+                    <h2 class="text-base font-bold text-gray-900">Table of Contents</h2>
+                    <div class="bg-gray-100 rounded px-2 py-1 flex items-center" id="toc-toggle">
+                        <svg class="w-4 h-4 text-gray-700 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                        </svg>
+                        <svg class="w-3 h-3 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-4" id="toc-content">
+                    <ul class="space-y-1.5">
+                        @foreach($tableOfContents as $item)
+                            <li class="text-sm">
+                                <a href="#{{ $item['id'] }}" 
+                                   class="text-gray-700 hover:text-orange-600 transition-colors flex items-start group"
+                                   style="padding-left: {{ ($item['level'] - 2) * 1.25 }}rem;">
+                                    <span class="mr-2 text-gray-500 font-medium">{{ $item['number'] }}</span>
+                                    <span class="group-hover:underline">{{ $item['text'] }}</span>
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            @endif
+
             <!-- Title -->
             <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{{ $post->title }}</h1>
 
@@ -342,4 +373,35 @@ use Illuminate\Support\Facades\Storage;
         @endif
     </div>
 </div>
+
+@push('scripts')
+<script>
+    function toggleTOC() {
+        const tocContent = document.getElementById('toc-content');
+        const tocToggle = document.getElementById('toc-toggle');
+        
+        if (tocContent.classList.contains('hidden')) {
+            tocContent.classList.remove('hidden');
+            tocToggle.innerHTML = '<svg class="w-4 h-4 text-gray-700 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg><svg class="w-3 h-3 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>';
+        } else {
+            tocContent.classList.add('hidden');
+            tocToggle.innerHTML = '<svg class="w-4 h-4 text-gray-700 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg><svg class="w-3 h-3 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>';
+        }
+    }
+    
+    // Smooth scroll for TOC links
+    document.querySelectorAll('#toc-content a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+</script>
+@endpush
 @endsection

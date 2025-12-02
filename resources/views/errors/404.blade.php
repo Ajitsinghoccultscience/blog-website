@@ -92,13 +92,42 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         .error-404-number {
             font-size: 12rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f97316 100%);
+            background: linear-gradient(135deg, #EF620F 0%, #FF7A1F 50%, #FF8C33 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             line-height: 1;
-            text-shadow: 0 4px 20px rgba(220, 38, 38, 0.3);
+            text-shadow: 0 4px 20px rgba(239, 98, 15, 0.3);
         }
+        
+        .theme-orange {
+            color: #EF620F;
+        }
+        
+        .bg-theme-orange {
+            background-color: #EF620F;
+        }
+        
+        .bg-theme-orange-hover:hover {
+            background-color: #D8560D;
+        }
+        
+        .text-theme-orange {
+            color: #EF620F;
+        }
+        
+        .text-theme-orange-hover:hover {
+            color: #FF7A1F !important;
+        }
+        
+        a.text-theme-orange-hover:hover {
+            color: #FF7A1F !important;
+        }
+        
+        .border-theme-orange {
+            border-color: #EF620F;
+        }
+        
 
         @media (max-width: 768px) {
             .error-404-number {
@@ -150,7 +179,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <!-- Action Buttons -->
                 <div class="flex justify-center items-center">
                     <a href="{{ route('blog.index') }}/" 
-                       class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-red-600 to-orange-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                       class="inline-flex items-center px-6 py-3 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300" 
+                       style="background: linear-gradient(135deg, #EF620F 0%, #FF7A1F 100%);">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                         </svg>
@@ -166,9 +196,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             <input type="text" 
                                    name="q" 
                                    placeholder="Search articles..." 
-                                   class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                   class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:border-transparent"
+                                   style="--tw-ring-color: #EF620F;"
+                                   onfocus="this.style.boxShadow='0 0 0 2px rgba(239, 98, 15, 0.5)'"
+                                   onblur="this.style.boxShadow=''">
                             <button type="submit" 
-                                    class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+                                    class="px-6 py-2 text-white rounded-lg transition-colors bg-theme-orange bg-theme-orange-hover"
+                                    style="background-color: #EF620F;"
+                                    onmouseover="this.style.backgroundColor='#D8560D'"
+                                    onmouseout="this.style.backgroundColor='#EF620F'">
                                 Search
                             </button>
                         </div>
@@ -220,7 +256,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <div>
                     <h4 class="text-lg font-bold text-white mb-4 relative">
                         Latest Post
-                        <div class="absolute bottom-0 left-0 w-8 h-0.5 bg-red-600"></div>
+                        <div class="absolute bottom-0 left-0 w-8 h-0.5 bg-theme-orange"></div>
                     </h4>
                     <div class="space-y-4">
                         @php
@@ -250,7 +286,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 </div>
                                 <div class="flex-1">
                                     <h5 class="text-sm text-white font-medium mb-1">{{ Str::limit($latestPost->title, 40) }}</h5>
-                                    <a href="{{ route('blog.post', $latestPost->slug) }}/" class="text-red-500 text-sm hover:text-red-400 transition-colors">
+                                    <a href="{{ route('blog.post', $latestPost->slug) }}/" class="text-theme-orange text-sm text-theme-orange-hover transition-colors">
                                         Read More »
                                     </a>
                                 </div>
@@ -263,7 +299,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <div>
                     <h4 class="text-lg font-bold text-white mb-4 relative">
                         Top Category
-                        <div class="absolute bottom-0 left-0 w-8 h-0.5 bg-red-600"></div>
+                        <div class="absolute bottom-0 left-0 w-8 h-0.5 bg-theme-orange"></div>
                     </h4>
                     <div class="space-y-2">
                         @php
@@ -273,7 +309,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             @foreach($navbarCategories->take(5) as $category)
                                 <div class="border-b border-gray-600 pb-2 last:border-b-0">
                                     <a href="{{ route('blog.category', $category->slug) }}/" 
-                                       class="text-white text-sm hover:text-red-500 transition-colors">
+                                       class="text-white text-sm text-theme-orange-hover transition-colors">
                                         {{ $category->name }}
                                     </a>
                                 </div>
@@ -299,7 +335,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <!-- Scroll to Top Button -->
     <button id="scrollToTop" 
-            class="fixed bottom-6 right-6 w-12 h-12 bg-gradient-to-b from-red-500 to-orange-500 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center z-50 opacity-0 pointer-events-none"
+            class="fixed bottom-6 right-6 w-12 h-12 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center z-50 opacity-0 pointer-events-none bg-theme-orange"
+            style="background: linear-gradient(135deg, #EF620F 0%, #FF7A1F 100%);"
             aria-label="Scroll to top">
         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>

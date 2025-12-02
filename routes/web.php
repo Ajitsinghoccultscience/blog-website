@@ -36,4 +36,10 @@ Route::get('/', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/about', [BlogController::class, 'about'])->name('blog.about');
 Route::get('/search', [BlogController::class, 'search'])->name('blog.search');
 Route::get('/category/{slug}', [BlogController::class, 'category'])->name('blog.category');
+
+// 404 page route - MUST come before catch-all route
+Route::get('/404', function () {
+    return response()->view('errors.404', [], 404);
+})->name('blog.404');
+
 Route::get('/{slug}', [BlogController::class, 'show'])->name('blog.post')->where('slug', '.*');

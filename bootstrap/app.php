@@ -16,5 +16,26 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        // Redirect 404 errors to the 404 page route
+        $exceptions->render(function (\Illuminate\Database\Eloquent\ModelNotFoundException $e, \Illuminate\Http\Request $request) {
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Resource not found.'], 404);
+            }
+            
+            // Don't redirect if already on the 404 page to avoid redirect loops
+            if ($request->path() !== '404') {
+                return redirect()->route('blog.404');
+            }
+        });
+        
+        $exceptions->render(function (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e, \Illuminate\Http\Request $request) {
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Page not found.'], 404);
+            }
+            
+            // Don't redirect if already on the 404 page to avoid redirect loops
+            if ($request->path() !== '404') {
+                return redirect()->route('blog.404');
+            }
+        });
     })->create();

@@ -6,30 +6,23 @@
     {{-- Homepage --}}
     <url>
         <loc>{{ url('/') }}/</loc>
-        <lastmod>{{ now()->toAtomString() }}</lastmod>
+        <!-- <lastmod>{{ now()->toAtomString() }}</lastmod> -->
     </url>
 
     {{-- About Page --}}
     <url>
         <loc>{{ route('blog.about') }}/</loc>
-        <lastmod>{{ now()->toAtomString() }}</lastmod>
+        <!-- <lastmod>{{ now()->toAtomString() }}</lastmod> -->
     </url>
 
     {{-- All Published Blog Posts --}}
     @foreach ($posts as $post)
     <url>
         <loc>{{ route('blog.post', $post->slug) }}/</loc>
-        <lastmod>{{ $post->updated_at->toAtomString() }}</lastmod>
+        <!-- <lastmod>{{ $post->updated_at->toAtomString() }}</lastmod> -->
     </url>
     @endforeach
 
-    {{-- All Active Categories --}}
-    @foreach ($categories as $category)
-    <url>
-        <loc>{{ route('blog.category', $category->slug) }}/</loc>
-        <lastmod>{{ $category->updated_at->toAtomString() }}</lastmod>
-    </url>
-    @endforeach
-
+    
 </urlset>
 

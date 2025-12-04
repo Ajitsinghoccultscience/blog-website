@@ -5,6 +5,8 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Models\Post;
+use App\Models\Category;
 
 // Admin authentication routes (public) - MUST come before catch-all routes
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -36,6 +38,20 @@ Route::get('/', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/about', [BlogController::class, 'about'])->name('blog.about');
 Route::get('/search', [BlogController::class, 'search'])->name('blog.search');
 Route::get('/category/{slug}', [BlogController::class, 'category'])->name('blog.category');
+
+// Dynamic Sitemap - MUST come before catch-all route
+Route::get('/sitemap.xml', function () {
+    $posts = Post::where('is_published', true)
+        ->orderBy('updated_at', 'desc')
+        ->get();
+    
+    $categories = Category::where('is_active', true)
+        ->orderBy('updated_at', 'desc')
+        ->get();
+    
+    return response()->view('sitemap', compact('posts', 'categories'))
+        ->header('Content-Type', 'text/xml');
+})->name('sitemap');
 
 // 404 page route - MUST come before catch-all route
 Route::get('/404', function () {

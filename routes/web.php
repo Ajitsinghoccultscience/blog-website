@@ -43,16 +43,26 @@ Route::get('/category/{slug}', [BlogController::class, 'category'])->name('blog.
 // Dynamic Sitemap - MUST come before catch-all route
 Route::get('/sitemap.xml', function () {
     try {
+        $urls = [];
+        
+        // Homepage
+        $urls[] = url('/') . '/';
+        
+        // About page
+        $urls[] = url(route('blog.about')) . '/';
+        
+        // All published posts
         $posts = Post::where('is_published', true)
             ->orderBy('updated_at', 'desc')
             ->get();
         
-        // Categories - commented out for now, will use in future
-        // $categories = Category::where('is_active', true)
-        //     ->orderBy('updated_at', 'desc')
-        //     ->get();
+        foreach ($posts as $post) {
+            if (!empty($post->slug)) {
+                $urls[] = url(route('blog.post', $post->slug)) . '/';
+            }
+        }
         
-        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . view('sitemap', compact('posts'))->render();
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . view('sitemap', compact('urls'))->render();
         
         return response($xml, 200)
             ->header('Content-Type', 'text/xml; charset=utf-8')
@@ -70,3 +80,6 @@ Route::get('/404', function () {
 })->name('blog.404');
 
 Route::get('/{slug}', [BlogController::class, 'show'])->name('blog.post')->where('slug', '^(?!sitemap\.xml$).*');
+
+
+

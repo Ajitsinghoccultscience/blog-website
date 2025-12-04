@@ -19,6 +19,16 @@ class PostController extends Controller
     {
         $query = Post::on('mysql')->with('category');
 
+        // Filter by status
+        if ($request->has('status')) {
+            if ($request->status === 'published') {
+                $query->where('is_published', true);
+            } elseif ($request->status === 'draft') {
+                $query->where('is_published', false);
+            }
+            // 'all' or no status shows all posts
+        }
+
         // Search by title only
         if ($request->has('search') && !empty($request->search)) {
             $search = $request->search;

@@ -11,9 +11,30 @@
     </a>
 </div>
 
+<!-- Status Filter Tabs -->
+<div class="bg-white rounded-lg shadow p-4 mb-6">
+    <div class="flex gap-2 border-b border-gray-200">
+        <a href="{{ route('admin.posts.index', array_merge(request()->except('status'), ['status' => 'all'])) }}" 
+           class="px-4 py-2 text-sm font-medium {{ (!request()->has('status') || request('status') === 'all') ? 'text-primary border-b-2 border-primary' : 'text-gray-500 hover:text-gray-700' }}">
+            <i class="fas fa-list mr-1"></i> All Posts
+        </a>
+        <a href="{{ route('admin.posts.index', array_merge(request()->except('status'), ['status' => 'published'])) }}" 
+           class="px-4 py-2 text-sm font-medium {{ request('status') === 'published' ? 'text-primary border-b-2 border-primary' : 'text-gray-500 hover:text-gray-700' }}">
+            <i class="fas fa-check-circle mr-1"></i> Published
+        </a>
+        <a href="{{ route('admin.posts.index', array_merge(request()->except('status'), ['status' => 'draft'])) }}" 
+           class="px-4 py-2 text-sm font-medium {{ request('status') === 'draft' ? 'text-primary border-b-2 border-primary' : 'text-gray-500 hover:text-gray-700' }}">
+            <i class="fas fa-edit mr-1"></i> Drafts
+        </a>
+    </div>
+</div>
+
 <!-- Search -->
 <div class="bg-white rounded-lg shadow p-4 mb-6">
     <form method="GET" class="flex gap-4 items-end">
+        @if(request()->has('status'))
+            <input type="hidden" name="status" value="{{ request('status') }}">
+        @endif
         <div class="flex-1">
             <label class="block text-sm font-medium text-gray-700 mb-1">Search Posts by Title</label>
             <input type="text" name="search" value="{{ request('search') }}" 
@@ -25,7 +46,7 @@
             <i class="fas fa-search mr-2"></i>Search
         </button>
         
-        @if(request()->has('search'))
+        @if(request()->has('search') || request()->has('status'))
             <a href="{{ route('admin.posts.index') }}" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 transition-colors">
                 <i class="fas fa-times mr-2"></i>Clear
             </a>
@@ -103,11 +124,17 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <div class="flex space-x-2">
+                            @if($post->is_published)
                             <a href="{{ route('blog.post', $post->slug) }}/" 
                                target="_blank"
                                class="text-gray-600 hover:text-gray-800" title="View on Website">
                                 <i class="fas fa-eye"></i>
                             </a>
+                            @else
+                            <span class="text-gray-400 cursor-not-allowed" title="Draft - Not published yet">
+                                <i class="fas fa-eye-slash"></i>
+                            </span>
+                            @endif
                             <a href="{{ route('admin.posts.edit', $post) }}" 
                                class="text-primary hover:text-blue-700" title="Edit">
                                 <i class="fas fa-edit"></i>

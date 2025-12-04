@@ -52,14 +52,14 @@ Route::get('/sitemap.xml', function () {
         //     ->orderBy('updated_at', 'desc')
         //     ->get();
         
-        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . view('sitemap', compact('posts'))->render();
+        $xml = '<?xml version="1.0" encoding="utf-8"?>' . "\n" . view('sitemap', compact('posts'))->render();
         
         return response($xml, 200)
             ->header('Content-Type', 'text/xml; charset=utf-8')
             ->header('Cache-Control', 'public, max-age=3600');
     } catch (\Exception $e) {
         Log::error('Sitemap generation error: ' . $e->getMessage());
-        return response('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>', 200)
+        return response('<?xml version="1.0" encoding="utf-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>', 200)
             ->header('Content-Type', 'text/xml; charset=utf-8');
     }
 })->name('sitemap');

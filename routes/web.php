@@ -45,11 +45,12 @@ Route::get('/sitemap.xml', function () {
         ->orderBy('updated_at', 'desc')
         ->get();
     
-    $categories = Category::where('is_active', true)
-        ->orderBy('updated_at', 'desc')
-        ->get();
+    // Categories - commented out for now, will use in future
+    // $categories = Category::where('is_active', true)
+    //     ->orderBy('updated_at', 'desc')
+    //     ->get();
     
-    $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . view('sitemap', compact('posts', 'categories'))->render();
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . view('sitemap', compact('posts'))->render();
     
     return response($xml)
         ->header('Content-Type', 'text/xml');

@@ -23,6 +23,13 @@
     </url>
     @endforeach
 
+    {{-- All Active Categories - Commented out for now, will use in future --}}
+    {{-- @foreach ($categories as $category)
+    <url>
+        <loc>{{ route('blog.category', $category->slug) }}/</loc>
+        <lastmod>{{ $category->updated_at->toAtomString() }}</lastmod>
+    </url>
+    @endforeach --}}
     
 </urlset>
 

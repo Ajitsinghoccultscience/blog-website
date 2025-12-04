@@ -55,7 +55,7 @@ use Illuminate\Support\Facades\Storage;
             @if(!empty($tableOfContents) && count($tableOfContents) > 0)
             <div class="bg-gray-100 rounded-lg border border-gray-200 mb-6 overflow-hidden" id="table-of-contents-container">
                 <div class="bg-white px-4 py-3 border-b border-gray-200 flex items-center justify-between cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleTOC()">
-                    <h2 class="text-base font-bold text-gray-900">Table of Contents</h2>
+                    <p class="text-base font-bold text-gray-900">Table of Contents</h2>
                     <div class="bg-gray-100 rounded px-2 py-1 flex items-center" id="toc-toggle">
                         <svg class="w-4 h-4 text-gray-700 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>

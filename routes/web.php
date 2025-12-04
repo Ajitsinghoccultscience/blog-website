@@ -49,7 +49,9 @@ Route::get('/sitemap.xml', function () {
         ->orderBy('updated_at', 'desc')
         ->get();
     
-    return response()->view('sitemap', compact('posts', 'categories'))
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . view('sitemap', compact('posts', 'categories'))->render();
+    
+    return response($xml)
         ->header('Content-Type', 'text/xml');
 })->name('sitemap');
 

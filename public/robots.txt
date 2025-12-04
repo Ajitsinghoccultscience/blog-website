@@ -2,6 +2,6 @@
 # ---------------------------
 User-agent: *
 Disallow:
-Sitemap: https://blog.occultscience.in/sitemap.xml
+Sitemap: https://blog.occultscience.in/sitemap_clean.xml
 # ---------------------------
 # START ROBOT TXT

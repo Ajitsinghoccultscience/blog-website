@@ -6,21 +6,20 @@
     {{-- Homepage --}}
     <url>
         <loc>{{ url('/') }}/</loc>
-      
     </url>
 
     {{-- About Page --}}
     <url>
         <loc>{{ route('blog.about') }}/</loc>
-        
     </url>
 
     {{-- All Published Blog Posts --}}
     @foreach ($posts as $post)
+    @if(!empty($post->slug))
     <url>
         <loc>{{ route('blog.post', $post->slug) }}/</loc>
-        
     </url>
+    @endif
     @endforeach
 
     {{-- All Active Categories - Commented out for now, will use in future --}}

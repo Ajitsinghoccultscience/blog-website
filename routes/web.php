@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PostController;
@@ -41,19 +42,26 @@ Route::get('/category/{slug}', [BlogController::class, 'category'])->name('blog.
 
 // Dynamic Sitemap - MUST come before catch-all route
 Route::get('/sitemap.xml', function () {
-    $posts = Post::where('is_published', true)
-        ->orderBy('updated_at', 'desc')
-        ->get();
-    
-    // Categories - commented out for now, will use in future
-    // $categories = Category::where('is_active', true)
-    //     ->orderBy('updated_at', 'desc')
-    //     ->get();
-    
-    $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . view('sitemap', compact('posts'))->render();
-    
-    return response($xml)
-        ->header('Content-Type', 'text/xml');
+    try {
+        $posts = Post::where('is_published', true)
+            ->orderBy('updated_at', 'desc')
+            ->get();
+        
+        // Categories - commented out for now, will use in future
+        // $categories = Category::where('is_active', true)
+        //     ->orderBy('updated_at', 'desc')
+        //     ->get();
+        
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . view('sitemap', compact('posts'))->render();
+        
+        return response($xml, 200)
+            ->header('Content-Type', 'text/xml; charset=utf-8')
+            ->header('Cache-Control', 'public, max-age=3600');
+    } catch (\Exception $e) {
+        Log::error('Sitemap generation error: ' . $e->getMessage());
+        return response('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>', 200)
+            ->header('Content-Type', 'text/xml; charset=utf-8');
+    }
 })->name('sitemap');
 
 // 404 page route - MUST come before catch-all route

@@ -5,14 +5,14 @@
 
 </url>
 <url>
-<loc>{{ route('blog.about') }}/</loc>
+<loc>{{ url(route('blog.about')) }}/</loc>
 
 
 </url>
 @foreach ($posts as $post)
 @if(!empty($post->slug))
 <url>
-<loc>{{ route('blog.post', $post->slug) }}/</loc>
+<loc>{{ url(route('blog.post', $post->slug)) }}/</loc>
 
 
 </url>

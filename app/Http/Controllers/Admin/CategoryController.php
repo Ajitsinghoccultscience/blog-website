@@ -60,6 +60,8 @@ class CategoryController extends Controller
             'description' => 'nullable|string|max:1000',
             'color' => 'nullable|string|max:7',
             'is_active' => 'boolean',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:500',
         ]);
 
         if ($validator->fails()) {
@@ -74,6 +76,8 @@ class CategoryController extends Controller
             'description' => $request->description,
             'color' => $request->color ?: '#6366f1',
             'is_active' => $request->has('is_active'),
+            'meta_title' => $request->meta_title,
+            'meta_description' => $request->meta_description,
         ]);
 
         return redirect()->route('admin.categories.index')
@@ -123,6 +127,8 @@ class CategoryController extends Controller
             'description' => $request->description,
             'color' => $request->color ?: '#6366f1',
             'is_active' => $request->has('is_active'),
+            'meta_title' => $request->meta_title,
+            'meta_description' => $request->meta_description,
         ]);
 
         return redirect()->route('admin.categories.index')

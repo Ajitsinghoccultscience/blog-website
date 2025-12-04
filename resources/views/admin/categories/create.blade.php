@@ -54,6 +54,36 @@
                     @enderror
                 </div>
 
+                <!-- Meta Title -->
+                <div>
+                    <label for="meta_title" class="block text-sm font-medium text-gray-700 mb-2">Meta Title</label>
+                    <input type="text" 
+                           id="meta_title" 
+                           name="meta_title" 
+                           value="{{ old('meta_title') }}" 
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent @error('meta_title') border-red-500 @enderror"
+                           placeholder="SEO meta title (optional)">
+                    <p class="mt-1 text-sm text-gray-500">Recommended: 50-60 characters. If left empty, category name will be used.</p>
+                    @error('meta_title')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Meta Description -->
+                <div>
+                    <label for="meta_description" class="block text-sm font-medium text-gray-700 mb-2">Meta Description</label>
+                    <textarea id="meta_description" 
+                              name="meta_description" 
+                              rows="2" 
+                              maxlength="500"
+                              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent @error('meta_description') border-red-500 @enderror"
+                              placeholder="SEO meta description (optional)">{{ old('meta_description') }}</textarea>
+                    <p class="mt-1 text-sm text-gray-500">Recommended: 150-160 characters. If left empty, category description will be used.</p>
+                    @error('meta_description')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <!-- Color -->
                 <div>
                     <label for="color" class="block text-sm font-medium text-gray-700 mb-2">Color</label>

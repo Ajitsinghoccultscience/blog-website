@@ -1,7 +1,13 @@
 @extends('layouts.homepage')
 
-@section('title', $category->name)
-@section('description', $category->description ?: 'Explore posts in the ' . $category->name . ' category.')
+@section('title', $category->meta_title ?: $category->name)
+@section('description', $category->meta_description ?: $category->description ?: 'Explore posts in the ' . $category->name . ' category.')
+
+@push('head')
+<link rel="canonical" href="{{ url(route('blog.category', $category->slug)) }}/">
+<meta name="author" content="All India Institute of Occult Science">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+@endpush
 
 @php
 use Illuminate\Support\Facades\Storage;

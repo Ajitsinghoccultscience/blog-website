@@ -69,4 +69,4 @@ Route::get('/404', function () {
     return response()->view('errors.404', [], 404);
 })->name('blog.404');
 
-Route::get('/{slug}', [BlogController::class, 'show'])->name('blog.post')->where('slug', '.*');
+Route::get('/{slug}', [BlogController::class, 'show'])->name('blog.post')->where('slug', '^(?!sitemap\.xml$).*');

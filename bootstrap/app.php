@@ -29,6 +29,11 @@ return Application::configure(basePath: dirname(__DIR__))
         });
         
         $exceptions->render(function (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e, \Illuminate\Http\Request $request) {
+            // Don't redirect sitemap.xml requests
+            if ($request->path() === 'sitemap.xml') {
+                return null; // Let Laravel handle it normally
+            }
+            
             if ($request->expectsJson()) {
                 return response()->json(['message' => 'Page not found.'], 404);
             }

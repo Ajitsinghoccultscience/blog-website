@@ -1,13 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\AuthController;
-use App\Models\Post;
-use App\Models\Category;
 
 // Admin authentication routes (public) - MUST come before catch-all routes
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -40,46 +37,12 @@ Route::get('/about', [BlogController::class, 'about'])->name('blog.about');
 Route::get('/search', [BlogController::class, 'search'])->name('blog.search');
 Route::get('/category/{slug}', [BlogController::class, 'category'])->name('blog.category');
 
-// Dynamic Sitemap - MUST come before catch-all route
-Route::get('/sitemap.xml', function () {
-    try {
-        $urls = [];
-        
-        // Homepage
-        $urls[] = url('/') . '/';
-        
-        // About page
-        $urls[] = url(route('blog.about')) . '/';
-        
-        // All published posts
-        $posts = Post::where('is_published', true)
-            ->orderBy('updated_at', 'desc')
-            ->get();
-        
-        foreach ($posts as $post) {
-            if (!empty($post->slug)) {
-                $urls[] = url(route('blog.post', $post->slug)) . '/';
-            }
-        }
-        
-        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . view('sitemap', compact('urls'))->render();
-        
-        return response($xml, 200)
-            ->header('Content-Type', 'text/xml; charset=utf-8')
-            ->header('Cache-Control', 'public, max-age=3600');
-    } catch (\Exception $e) {
-        Log::error('Sitemap generation error: ' . $e->getMessage());
-        return response('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>', 200)
-            ->header('Content-Type', 'text/xml; charset=utf-8');
-    }
-})->name('sitemap');
-
 // 404 page route - MUST come before catch-all route
 Route::get('/404', function () {
     return response()->view('errors.404', [], 404);
 })->name('blog.404');
 
-Route::get('/{slug}', [BlogController::class, 'show'])->name('blog.post')->where('slug', '^(?!sitemap\.xml$).*');
+Route::get('/{slug}', [BlogController::class, 'show'])->name('blog.post')->where('slug', '.*');
 
 
 

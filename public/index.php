@@ -4,12 +4,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     //makee array where those not start with /admin will be redirected
     
-    // Skip redirection for sitemap.xml
-    if ($uri === '/sitemap.xml') {
-        // Let Laravel handle the sitemap route
-    }
     // Skip redirection if path starts with /admin
-    elseif (!preg_match('#^/admin(/|$)#', $uri)) {
+    if (!preg_match('#^/admin(/|$)#', $uri)) {
         // Skip if it's a file (e.g., ends in .css, .js, .jpg, .xml, etc.)
         if (!preg_match('/\.[a-zA-Z0-9]+$/', $uri) && substr($uri, -1) !== '/') {
             $query = $_SERVER['QUERY_STRING'];

@@ -57,10 +57,6 @@
                                     <div class="emblem-inner">
                                     </div>
                                 </div>
-                                <div class="logo-text">
-                                    <h1 class="institute-name">ALL INDIA INSTITUTE OF OCCULT SCIENCE</h1>
-                                    <p class="hindi-slogan">विद्याधनं सर्वधनं प्रधानम्</p>
-                                </div>
                             </div>
                         </div>
                     </div>

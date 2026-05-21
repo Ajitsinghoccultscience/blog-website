@@ -176,7 +176,23 @@ use Illuminate\Support\Facades\Storage;
                             display: list-item;
                             margin: 0.5rem 0;
                         }
-                        
+                        .prose table, article table {
+                            border-collapse: collapse;
+                            width: 100%;
+                            margin: 1rem 0;
+                        }
+                        .prose table, .prose th, .prose td, article table, article th, article td {
+                            border: 1px solid #000;
+                        }
+                        .prose th, .prose td, article th, article td {
+                            padding: 8px 12px;
+                            text-align: left;
+                        }
+                        .prose th, article th {
+                            background-color: #f3f4f6;
+                            font-weight: 600;
+                        }
+
                         /* 📱 Mobile (below 768px) */
                         @media (max-width: 768px) {
                             .prose h1, article h1 {

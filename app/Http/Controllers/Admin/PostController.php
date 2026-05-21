@@ -232,37 +232,30 @@ class PostController extends Controller
      */
     public function uploadImage(Request $request)
     {
-        \Log::info('Upload attempt started', ['request' => $request->all()]);
-        
-        $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        $validator = Validator::make($request->all(), [
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:5120'
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->first('file')], 422);
+        }
 
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            
-            // Try storing in public directory directly
+            $filename = time() . '_' . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $file->getClientOriginalExtension();
+
             $publicPath = public_path('uploads/posts');
             if (!file_exists($publicPath)) {
                 mkdir($publicPath, 0755, true);
             }
-            
-            // Move file to public directory
+
             $file->move($publicPath, $filename);
-            
-            \Log::info('File uploaded successfully', ['filename' => $filename, 'path' => $publicPath]);
-            
-            $url = url('uploads/posts/' . $filename);
-            
-            \Log::info('Generated URL', ['url' => $url]);
-            
+
             return response()->json([
-                'location' => $url
+                'location' => url('uploads/posts/' . $filename)
             ]);
         }
 
-        \Log::error('No file uploaded');
-        return response()->json(['error' => 'No file uploaded'], 400);
+        return response()->json(['error' => 'No file received'], 400);
     }
 }

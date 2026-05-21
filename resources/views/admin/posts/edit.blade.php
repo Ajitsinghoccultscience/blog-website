@@ -540,6 +540,8 @@ tinymce.init({
             xhr.open('POST', '{{ route("admin.posts.upload-image") }}');
             
             xhr.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            xhr.setRequestHeader('Accept', 'application/json');
             
             xhr.upload.onprogress = function (e) {
                 progress(e.loaded / e.total * 100);

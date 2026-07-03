@@ -87,9 +87,9 @@ class BlogController extends Controller
 
         // Set meta data
         $metaTitle = $post->meta_title ?: $post->title;
-        // Remove "Occult Science Blog" or " - Occult Science Blog" from title
-        $metaTitle = preg_replace('/\s*-\s*Occult Science Blog\s*/i', '', $metaTitle);
-        $metaTitle = preg_replace('/\s*Occult Science Blog\s*-\s*/i', '', $metaTitle);
+        // Remove site name suffixes/prefixes like "- Occult Science", "| Occult Science", "- Occult Science Blog", etc.
+        $metaTitle = preg_replace('/\s*[-|]\s*(?:ALL INDIA INSTITUTE OF\s+)?Occult Science(?:\s+Blog)?\s*$/i', '', $metaTitle);
+        $metaTitle = preg_replace('/^\s*(?:ALL INDIA INSTITUTE OF\s+)?Occult Science(?:\s+Blog)?\s*[-|]\s*/i', '', $metaTitle);
         $metaTitle = trim($metaTitle);
         $metaDescription = $post->meta_description ?: $post->excerpt ?: Str::limit(strip_tags($post->content), 160);
 
